@@ -21,7 +21,7 @@ def pullstream(uri, **kwargs):
 
 def getstreaminfo(id):
     """
-    Returns a detailed set of information about a stream
+    Returns a detailed set of information about a stream.
     """
     return execute('getstreaminfo', {'id': id})
 
@@ -35,7 +35,7 @@ def liststreams():
 
 def shutdownstream(**kwargs):
     """
-    Delete stream
+    Delete stream.
     """
     expected = ['id', 'name', 'permanently']
     check_params(expected, kwargs.keys())
