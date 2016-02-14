@@ -4,6 +4,8 @@ import socket
 
 from django.conf import settings
 
+from evostream import EvoStreamException
+
 try:
     from httplib import HTTPConnection
 except ImportError:
@@ -26,6 +28,6 @@ class HTTPProtocol(BaseProtocol):
         try:
             conn.request('GET', uri)
         except socket.error as ex:
-            raise ConnectionError(ex)
+            raise EvoStreamException(ex)
         response = conn.getresponse()
         return json.loads(response.read())
