@@ -1,5 +1,5 @@
-from setuptools import setup
-
+from setuptools import setup, find_packages
+from codecs import open
 
 setup(
     name="django-evostream",
@@ -28,5 +28,5 @@ setup(
         'Topic :: Utilities',
     ],
     license='MIT',
-    packages=['evostream']
+    packages=find_packages()
 )
