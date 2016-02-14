@@ -19,4 +19,6 @@ class Command(BaseCommand):
             self.stdout.write('No data\n')
             return
         for stream in streams['data']:
-            self.stdout.write(json.dumps(stream) + '\n')
+            for key in stream.keys():
+                self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
+            self.stdout.write('\n')
