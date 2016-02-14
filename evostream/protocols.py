@@ -2,9 +2,8 @@ from base64 import b64encode
 import json
 import socket
 
-from django.conf import settings
-
-from evostream import EvoStreamException
+from .conf import settings
+from . import EvoStreamException
 
 try:
     from httplib import HTTPConnection
