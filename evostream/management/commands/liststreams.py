@@ -7,6 +7,7 @@ from evostream.commands import liststreams
 
 
 class Command(BaseCommand):
+    help = 'Provides a detailed description of all active streams.'
     requires_system_checks = False
 
     def handle(self, *args, **options):
