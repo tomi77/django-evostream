@@ -1,14 +1,13 @@
 from base64 import b64encode
 import json
 import socket
-
-from .conf import settings
-from . import EvoStreamException
-
 try:
     from httplib import HTTPConnection
 except ImportError:
     from http.client import HTTPConnection
+
+from .conf import settings
+from . import EvoStreamException
 
 
 class BaseProtocol(object):

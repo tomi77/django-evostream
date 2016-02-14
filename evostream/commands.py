@@ -12,9 +12,10 @@ def pullstream(uri, **kwargs):
     be used to access the stream from the EMS.
     """
     kwargs['uri'] = uri
-    expected = ['uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl', 'swfUrl', 'ttl', 'tos',
-                'rtcpDetectionInterval', 'emulateUserAgent', 'isAudio', 'audioCodecBytes', 'spsBytes', 'ppsBytes',
-                'ssmIp']
+    expected = ['uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl',
+                'pageUrl', 'swfUrl', 'ttl', 'tos', 'rtcpDetectionInterval',
+                'emulateUserAgent', 'isAudio', 'audioCodecBytes', 'spsBytes',
+                'ppsBytes', 'ssmIp']
     check_params(expected, kwargs.keys())
     return execute('pullstream', kwargs)
 
