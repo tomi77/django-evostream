@@ -1,0 +1,2 @@
+class EvoStreamException(Exception):
+    pass
