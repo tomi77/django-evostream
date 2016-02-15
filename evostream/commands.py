@@ -3,6 +3,9 @@ from functools import wraps
 from .default import protocol
 
 
+__all__ = ['pull_stream', 'get_stream_info', 'list_streams', 'shutdown_stream',
+           'list_config', 'remove_config']
+
 execute = protocol.execute
 
 
@@ -10,13 +13,13 @@ def expected(*expected_keys):
     expected_keys = set(expected_keys)
 
     def command_decorator(func):
-        def wrapped_view(*args, **kwargs):
+        def wrapped_func(*args, **kwargs):
             got = set(kwargs.keys())
             if bool(got - expected_keys):
                 unexpected = ','.join([key for key in list(got - expected_keys)])
                 raise KeyError('Unexpected argument(s): %s' % unexpected)
             return func(*args, **kwargs)
-        return wraps(func)(wrapped_view)
+        return wraps(func)(wrapped_func)
     return command_decorator
 
 

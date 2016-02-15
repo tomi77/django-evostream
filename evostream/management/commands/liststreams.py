@@ -2,8 +2,7 @@ import json
 
 from django.core.management.base import BaseCommand
 
-from evostream import EvoStreamException
-from evostream.commands import list_streams
+from evostream import EvoStreamException, list_streams
 
 
 class Command(BaseCommand):
