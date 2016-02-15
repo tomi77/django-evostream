@@ -5,7 +5,7 @@ from .utils import check_params
 execute = protocol.execute
 
 
-def pullstream(uri, **kwargs):
+def pull_stream(uri, **kwargs):
     """
     This will try to pull in a stream from an external source. Once a stream
     has been successfully pulled it is assigned a 'local stream name' which can
@@ -14,21 +14,21 @@ def pullstream(uri, **kwargs):
     return execute('pullstream', uri=uri, **kwargs)
 
 
-def getstreaminfo(id):
+def get_stream_info(id):
     """
     Returns a detailed set of information about a stream.
     """
     return execute('getstreaminfo', id=id)
 
 
-def liststreams():
+def list_streams():
     """
     Provides a detailed description of all active streams.
     """
     return execute('liststreams')
 
 
-def shutdownstream(**kwargs):
+def shutdown_stream(**kwargs):
     """
     Delete stream.
     """
@@ -37,14 +37,14 @@ def shutdownstream(**kwargs):
     return execute('shutdownstream', **kwargs)
 
 
-def listconfig():
+def list_config():
     """
     Returns a list with all push/pull configurations.
     """
     return execute('listconfig')
 
 
-def removeconfig(**kwargs):
+def remove_config(**kwargs):
     """
     This command will both stop the stream and remove the corresponding
     configuration entry. This command is the same as performing:
