@@ -11,20 +11,14 @@ def pullstream(uri, **kwargs):
     has been successfully pulled it is assigned a 'local stream name' which can
     be used to access the stream from the EMS.
     """
-    kwargs['uri'] = uri
-    expected = ['uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl',
-                'pageUrl', 'swfUrl', 'ttl', 'tos', 'rtcpDetectionInterval',
-                'emulateUserAgent', 'isAudio', 'audioCodecBytes', 'spsBytes',
-                'ppsBytes', 'ssmIp']
-    check_params(expected, kwargs.keys())
-    return execute('pullstream', kwargs)
+    return execute('pullstream', uri=uri, **kwargs)
 
 
 def getstreaminfo(id):
     """
     Returns a detailed set of information about a stream.
     """
-    return execute('getstreaminfo', {'id': id})
+    return execute('getstreaminfo', id=id)
 
 
 def liststreams():
@@ -40,7 +34,7 @@ def shutdownstream(**kwargs):
     """
     expected = ['id', 'name', 'permanently']
     check_params(expected, kwargs.keys())
-    return execute('shutdownstream', kwargs)
+    return execute('shutdownstream', **kwargs)
 
 
 def listconfig():
@@ -60,4 +54,4 @@ def removeconfig(**kwargs):
     """
     expected = ['id', 'HlsHdsGroup', 'removeHlsHdsFiles']
     check_params(expected, kwargs.keys())
-    return execute('removeconfig', kwargs)
+    return execute('removeconfig', **kwargs)

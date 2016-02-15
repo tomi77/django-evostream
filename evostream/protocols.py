@@ -16,13 +16,17 @@ class BaseProtocol(object):
 
 
 class HTTPProtocol(BaseProtocol):
-    def execute(self, command, params=None):
-        conn = HTTPConnection(settings.EVOSTREAM_URL)
-        if params is None:
-            uri = '/%s' % command
-        else:
+    @staticmethod
+    def make_uri(command, **params):
+        uri = '/%s' % command
+        if len(params) > 0:
             str_params = ' '.join(['%s=%s' % (i, params[i]) for i in params])
-            uri = '/%s?params=%s' % (command, b64encode(str_params))
+            uri = '?params=%s' % b64encode(str_params)
+        return uri
+
+    def execute(self, command, **params):
+        conn = HTTPConnection(settings.EVOSTREAM_URL)
+        uri = self.make_uri(command, **params)
         try:
             conn.request('GET', uri)
         except socket.error as ex:
