@@ -3,7 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 
 from evostream import EvoStreamException
-from evostream.commands import liststreams
+from evostream.commands import list_streams
 
 
 class Command(BaseCommand):
@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            streams = liststreams()
+            streams = list_streams()
         except EvoStreamException as ex:
             self.stderr.write(str(ex) + '\n')
             return
