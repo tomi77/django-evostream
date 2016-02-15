@@ -1,10 +1,28 @@
+from functools import wraps
+
 from .default import protocol
-from .utils import check_params
 
 
 execute = protocol.execute
 
 
+def expected(*expected_keys):
+    expected_keys = set(expected_keys)
+
+    def command_decorator(func):
+        def wrapped_view(*args, **kwargs):
+            got = set(kwargs.keys())
+            if bool(got - expected_keys):
+                unexpected = ','.join([key for key in list(got - expected_keys)])
+                raise KeyError('Unexpected argument(s): %s' % unexpected)
+            return func(*args, **kwargs)
+        return wraps(func)(wrapped_view)
+    return command_decorator
+
+
+@expected('keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl',
+          'swfUrl', 'ttl', 'tos', 'rtcpDetectionInterval', 'emulateUserAgent',
+          'isAudio', 'audioCodecBytes', 'spsBytes', 'ppsBytes', 'ssmIp')
 def pull_stream(uri, **kwargs):
     """
     This will try to pull in a stream from an external source. Once a stream
@@ -28,12 +46,11 @@ def list_streams():
     return execute('liststreams')
 
 
+@expected('id', 'name', 'permanently')
 def shutdown_stream(**kwargs):
     """
     Delete stream.
     """
-    expected = ['id', 'name', 'permanently']
-    check_params(expected, kwargs.keys())
     return execute('shutdownstream', **kwargs)
 
 
@@ -44,6 +61,7 @@ def list_config():
     return execute('listconfig')
 
 
+@expected('id', 'HlsHdsGroup', 'removeHlsHdsFiles')
 def remove_config(**kwargs):
     """
     This command will both stop the stream and remove the corresponding
@@ -52,6 +70,4 @@ def remove_config(**kwargs):
     shutdownStream permanently=1
     </code>
     """
-    expected = ['id', 'HlsHdsGroup', 'removeHlsHdsFiles']
-    check_params(expected, kwargs.keys())
     return execute('removeconfig', **kwargs)
