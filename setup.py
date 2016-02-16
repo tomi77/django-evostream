@@ -5,14 +5,14 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-evostream",
-    version='0.1',
+    version='0.1.0alpha1',
     author="Tomasz Jakub Rup",
     author_email="tomasz.rup@gmail.com",
     url='https://github.com/tomi77/django-evostream',
     description='Manage EvoStream Media Server',
     long_description=open("README.md").read(),
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
