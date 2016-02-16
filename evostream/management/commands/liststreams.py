@@ -15,7 +15,7 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--disable-internal-streams', action='store',
                     type='choice', choices=['0', '1'], default='0',
-                    help='Filtered out internal streams from the list'),
+                    help='Filtering out internal streams from the list'),
     )
 
     def handle(self, *args, **options):
