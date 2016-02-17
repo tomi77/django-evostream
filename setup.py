@@ -2,12 +2,13 @@ from codecs import open
 
 from setuptools import setup, find_packages
 
+from evostream import __version__, __author__, __email__, __license__
 
 setup(
     name="django-evostream",
-    version='0.1.0alpha1',
-    author="Tomasz Jakub Rup",
-    author_email="tomasz.rup@gmail.com",
+    version=__version__,
+    author=__author__,
+    author_email=__email__,
     url='https://github.com/tomi77/django-evostream',
     description='Manage EvoStream Media Server',
     long_description=open("README.md").read(),
@@ -29,6 +30,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
     ],
-    license='MIT',
+    license=__license__,
     packages=find_packages()
 )
