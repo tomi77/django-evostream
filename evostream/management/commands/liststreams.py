@@ -27,7 +27,7 @@ class Command(BaseCommand):
                         help='Filtering out internal streams from the list'),
         )
 
-    def handle(self, *args, **options):
+    def handle(self, verbosity, *args, **options):
         try:
             streams = list_streams(**options)
         except EvoStreamException as ex:
@@ -38,5 +38,6 @@ class Command(BaseCommand):
             return
         for stream in streams:
             for key in stream.keys():
-                self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
+                if verbosity > 1 or key in ('uniqueId', 'name'):
+                    self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
             self.stdout.write('\n')
