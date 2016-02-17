@@ -11,8 +11,16 @@ from . import EvoStreamException
 
 
 class BaseProtocol(object):
-    def execute(self, command, params=None):
+    def get_result(self, command, **params):
         raise NotImplementedError()
+
+    def parse_result(self, result):
+        raise NotImplementedError()
+
+    def execute(self, command, **params):
+        result = self.get_result(command, **params)
+
+        return self.parse_result(result)
 
 
 class HTTPProtocol(BaseProtocol):
@@ -24,7 +32,7 @@ class HTTPProtocol(BaseProtocol):
             uri += '?params=%s' % b64encode(str_params)
         return uri
 
-    def execute(self, command, **params):
+    def get_result(self, command, **params):
         conn = HTTPConnection(settings.EVOSTREAM_URL)
         uri = self.make_uri(command, **params)
         try:
@@ -32,8 +40,11 @@ class HTTPProtocol(BaseProtocol):
         except socket.error as ex:
             raise EvoStreamException(ex)
         response = conn.getresponse()
-        out = json.loads(response.read())
-        if out['status'] == 'FAIL':
-            raise EvoStreamException(out['description'])
+        return response.read()
+
+    def parse_result(self, result):
+        result = json.loads(result)
+        if result['status'] == 'FAIL':
+            raise EvoStreamException(result['description'])
         else:
-            return out['data']
+            return result['data']
