@@ -26,40 +26,14 @@ Setup `EvoStream` HTTP API address:
 
     print liststreams()
 
-### Available commands
-
-#### pullstream(uri)
-
-This will try to pull in a stream from an external source. Once a stream has been successfully pulled it is assigned a 'local stream name' which can be used to access the stream from the EMS.
-
-#### getstreaminfo(id)
-
-Returns a detailed set of information about a stream.
-
-#### liststreams()
-
-Provides a detailed description of all active streams.
-
-#### shutdownstream()
-
-Delete stream
-
-#### listconfig()
-
-Returns a list with all push/pull configurations.
-
-#### removeconfig()
-
-This command will both stop the stream and remove the corresponding configuration entry. This command is the same as performing:
-
-    shutdownStream permanently=1
-
 ## CLI Usage
 
 `django-evostream` provide `Django` commands to manage `EvoStream`.
 
-### Available commands
-
-#### List all active streams
+Example:
 
     ./manage.py liststreams
+
+## Documentation
+
+http://django-evostream.readthedocs.org/
