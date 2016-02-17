@@ -95,7 +95,7 @@ def pull_stream(uri, **kwargs):
     :type isAudio: int
 
     :param audioCodecBytes: The audio codec setup of this RTP stream if it is
-        audio. Represented as hex format without ‘0x’ or ‘h’. For example:
+        audio. Represented as hex format without '0x' or 'h'. For example:
         audioCodecBytes=1190
     :type audioCodecBytes: str
 
@@ -111,9 +111,9 @@ def pull_stream(uri, **kwargs):
         when doing UDP based pull
     :type ssmIp: str
 
-    :param httpProxy: This parameter has two valid values: IP:Port – This
+    :param httpProxy: This parameter has two valid values: IP:Port - This
         value combination specifies an RTSP HTTP Proxy from which the RTSP
-        stream should be pulled from Self - Specifying “self” as the value
+        stream should be pulled from Self - Specifying "self" as the value
         implies pulling RTSP over HTTP
     :type httpProxy: str
 
@@ -163,7 +163,7 @@ def shutdown_stream(**kwargs):
     analogous to removeConfig.
 
     :param id: The uniqueId of the stream that needs to be terminated. The
-        stream ID’s can be obtained using the listStreams command. This
+        stream ID's can be obtained using the listStreams command. This
         parameter is not mandatory but either this or localStreamName should be
         present to identify the particular stream
     :type id: int
@@ -208,7 +208,7 @@ def remove_config(**kwargs):
     shutdownStream permanently=1.
 
     :param id: The configId of the configuration that needs to be removed.
-        ConfigId’s can be obtained from the listConfig interface. Removing an
+        ConfigId's can be obtained from the listConfig interface. Removing an
         inbound stream will also automatically remove all associated outbound
         streams.
     :type id: int
