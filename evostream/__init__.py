@@ -1,8 +1,11 @@
+from django import get_version
+
+
+VERSION = (0, 1, 0, 'beta', 1)
 __author__ = "Tomasz Jakub Rup"
-__license__ = "MIT"
-__version__ = '0.1.0b1'
 __email__ = "tomasz.rup@gmail.com"
-__status__ = "Beta"
+__version__ = get_version(VERSION)
+__license__ = "MIT"
 
 
 class EvoStreamException(Exception):
