@@ -21,7 +21,7 @@ class HTTPProtocol(BaseProtocol):
         uri = '/%s' % command
         if len(params) > 0:
             str_params = ' '.join(['%s=%s' % (i, params[i]) for i in params])
-            uri = '?params=%s' % b64encode(str_params)
+            uri += '?params=%s' % b64encode(str_params)
         return uri
 
     def execute(self, command, **params):
@@ -32,4 +32,8 @@ class HTTPProtocol(BaseProtocol):
         except socket.error as ex:
             raise EvoStreamException(ex)
         response = conn.getresponse()
-        return json.loads(response.read())
+        out = json.loads(response.read())
+        if out['status'] == 'FAIL':
+            raise EvoStreamException(out['description'])
+        else:
+            return out['data']

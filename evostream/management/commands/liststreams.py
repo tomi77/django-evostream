@@ -33,10 +33,10 @@ class Command(BaseCommand):
         except EvoStreamException as ex:
             self.stderr.write(str(ex) + '\n')
             return
-        if streams['data'] is None:
+        if streams is None:
             self.stdout.write('No data\n')
             return
-        for stream in streams['data']:
+        for stream in streams:
             for key in stream.keys():
                 self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
             self.stdout.write('\n')
