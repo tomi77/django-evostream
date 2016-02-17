@@ -2,13 +2,12 @@ import json
 from optparse import make_option
 
 import django
-from django.core.management.base import BaseCommand
 
-from evostream import EvoStreamException
 from evostream.commands import list_streams
+from evostream.management.base import EvoStreamCommand
 
 
-class Command(BaseCommand):
+class Command(EvoStreamCommand):
     help = 'Provides a detailed description of all active streams.'
 
     requires_system_checks = False
@@ -20,24 +19,22 @@ class Command(BaseCommand):
                                 dest='disableInternalStreams',
                                 help='Filtering out internal streams from the list')
     else:
-        option_list = BaseCommand.option_list + (
+        option_list = EvoStreamCommand.option_list + (
             make_option('--disable-internal-streams', action='store',
                         type='choice', choices=['0', '1'], default='0',
                         dest='disableInternalStreams',
                         help='Filtering out internal streams from the list'),
         )
 
-    def handle(self, verbosity, *args, **options):
-        try:
-            streams = list_streams(**options)
-        except EvoStreamException as ex:
-            self.stderr.write(str(ex) + '\n')
-            return
-        if streams is None:
-            self.stdout.write('No data\n')
-            return
-        for stream in streams:
-            for key in stream.keys():
-                if verbosity > 1 or key in ('uniqueId', 'name'):
-                    self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
-            self.stdout.write('\n')
+    def get_results(self, **options):
+        return list_streams(**options)
+
+    def format_results(self, results, verbosity):
+        if verbosity > 1:
+            super(Command, self).format_results(results, verbosity=verbosity)
+        else:
+            for stream in results:
+                for key, val in stream.items():
+                    if key in ('uniqueId', 'name'):
+                        self.stdout.write(key + ': ' + json.dumps(val) + '\n')
+        self.stdout.write('\n')
