@@ -15,4 +15,13 @@ Parameters:
 
 Example::
 
-    ./manage.py liststreams --disable-internal-streams
+ ./manage.py liststreams --disable-internal-streams=1
+
+``listconfig``
+==============
+
+Returns a list with all push/pull configurations.
+
+Example::
+
+ ./manage.py listconfig
