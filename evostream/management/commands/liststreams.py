@@ -1,6 +1,7 @@
 import json
 from optparse import make_option
 
+import django
 from django.core.management.base import BaseCommand
 
 from evostream import EvoStreamException
@@ -12,11 +13,19 @@ class Command(BaseCommand):
 
     requires_system_checks = False
 
-    option_list = BaseCommand.option_list + (
-        make_option('--disable-internal-streams', action='store',
-                    type='choice', choices=['0', '1'], default='0',
-                    help='Filtering out internal streams from the list'),
-    )
+    if django.VERSION[:2] > (1, 7):
+        def add_arguments(self, parser):
+            parser.add_argument('--disable-internal-streams', action='store',
+                                type=int, choices=[0, 1], default=0,
+                                dest='disableInternalStreams',
+                                help='Filtering out internal streams from the list')
+    else:
+        option_list = BaseCommand.option_list + (
+            make_option('--disable-internal-streams', action='store',
+                        type='choice', choices=['0', '1'], default='0',
+                        dest='disableInternalStreams',
+                        help='Filtering out internal streams from the list'),
+        )
 
     def handle(self, *args, **options):
         try:
