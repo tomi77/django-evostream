@@ -22,9 +22,9 @@ Setup `EvoStream` HTTP API address:
 
 ## API Usage
 
-    from evostream.commands import liststreams
+    from evostream.commands import list_streams
 
-    print liststreams()
+    print list_streams()
 
 ## CLI Usage
 
