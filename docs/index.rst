@@ -2,8 +2,9 @@ Table Of Contents
 =================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    quick_start
    settings
+   api
    cli
