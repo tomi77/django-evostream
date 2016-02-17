@@ -1,9 +1,11 @@
 from functools import wraps
+import logging
 
 from .default import protocol
 
 
 execute = protocol.execute
+logger = logging.getLogger(__name__)
 
 
 def expected(*expected_keys):
@@ -11,10 +13,15 @@ def expected(*expected_keys):
 
     def command_decorator(func):
         def wrapped_func(*args, **kwargs):
-            got = set(kwargs.keys())
-            if bool(got - expected_keys):
-                unexpected = ','.join([key for key in list(got - expected_keys)])
-                raise KeyError('Unexpected argument(s): %s' % unexpected)
+            unexpected = set(kwargs.keys()) - expected_keys
+
+            if bool(unexpected):
+                unexpected = ', '.join([key for key in list(unexpected)])
+                logger.warning('Function %s: Unexpected argument(s): %s', func.__name__, unexpected)
+
+            kwargs = dict((key, val) for key, val in kwargs.items()
+                          if key in expected_keys)
+
             return func(*args, **kwargs)
         return wraps(func)(wrapped_func)
     return command_decorator
