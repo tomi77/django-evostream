@@ -36,4 +36,4 @@ Example:
 
 ## Documentation
 
-http://django-evostream.readthedocs.org/
+http://pythonhosted.org/django-evostream/
