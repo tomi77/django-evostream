@@ -1,0 +1,21 @@
+==========
+0.1 beta 1
+==========
+
+Initial release.
+
+**New features:**
+
+* API
+
+ * pull_stream
+ * get_stream_info
+ * list_streams
+ * shutdown_stream
+ * list_config
+ * remove_config
+
+* Command Line
+
+ * liststreams
+ * listconfig

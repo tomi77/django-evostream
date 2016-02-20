@@ -8,3 +8,4 @@ Table Of Contents
    settings
    api
    cli
+   release_notes/index
