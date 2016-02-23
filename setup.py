@@ -11,7 +11,7 @@ setup(
     author_email=__email__,
     url='https://github.com/tomi77/django-evostream',
     description='Manage EvoStream Media Server',
-    long_description=open("README.md").read(),
+    long_description=open("README.rst").read(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',
