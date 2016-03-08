@@ -6,16 +6,11 @@ Settings
 
 This is a comprehensive list of the settings django-evostream recognizes.
 
-``EVOSTREAM_URL``
+``EVOSTREAM_URI``
 =================
 
-This settings controls ``URL`` of EvoStream HTTP interface.
+This settings controls protocol type and URL of EvoStream HTTP interface.
 
-Default: ``127.0.0.1:7777``
+Default: ``http://127.0.0.1:7777``
 
-``EVOSTREAM_PROTOCOL``
-======================
-
-This settings controls protocol to communicate with EvoStream.
-
-Currently only ``evostream.protocols.HTTPProtocol`` is implemented.
+As protocol, can be used ``http`` or ``telnet`` (NOTE: Only ``http`` is implemented)

@@ -48,3 +48,11 @@ class HTTPProtocol(BaseProtocol):
             raise EvoStreamException(result['description'])
         else:
             return result['data']
+
+
+class TelnetProtocol(BaseProtocol):
+    def get_result(self, command, **params):
+        raise NotImplementedError('Telnet protocol is not implemented')
+
+    def parse_result(self, result):
+        raise NotImplementedError('Telnet protocol is not implemented')

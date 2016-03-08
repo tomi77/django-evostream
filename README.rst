@@ -17,7 +17,7 @@ Install package via ``pip``
 Setup ``EvoStream Media Server`` HTTP API address
 ::
 
-    EVOSTREAM_URL = '127.0.0.1:7777'
+    EVOSTREAM_URI = 'http://127.0.0.1:7777'
 
 API Usage
 =========

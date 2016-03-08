@@ -1,5 +1,5 @@
-# Evo URL
-EVOSTREAM_URL = '127.0.0.1:7777'
+"""
+Default django-evostream configuration
+"""
 
-# Protocol
-EVOSTREAM_PROTOCOL = 'evostream.protocols.HTTPProtocol'
+EVOSTREAM_URI = 'http://127.0.0.1:7777'
