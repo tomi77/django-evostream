@@ -1,0 +1,19 @@
+==========
+0.2 beta 1
+==========
+
+**Breaking changes**
+
+* Simplify configuration
+
+**New features:**
+
+* API
+
+ * get_streams_ids
+ * get_streams_count
+
+* Command Line
+
+ * getstreamsids
+ * getstreamscount

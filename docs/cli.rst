@@ -4,6 +4,35 @@
 Command Line
 ============
 
+``getstreamscount``
+===================
+
+Returns the number of active streams.
+
+Example
+::
+
+    ./manage.py getstreamscount
+
+``getstreamsids``
+=================
+
+Get a list of IDs for every active stream.
+
+Example
+::
+
+    ./manage.py getstreamsids
+``listconfig``
+==============
+
+Returns a list with all push/pull configurations.
+
+Example
+::
+
+    ./manage.py listconfig
+
 ``liststreams``
 ===============
 
@@ -13,15 +42,8 @@ Parameters:
 
 * ``--disable-internal-streams`` Filtering out internal streams from the list.
 
-Example::
+Example
+::
 
- ./manage.py liststreams --disable-internal-streams=1
+    ./manage.py liststreams --disable-internal-streams=1
 
-``listconfig``
-==============
-
-Returns a list with all push/pull configurations.
-
-Example::
-
- ./manage.py listconfig

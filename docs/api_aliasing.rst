@@ -4,6 +4,18 @@
 Aliasing
 ========
 
+``get_streams_ids``
+===================
+
+Get a list of IDs for every active stream.
+
+Example
+::
+
+    get_streams_ids()
+
+http://docs.evostream.com/ems_api_definition/liststreamsids
+
 ``get_stream_info``
 ===================
 
@@ -21,7 +33,7 @@ One of these parameters is required.
 
 Example::
 
- get_stream_info(id=1)
+    get_stream_info(id=1)
 
 http://docs.evostream.com/ems_api_definition/getstreaminfo
 
@@ -41,6 +53,16 @@ Example::
  list_streams()
 
 http://docs.evostream.com/ems_api_definition/liststreams
+
+``get_streams_count``
+=====================
+
+Returns the number of active streams.
+
+Example
+::
+
+    get_streams_count()
 
 ``shutdown_stream``
 ===================
