@@ -37,7 +37,7 @@ setup(
         'Topic :: Utilities',
     ],
     license=__license__,
-    packages=find_packages(),
+    packages=find_packages(exclude=['testapp']),
     install_requires=[
         'django>=1.4'
     ]
