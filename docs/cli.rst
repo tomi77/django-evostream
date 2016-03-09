@@ -14,15 +14,16 @@ Example
 
     ./manage.py getstreamscount
 
-``getstreamsids``
-=================
+``liststreamsids``
+==================
 
 Get a list of IDs for every active stream.
 
 Example
 ::
 
-    ./manage.py getstreamsids
+    ./manage.py liststreamsids
+
 ``listconfig``
 ==============
 

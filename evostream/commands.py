@@ -129,13 +129,13 @@ def pull_stream(uri, **kwargs):
     return execute('pullstream', uri=uri, **kwargs)
 
 
-def get_streams_ids():
+def list_streams_ids():
     """
     Get a list of IDs for every active stream.
 
     :link: http://docs.evostream.com/ems_api_definition/liststreamsids
     """
-    return execute('getstreamsids')
+    return execute('liststreamsids')
 
 
 @expected('id', 'localStreamName')

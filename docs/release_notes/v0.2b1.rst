@@ -10,10 +10,10 @@
 
 * API
 
- * get_streams_ids
+ * list_streams_ids
  * get_streams_count
 
 * Command Line
 
- * getstreamsids
  * getstreamscount
+ * liststreamsids

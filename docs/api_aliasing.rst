@@ -4,15 +4,15 @@
 Aliasing
 ========
 
-``get_streams_ids``
-===================
+``list_streams_ids``
+====================
 
 Get a list of IDs for every active stream.
 
 Example
 ::
 
-    get_streams_ids()
+    list_streams_ids()
 
 http://docs.evostream.com/ems_api_definition/liststreamsids
 
