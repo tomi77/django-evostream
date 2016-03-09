@@ -7,5 +7,5 @@ class Command(EvoStreamCommand):
 
     requires_system_checks = False
 
-    def get_results(self, **options):
+    def get_results(self, *args, **options):
         return list_config()

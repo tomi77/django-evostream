@@ -8,7 +8,7 @@ from evostream import EvoStreamException
 class EvoStreamCommand(BaseCommand):
     requires_system_checks = False
 
-    def get_results(self, **options):
+    def get_results(self, *args, **options):
         raise NotImplementedError()
 
     def format_results(self, results, verbosity):
@@ -16,7 +16,7 @@ class EvoStreamCommand(BaseCommand):
 
     def handle(self, verbosity, *args, **options):
         try:
-            results = self.get_results(**options)
+            results = self.get_results(*args, **options)
         except EvoStreamException as ex:
             self.stderr.write(str(ex) + '\n')
             return

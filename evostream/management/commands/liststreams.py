@@ -26,7 +26,7 @@ class Command(EvoStreamCommand):
                         help='Filtering out internal streams from the list'),
         )
 
-    def get_results(self, **options):
+    def get_results(self, *args, **options):
         return list_streams(**options)
 
     def format_results(self, results, verbosity):
