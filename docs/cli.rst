@@ -4,6 +4,17 @@
 Command Line
 ============
 
+``getstreaminfo``
+=================
+
+Returns a detailed set of information about a stream.
+
+Example
+::
+
+    ./manage.py getstreaminfo 1
+    ./manage.py getstreaminfo streamname
+
 ``getstreamscount``
 ===================
 
@@ -13,16 +24,6 @@ Example
 ::
 
     ./manage.py getstreamscount
-
-``liststreamsids``
-==================
-
-Get a list of IDs for every active stream.
-
-Example
-::
-
-    ./manage.py liststreamsids
 
 ``listconfig``
 ==============
@@ -48,3 +49,12 @@ Example
 
     ./manage.py liststreams --disable-internal-streams=1
 
+``liststreamsids``
+==================
+
+Get a list of IDs for every active stream.
+
+Example
+::
+
+    ./manage.py liststreamsids

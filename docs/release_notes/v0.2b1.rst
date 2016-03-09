@@ -17,3 +17,4 @@
 
  * getstreamscount
  * liststreamsids
+ * getstreaminfo
