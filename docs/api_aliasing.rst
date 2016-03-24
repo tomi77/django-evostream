@@ -195,3 +195,13 @@ Example:
  add_stream_alias('bunny', 'video1', expirePeriod=-300)
 
 http://docs.evostream.com/ems_api_definition/addstreamalias
+
+``list_stream_aliases``
+=======================
+
+Returns a complete list of aliases.
+
+Example:
+::
+
+ list_stream_aliases()

@@ -58,6 +58,16 @@ Example
 
     ./manage.py listconfig
 
+``liststreamaliases``
+=====================
+
+Returns a complete list of aliases.
+
+Example
+::
+
+    ./manage.py liststreamaliases
+
 ``liststreams``
 ===============
 
