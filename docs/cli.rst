@@ -91,3 +91,13 @@ Example
 ::
 
     ./manage.py liststreamsids
+
+``removestreamalias``
+=====================
+
+Removes an alias of a stream.
+
+Example
+::
+
+    ./manage.py removestreamalias video1

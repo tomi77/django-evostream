@@ -297,3 +297,15 @@ def list_stream_aliases():
     :link: http://docs.evostream.com/ems_api_definition/liststreamaliases
     """
     return execute('liststreamaliases')
+
+
+def remove_stream_alias(aliasName):
+    """
+    Removes an alias of a stream.
+
+    :param aliasName: The alias to delete
+    :type aliasName: str
+
+    :link: http://docs.evostream.com/ems_api_definition/removestreamalias
+    """
+    return execute('removestreamalias', aliasName=aliasName)

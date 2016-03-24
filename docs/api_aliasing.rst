@@ -205,3 +205,17 @@ Example:
 ::
 
  list_stream_aliases()
+
+http://docs.evostream.com/ems_api_definition/liststreamaliases
+
+``remove_stream_alias``
+=======================
+
+Removes an alias of a stream.
+
+Example:
+::
+
+ remove_stream_alias('video1')
+
+http://docs.evostream.com/ems_api_definition/removestreamalias
