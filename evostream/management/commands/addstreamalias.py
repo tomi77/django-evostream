@@ -1,4 +1,3 @@
-import json
 from optparse import make_option
 
 import django
