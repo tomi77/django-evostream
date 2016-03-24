@@ -13,6 +13,7 @@
  * list_streams_ids
  * get_streams_count
  * get_config_info
+ * add_stream_alias
 
 * Command Line
 
@@ -20,3 +21,4 @@
  * liststreamsids
  * getstreaminfo
  * getconfiginfo
+ * addstreamalias

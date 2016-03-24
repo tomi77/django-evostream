@@ -4,6 +4,19 @@
 Command Line
 ============
 
+``addstreamalias``
+==================
+
+Allows you to create secondary name(s) for internal streams. Once an alias is
+created the localstreamname cannot be used to request playback of that stream.
+Once an alias is used (requested by a client) the alias is removed. Aliases
+are designed to be used to protect/hide your source streams.
+
+Example:
+::
+
+    ./manage.py addstreamalias bunny video1 --expire-period=-300
+
 ``getconfiginfo``
 =================
 
