@@ -12,9 +12,11 @@
 
  * list_streams_ids
  * get_streams_count
+ * get_config_info
 
 * Command Line
 
  * getstreamscount
  * liststreamsids
  * getstreaminfo
+ * getconfiginfo

@@ -4,6 +4,16 @@
 Command Line
 ============
 
+``getconfiginfo``
+=================
+
+Returns the information of the stream by the configId.
+
+Example
+::
+
+    ./manage.py getconfiginfo 1
+
 ``getstreaminfo``
 =================
 

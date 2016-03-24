@@ -146,3 +146,23 @@ Example::
  remove_config(id=55)
 
 http://docs.evostream.com/ems_api_definition/removeconfig
+
+``get_config_info``
+===================
+
+Returns the information of the stream by the `configId`.
+::
+
+ get_config_info(id=1)
+
+Required:
+
+:``id`` `(int)`:
+    The `configId` of the configuration to get some information.
+
+Example:
+::
+
+ get_config_info(id=1)
+
+http://docs.evostream.com/ems_api_definition/getconfiginfo

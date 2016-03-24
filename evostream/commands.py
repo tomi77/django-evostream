@@ -250,3 +250,15 @@ def remove_config(**kwargs):
     :link: http://docs.evostream.com/ems_api_definition/removeconfig
     """
     return execute('removeconfig', **kwargs)
+
+
+def get_config_info(id):
+    """
+    Returns the information of the stream by the configId.
+
+    :param id: The configId of the configuration to get some information
+    :type id: int
+
+    :link: http://docs.evostream.com/ems_api_definition/getconfiginfo
+    """
+    return execute('getconfiginfo', id=id)
