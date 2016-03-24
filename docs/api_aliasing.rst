@@ -213,9 +213,26 @@ http://docs.evostream.com/ems_api_definition/liststreamaliases
 
 Removes an alias of a stream.
 
+Required:
+
+:``aliasName`` `(str)`:
+    The alias to delete
+
 Example:
 ::
 
  remove_stream_alias('video1')
 
 http://docs.evostream.com/ems_api_definition/removestreamalias
+
+``flush_stream_aliases``
+========================
+
+Invalidates all streams aliases.
+
+Example:
+::
+
+ flush_stream_aliases()
+
+http://docs.evostream.com/ems_api_definition/flushstreamaliases

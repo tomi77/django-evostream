@@ -16,6 +16,7 @@
  * add_stream_alias
  * list_stream_aliases
  * remove_stream_alias
+ * flush_stream_aliases
 
 * Command Line
 
@@ -26,3 +27,4 @@
  * addstreamalias
  * liststreamaliases
  * removestreamalias
+ * flushstreamaliases

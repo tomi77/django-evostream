@@ -17,6 +17,16 @@ Example:
 
     ./manage.py addstreamalias bunny video1 --expire-period=-300
 
+``flushstreamaliases``
+======================
+
+Invalidates all streams aliases.
+
+Example:
+::
+
+    ./manage.py flushstreamaliases
+
 ``getconfiginfo``
 =================
 

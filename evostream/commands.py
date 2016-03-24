@@ -309,3 +309,12 @@ def remove_stream_alias(aliasName):
     :link: http://docs.evostream.com/ems_api_definition/removestreamalias
     """
     return execute('removestreamalias', aliasName=aliasName)
+
+
+def flush_stream_aliases():
+    """
+    Invalidates all streams aliases.
+
+    :link: http://docs.evostream.com/ems_api_definition/flushstreamaliases
+    """
+    return execute('flushstreamaliases')
