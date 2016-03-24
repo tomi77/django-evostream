@@ -287,4 +287,4 @@ def add_stream_alias(localStreamName, aliasName, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/addstreamalias
     """
-    return execute(localStreamName=localStreamName, aliasName=aliasName, **kwargs)
+    return execute('addstreamalias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
