@@ -126,7 +126,7 @@ def pull_stream(uri, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/pullstream
     """
-    return execute('pullstream', uri=uri, **kwargs)
+    return execute('pullStream', uri=uri, **kwargs)
 
 
 def list_streams_ids():
@@ -135,7 +135,7 @@ def list_streams_ids():
 
     :link: http://docs.evostream.com/ems_api_definition/liststreamsids
     """
-    return execute('liststreamsids')
+    return execute('listStreamsIds')
 
 
 @expected('id', 'localStreamName')
@@ -155,7 +155,7 @@ def get_stream_info(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/getstreaminfo
     """
-    return execute('getstreaminfo', **kwargs)
+    return execute('getStreamInfo', **kwargs)
 
 
 @expected('disableInternalStreams')
@@ -169,7 +169,7 @@ def list_streams(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/liststreams
     """
-    return execute('liststreams', **kwargs)
+    return execute('listStreams', **kwargs)
 
 
 def get_streams_count():
@@ -178,7 +178,7 @@ def get_streams_count():
 
     :link: http://docs.evostream.com/ems_api_definition/getstreamscount
     """
-    return execute('getstreamscount')
+    return execute('getStreamsCount')
 
 
 @expected('id', 'localStreamName', 'permanently')
@@ -207,7 +207,7 @@ def shutdown_stream(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/shutdownstream
     """
-    return execute('shutdownstream', **kwargs)
+    return execute('shutdownStream', **kwargs)
 
 
 def list_config():
@@ -222,7 +222,7 @@ def list_config():
 
     :link: http://docs.evostream.com/ems_api_definition/listconfig
     """
-    return execute('listconfig')
+    return execute('listConfig')
 
 
 @expected('id', 'groupName', 'removeHlsHdsFiles')
@@ -249,7 +249,7 @@ def remove_config(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/removeconfig
     """
-    return execute('removeconfig', **kwargs)
+    return execute('removeConfig', **kwargs)
 
 
 def get_config_info(id):
@@ -261,7 +261,7 @@ def get_config_info(id):
 
     :link: http://docs.evostream.com/ems_api_definition/getconfiginfo
     """
-    return execute('getconfiginfo', id=id)
+    return execute('getConfigInfo', id=id)
 
 
 @expected('expirePeriod')
@@ -287,7 +287,7 @@ def add_stream_alias(localStreamName, aliasName, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/addstreamalias
     """
-    return execute('addstreamalias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
+    return execute('addStreamAlias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
 
 
 def list_stream_aliases():
@@ -296,7 +296,7 @@ def list_stream_aliases():
 
     :link: http://docs.evostream.com/ems_api_definition/liststreamaliases
     """
-    return execute('liststreamaliases')
+    return execute('listStreamAliases')
 
 
 def remove_stream_alias(aliasName):
@@ -308,7 +308,7 @@ def remove_stream_alias(aliasName):
 
     :link: http://docs.evostream.com/ems_api_definition/removestreamalias
     """
-    return execute('removestreamalias', aliasName=aliasName)
+    return execute('removeStreamAlias', aliasName=aliasName)
 
 
 def flush_stream_aliases():
@@ -317,4 +317,4 @@ def flush_stream_aliases():
 
     :link: http://docs.evostream.com/ems_api_definition/flushstreamaliases
     """
-    return execute('flushstreamaliases')
+    return execute('flushStreamAliases')
