@@ -4,7 +4,6 @@ import logging
 from .default import protocol
 
 
-execute = protocol.execute
 logger = logging.getLogger(__name__)
 
 
@@ -126,7 +125,7 @@ def pull_stream(uri, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/pullstream
     """
-    return execute('pullStream', uri=uri, **kwargs)
+    return protocol.protocol.execute('pullStream', uri=uri, **kwargs)
 
 
 def list_streams_ids():
@@ -135,7 +134,7 @@ def list_streams_ids():
 
     :link: http://docs.evostream.com/ems_api_definition/liststreamsids
     """
-    return execute('listStreamsIds')
+    return protocol.execute('listStreamsIds')
 
 
 @expected('id', 'localStreamName')
@@ -155,7 +154,7 @@ def get_stream_info(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/getstreaminfo
     """
-    return execute('getStreamInfo', **kwargs)
+    return protocol.execute('getStreamInfo', **kwargs)
 
 
 @expected('disableInternalStreams')
@@ -169,7 +168,7 @@ def list_streams(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/liststreams
     """
-    return execute('listStreams', **kwargs)
+    return protocol.execute('listStreams', **kwargs)
 
 
 def get_streams_count():
@@ -178,7 +177,7 @@ def get_streams_count():
 
     :link: http://docs.evostream.com/ems_api_definition/getstreamscount
     """
-    return execute('getStreamsCount')
+    return protocol.execute('getStreamsCount')
 
 
 @expected('id', 'localStreamName', 'permanently')
@@ -207,7 +206,7 @@ def shutdown_stream(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/shutdownstream
     """
-    return execute('shutdownStream', **kwargs)
+    return protocol.execute('shutdownStream', **kwargs)
 
 
 def list_config():
@@ -222,7 +221,7 @@ def list_config():
 
     :link: http://docs.evostream.com/ems_api_definition/listconfig
     """
-    return execute('listConfig')
+    return protocol.execute('listConfig')
 
 
 @expected('id', 'groupName', 'removeHlsHdsFiles')
@@ -249,7 +248,7 @@ def remove_config(**kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/removeconfig
     """
-    return execute('removeConfig', **kwargs)
+    return protocol.execute('removeConfig', **kwargs)
 
 
 def get_config_info(id):
@@ -261,7 +260,7 @@ def get_config_info(id):
 
     :link: http://docs.evostream.com/ems_api_definition/getconfiginfo
     """
-    return execute('getConfigInfo', id=id)
+    return protocol.execute('getConfigInfo', id=id)
 
 
 @expected('expirePeriod')
@@ -287,7 +286,7 @@ def add_stream_alias(localStreamName, aliasName, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/addstreamalias
     """
-    return execute('addStreamAlias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
+    return protocol.execute('addStreamAlias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
 
 
 def list_stream_aliases():
@@ -296,7 +295,7 @@ def list_stream_aliases():
 
     :link: http://docs.evostream.com/ems_api_definition/liststreamaliases
     """
-    return execute('listStreamAliases')
+    return protocol.execute('listStreamAliases')
 
 
 def remove_stream_alias(aliasName):
@@ -308,7 +307,7 @@ def remove_stream_alias(aliasName):
 
     :link: http://docs.evostream.com/ems_api_definition/removestreamalias
     """
-    return execute('removeStreamAlias', aliasName=aliasName)
+    return protocol.execute('removeStreamAlias', aliasName=aliasName)
 
 
 def flush_stream_aliases():
@@ -317,4 +316,4 @@ def flush_stream_aliases():
 
     :link: http://docs.evostream.com/ems_api_definition/flushstreamaliases
     """
-    return execute('flushStreamAliases')
+    return protocol.execute('flushStreamAliases')
