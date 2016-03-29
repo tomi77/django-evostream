@@ -10,7 +10,7 @@ except ImportError:
 from django.core.management import call_command
 from django.test import TestCase
 from evostream import EvoStreamException
-from evostream.commands import list_streams_ids, list_streams
+from evostream.commands import list_streams_ids, get_stream_info, list_streams
 from evostream.protocols import BaseProtocol
 
 
@@ -55,6 +55,109 @@ if django.VERSION >= (1, 5):
             self.assertEqual(mock_write.call_args,
                              [(json.dumps(LIST_STREAMS_IDS_TEST_DATA['data'], indent=1, sort_keys=True),)])
 
+GET_STREAM_INFO_TEST_DATA = {
+    "data": {
+        "appName": "evostreamms",
+        "audio": {
+            "bytesCount": 168860,
+            "codec": "AAAC",
+            "codecNumeric": 4702111241970122752,
+            "droppedBytesCount": 0,
+            "droppedPacketsCount": 0,
+            " packetsCount": 521
+        },
+        "bandwidth": 0,
+        "connectionType": 1,
+        "creationTimestamp": 1448003954598.3130,
+        "farIp": "54.239.131.151",
+        "farPort": 1935,
+        "ip": "192.168.2.35",
+        "name": "testpullstream",
+        "nearIp": "192.168.2.35",
+        "nearPort": 1299,
+        "outStreamsUniqueIds": None,
+        "pageUrl": "",
+        "port": 1299,
+        "processId": 12848,
+        "processType": "origin",
+        "pullSetting s": {
+            "_callback": None,
+            "audioCodecBytes": "",
+            "configId": 1,
+            "emulateUserAgent": "EvoSt ream Media Server (www.evostream.com) player",
+            "forceTcp": False,
+            "httpProxy": "",
+            "isAudio": True,
+            "keepAlive": True,
+            "localStreamName": "testpullstream",
+            "operationType": 1,
+            "pageUrl": "",
+            "ppsBytes": "",
+            "rangeEnd": -1,
+            "rangeStart": -2,
+            "rtcpDetectionInterval": 10,
+            "sendRenewStream": False,
+            "spsBytes": "",
+            "ssmIp": "",
+            "swfUrl": "",
+            "tcUrl": "",
+            "tos": 256,
+            "ttl": 256,
+            "uri": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4"
+        },
+        "queryTimestamp": 1448003961907.7310,
+        "serverAgent": "FMS\/3,5,7,7009",
+        "swfUrl": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4",
+        "tcUrl": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4",
+        "type": "INR ",
+        "typeNumeric": 5282249572905648128,
+        "uniqueId": 1,
+        "upTime": 7309.4180,
+        "video": {
+            "bytesCount": 825054,
+            "codec": "VH264",
+            "codecNumeric": 6217274493967007744,
+            "droppedByte sCount": 0,
+            "droppedPacketsCount": 0,
+            "height": 306,
+            "level": 30,
+            "packetsCount": 291,
+            "profile": 66,
+            "width": 720
+        }
+    },
+    "description": "Stream information",
+    "status": "SUCCESS"
+}
+
+
+@patch('evostream.commands.logger', Mock())
+class GetStreamInfoTestCase(TestCase):
+    @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
+    def test_success(self):
+        ids = get_stream_info(id=1)
+        self.assertDictEqual(ids, GET_STREAM_INFO_TEST_DATA['data'])
+
+
+if django.VERSION >= (1, 5):
+    @patch('evostream.commands.logger', Mock())
+    class GetStreamInfoCommandTestCase(TestCase):
+        @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_verbose(self, mock_write):
+            call_command('getstreaminfo', id_or_local_stream_name=1, verbosity=2)
+            self.assertEqual(mock_write.call_count, 1)
+            self.assertEqual(mock_write.call_args,
+                             [(json.dumps(GET_STREAM_INFO_TEST_DATA['data'], indent=1, sort_keys=True),)])
+
+        @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_silent(self, mock_write):
+            call_command('getstreaminfo', id_or_local_stream_name=1)
+            self.assertEqual(mock_write.call_count, 2)
+            self.assertListEqual(mock_write.call_args_list,
+                                 [[('uniqueId: 1\n',)],
+                                  [('name: "testpullstream"\n',)]])
 
 LIST_STREAMS_TEST_DATA = {
     "data": [
