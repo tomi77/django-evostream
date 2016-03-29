@@ -29,6 +29,33 @@ class TestProtocol(BaseProtocol):
             return result['data']
 
 
+LIST_STREAMS_IDS_TEST_DATA = {
+    "data": [205, 206, 207],
+    "description": "Available stream IDs",
+    "status": "SUCCESS"
+}
+
+
+@patch('evostream.commands.logger', Mock())
+class ListStreamsIdsTestCase(TestCase):
+    @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
+    def test_success(self):
+        ids = list_streams_ids()
+        self.assertListEqual(ids, LIST_STREAMS_IDS_TEST_DATA['data'])
+
+
+if django.VERSION >= (1, 5):
+    @patch('evostream.commands.logger', Mock())
+    class ListStreamsIdsCommandTestCase(TestCase):
+        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_verbose(self, mock_write):
+            call_command('liststreamsids')
+            self.assertEqual(mock_write.call_count, 1)
+            self.assertEqual(mock_write.call_args,
+                             [(json.dumps(LIST_STREAMS_IDS_TEST_DATA['data'], indent=1, sort_keys=True),)])
+
+
 LIST_STREAMS_TEST_DATA = {
     "data": [
         {
@@ -135,30 +162,3 @@ if django.VERSION >= (1, 5):
             self.assertListEqual(mock_write.call_args_list,
                                  [[('uniqueId: 36\n',)],
                                   [('name: "testpullstream"\n',)]])
-
-
-LIST_STREAMS_IDS_TEST_DATA = {
-    "data": [205, 206, 207],
-    "description": "Available stream IDs",
-    "status": "SUCCESS"
-}
-
-
-@patch('evostream.commands.logger', Mock())
-class ListStreamsIdsTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
-    def test_success(self):
-        ids = list_streams_ids()
-        self.assertListEqual(ids, LIST_STREAMS_IDS_TEST_DATA['data'])
-
-
-if django.VERSION >= (1, 5):
-    @patch('evostream.commands.logger', Mock())
-    class ListStreamsIdsCommandTestCase(TestCase):
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
-        def test_verbose(self, mock_write):
-            call_command('liststreamsids')
-            self.assertEqual(mock_write.call_count, 1)
-            self.assertEqual(mock_write.call_args,
-                             [(json.dumps(LIST_STREAMS_IDS_TEST_DATA['data'], indent=1, sort_keys=True),)])
