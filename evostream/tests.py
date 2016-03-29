@@ -9,24 +9,16 @@ except ImportError:
 
 from django.core.management import call_command
 from django.test import TestCase
-from evostream import EvoStreamException
 from evostream.commands import list_streams_ids, get_stream_info, list_streams
-from evostream.protocols import BaseProtocol
+from evostream.protocols import HTTPProtocol
 
 
-class TestProtocol(BaseProtocol):
+class TestHTTPProtocol(HTTPProtocol):
     def __init__(self, result):
-        self.result = result
+        self.result = json.dumps(result)
 
     def get_result(self, command, **params):
         return self.result
-
-    def parse_result(self, result):
-        result = json.loads(result)
-        if result['status'] == 'FAIL':
-            raise EvoStreamException(result['description'])
-        else:
-            return result['data']
 
 
 LIST_STREAMS_IDS_TEST_DATA = {
@@ -37,8 +29,8 @@ LIST_STREAMS_IDS_TEST_DATA = {
 
 
 @patch('evostream.commands.logger', Mock())
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
 class ListStreamsIdsTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
     def test_success(self):
         ids = list_streams_ids()
         self.assertListEqual(ids, LIST_STREAMS_IDS_TEST_DATA['data'])
@@ -46,9 +38,9 @@ class ListStreamsIdsTestCase(TestCase):
 
 if django.VERSION >= (1, 5):
     @patch('evostream.commands.logger', Mock())
+    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
+    @patch('django.core.management.base.OutputWrapper.write')
     class ListStreamsIdsCommandTestCase(TestCase):
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
         def test_verbose(self, mock_write):
             call_command('liststreamsids')
             self.assertEqual(mock_write.call_count, 1)
@@ -132,8 +124,8 @@ GET_STREAM_INFO_TEST_DATA = {
 
 
 @patch('evostream.commands.logger', Mock())
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
 class GetStreamInfoTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
     def test_success(self):
         ids = get_stream_info(id=1)
         self.assertDictEqual(ids, GET_STREAM_INFO_TEST_DATA['data'])
@@ -141,17 +133,15 @@ class GetStreamInfoTestCase(TestCase):
 
 if django.VERSION >= (1, 5):
     @patch('evostream.commands.logger', Mock())
+    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
+    @patch('django.core.management.base.OutputWrapper.write')
     class GetStreamInfoCommandTestCase(TestCase):
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
         def test_verbose(self, mock_write):
             call_command('getstreaminfo', id_or_local_stream_name=1, verbosity=2)
             self.assertEqual(mock_write.call_count, 1)
             self.assertEqual(mock_write.call_args,
                              [(json.dumps(GET_STREAM_INFO_TEST_DATA['data'], indent=1, sort_keys=True),)])
 
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(GET_STREAM_INFO_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
         def test_silent(self, mock_write):
             call_command('getstreaminfo', id_or_local_stream_name=1)
             self.assertEqual(mock_write.call_count, 2)
@@ -239,8 +229,8 @@ LIST_STREAMS_TEST_DATA = {
 
 
 @patch('evostream.commands.logger', Mock())
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
 class ListStreamsTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_TEST_DATA)))
     def test_success(self):
         ids = list_streams()
         self.assertListEqual(ids, LIST_STREAMS_TEST_DATA['data'])
@@ -248,17 +238,15 @@ class ListStreamsTestCase(TestCase):
 
 if django.VERSION >= (1, 5):
     @patch('evostream.commands.logger', Mock())
+    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
+    @patch('django.core.management.base.OutputWrapper.write')
     class ListStreamsCommandTestCase(TestCase):
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
         def test_verbose(self, mock_write):
             call_command('liststreams', verbosity=2)
             self.assertEqual(mock_write.call_count, 1)
             self.assertEqual(mock_write.call_args,
                              [(json.dumps(LIST_STREAMS_TEST_DATA['data'], indent=1, sort_keys=True),)])
 
-        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_TEST_DATA)))
-        @patch('django.core.management.base.OutputWrapper.write')
         def test_silent(self, mock_write):
             call_command('liststreams')
             self.assertEqual(mock_write.call_count, 2)
