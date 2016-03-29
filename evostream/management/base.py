@@ -22,12 +22,17 @@ class BaseEvoStreamCommand(BaseCommand):
                     self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
 
     def handle(self, verbosity, *args, **options):
+        if not isinstance(verbosity, int):
+            verbosity = int(verbosity)
+
         try:
             results = self.get_results(*args, **options)
         except EvoStreamException as ex:
             self.stderr.write(str(ex) + '\n')
             return
+
         if results is None:
             self.stdout.write('No data\n')
             return
+
         self.format_results(results, verbosity=verbosity)
