@@ -18,9 +18,8 @@ class BaseEvoStreamCommand(BaseCommand):
             self.stdout.write(json.dumps(results, indent=1, sort_keys=True))
         else:
             for stream in results:
-                for key, val in stream.items():
-                    if key in self.silent_keys:
-                        self.stdout.write(key + ': ' + json.dumps(val) + '\n')
+                for key in self.silent_keys:
+                    self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
 
     def handle(self, verbosity, *args, **options):
         try:
