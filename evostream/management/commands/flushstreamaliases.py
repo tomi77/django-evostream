@@ -1,8 +1,8 @@
 from evostream.commands import flush_stream_aliases
-from evostream.management.base import EvoStreamCommand
+from evostream.management.base import BaseEvoStreamCommand
 
 
-class Command(EvoStreamCommand):
+class Command(BaseEvoStreamCommand):
     help = 'Invalidates all streams aliases.'
 
     requires_system_checks = False

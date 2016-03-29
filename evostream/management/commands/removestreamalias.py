@@ -1,8 +1,8 @@
 from evostream.commands import remove_stream_alias
-from evostream.management.base import EvoStreamCommand
+from evostream.management.base import BaseEvoStreamCommand
 
 
-class Command(EvoStreamCommand):
+class Command(BaseEvoStreamCommand):
     args = '<aliasName>'
 
     help = 'Removes an alias of a stream.'

@@ -3,10 +3,10 @@ from optparse import make_option
 import django
 
 from evostream.commands import add_stream_alias
-from evostream.management.base import EvoStreamCommand
+from evostream.management.base import BaseEvoStreamCommand
 
 
-class Command(EvoStreamCommand):
+class Command(BaseEvoStreamCommand):
     args = '<local_stream_name> <alias_name>'
 
     help = 'Create secondary name for internal stream.'
@@ -28,7 +28,7 @@ class Command(EvoStreamCommand):
                                      'many seconds. The default is -600 '
                                      '(one-shot, 10 mins)')
     else:
-        option_list = EvoStreamCommand.option_list + (
+        option_list = BaseEvoStreamCommand.option_list + (
             make_option('--expire-period', action='store',
                         type='int', default=-600,
                         dest='expirePeriod',

@@ -1,8 +1,8 @@
 from evostream.commands import list_streams_ids
-from evostream.management.base import EvoStreamCommand
+from evostream.management.base import BaseEvoStreamCommand
 
 
-class Command(EvoStreamCommand):
+class Command(BaseEvoStreamCommand):
     help = 'Get a list of IDs for every active stream.'
 
     requires_system_checks = False
