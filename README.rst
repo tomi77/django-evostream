@@ -5,6 +5,10 @@ django-evostream
 .. image:: https://codeclimate.com/github/tomi77/django-evostream/badges/gpa.svg
    :target: https://codeclimate.com/github/tomi77/django-evostream
    :alt: Code Climate
+.. image:: https://travis-ci.org/tomi77/django-evostream.svg?branch=master
+   :target: https://travis-ci.org/tomi77/django-evostream
+.. image:: https://coveralls.io/repos/github/tomi77/django-evostream/badge.svg?branch=master
+   :target: https://coveralls.io/github/tomi77/django-evostream?branch=master
 
 Installation
 ============
