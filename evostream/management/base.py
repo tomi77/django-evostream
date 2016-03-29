@@ -17,9 +17,12 @@ class BaseEvoStreamCommand(BaseCommand):
         if verbosity > 1 or len(self.silent_keys) == 0:
             self.stdout.write(json.dumps(results, indent=1, sort_keys=True))
         else:
-            for stream in results:
+            if not isinstance(results, list):
+                results = [results]
+            for result in results:
                 for key in self.silent_keys:
-                    self.stdout.write(key + ': ' + json.dumps(stream[key]) + '\n')
+                    if key in result:
+                        self.stdout.write(key + ': ' + json.dumps(result[key]) + '\n')
 
     def handle(self, verbosity, *args, **options):
         if not isinstance(verbosity, int):
