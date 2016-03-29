@@ -19,6 +19,7 @@ class BaseEvoStreamCommand(BaseCommand):
         else:
             if not isinstance(results, list):
                 results = [results]
+
             for result in results:
                 for key in self.silent_keys:
                     if key in result:
