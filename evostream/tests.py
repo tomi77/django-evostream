@@ -9,7 +9,7 @@ except ImportError:
 
 from django.core.management import call_command
 from django.test import TestCase
-from evostream.commands import list_streams_ids, get_stream_info, list_streams
+from evostream.commands import list_streams_ids, get_stream_info, list_streams, get_streams_count
 from evostream.protocols import HTTPProtocol
 
 
@@ -253,3 +253,31 @@ if django.VERSION >= (1, 5):
             self.assertListEqual(mock_write.call_args_list,
                                  [[('uniqueId: 36\n',)],
                                   [('name: "testpullstream"\n',)]])
+
+GET_STREAMS_COUNT_TEST_DATA = {
+    "data": {
+        "streamCount": 1
+    },
+    "description": "Active streams count",
+    "status": "SUCCESS"
+}
+
+
+@patch('evostream.commands.logger', Mock())
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAMS_COUNT_TEST_DATA))
+class GetStreamsCountTestCase(TestCase):
+    def test_success(self):
+        cnt = get_streams_count()
+        self.assertDictEqual(cnt, GET_STREAMS_COUNT_TEST_DATA['data'])
+
+
+if django.VERSION >= (1, 5):
+    @patch('evostream.commands.logger', Mock())
+    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAMS_COUNT_TEST_DATA))
+    @patch('django.core.management.base.OutputWrapper.write')
+    class GetStreamsCountCommandTestCase(TestCase):
+        def test_verbose(self, mock_write):
+            call_command('getstreamscount')
+            self.assertEqual(mock_write.call_count, 1)
+            self.assertEqual(mock_write.call_args,
+                             [(json.dumps(GET_STREAMS_COUNT_TEST_DATA['data'], indent=1, sort_keys=True),)])
