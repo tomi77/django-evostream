@@ -1,0 +1,115 @@
+{
+  "data": {
+    "protocolStackInfo": {
+      "carrier": {
+        "farIP": "54.239.131.57",
+        "farPort": 1935,
+        "id": 601,
+        "nearIP": "192.168.2.35",
+        "nearPort": 2326,
+        "rx": 3077367,
+        "tx": 3653,
+        "type": "IOHT_TCP_CARRIER"
+      },
+      "stack": [
+        {
+          "applicationId": 0,
+          "creationTimestamp": 1448008702269.8640,
+          "id": 794,
+          "isEnqueueForDelete": false,
+          "queryTimestamp": 1448008724139.1150,
+          "type": "TCP"
+        },
+        {
+          "applicationId": 1,
+          "creationTimestamp": 1448008702269.8640,
+          "id": 795,
+          "isEnqueueForDelete": false,
+          "queryTimestamp": 1448008724139.1150,
+          "rxInvokes": 31,
+          "serverAgent": "FMS/3,5,7,7009",
+          "streams": [
+            {
+              "appName": "evostreamms",
+              "audio": {
+                "bytesCount": 348883,
+                "codec": "AAAC",
+                "codecNumeric": 4702111241970122752,
+                "droppedBytesCo unt": 0,
+                "droppedPacketsCount": 0,
+                "packetsCount": 1068
+              },
+              "bandwidth": 0,
+              "connectionTyp e": 1,
+              "creationTimestamp": 1448008702871.8989,
+              "farIp": "54.239.131.57",
+              "farPort": 1935,
+              "ip": "192.168.2.35",
+              "name": "testpullstream",
+              "nearIp": "192.168.2.35",
+              "nearPort ": 2326,
+              "outStreamsUniqueIds": [
+                91
+              ],
+              "pageUrl": "",
+              "port": 2326,
+              "processId": 12848,
+              "processType": "origin",
+              "pullSettings": {
+                "_callback": null,
+                "audioCodecBytes": "",
+                "configId": 1,
+                "emulateUserAgent": "EvoStream Media Server (www.evostream.com) player",
+                "forceTcp": false,
+                "httpProxy": "",
+                "isAudio": true,
+                "keepAlive": true,
+                "localStreamName": "testpullstream",
+                "operationType": 1,
+                "pageUrl": "",
+                "ppsBytes": "",
+                "rangeEnd": -1,
+                "ran geStart": -2,
+                "rtcpDetectionInterval": 10,
+                "sendRenewStream": false,
+                "spsBytes": "",
+                "ss mIp": "",
+                "swfUrl": "",
+                "tcUrl": "",
+                "tos": 256,
+                "ttl": 256,
+                "uri": "rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4"
+              },
+              "queryTimestamp": 1448008724139.1150,
+              "serverAgent": "FMS/3,5,7,7009",
+              "swfUrl": "rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4",
+              "tcUrl": "rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4",
+              "type": "INR",
+              "typeNumeric": 5282249572905648128,
+              "uniqueId": 95,
+              "upTime": 21267.2161,
+              "video": {
+                "bytesCount": 2698244,
+                "codec": "VH264",
+                "codecNumeric": 6217274493967007744,
+                "droppedBytesCount": 0,
+                "droppedPacketsCount": 0,
+                "height": 306,
+                "level": 30,
+                "packetsCount": 596,
+                "profile": 66,
+                "width": 720
+              }
+            }
+          ],
+          "txInvokes": 7,
+          "type": "OR"
+        }
+      ]
+    },
+    "streamInfo": {
+    }
+  },
+  "description": "Stream closed",
+  "status": "SUCCESS"
+}
