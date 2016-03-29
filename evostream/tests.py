@@ -1,4 +1,7 @@
 import json
+
+import django
+
 try:
     from unittest.mock import patch, Mock
 except ImportError:
@@ -40,11 +43,12 @@ class ListStreamsIdsTestCase(TestCase):
         self.assertListEqual(ids, LIST_STREAMS_IDS_TEST_DATA['data'])
 
 
-class ListStreamsIdsCommandTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
-    @patch('sys.stdout.write')
-    def test_command(self, mock_write):
-        call_command('liststreamsids')
-        self.assertEqual(mock_write.call_count, 1)
-        self.assertEqual(mock_write.call_args,
-                         [(json.dumps(LIST_STREAMS_IDS_TEST_DATA['data'], indent=1, sort_keys=True) + '\n', )])
+if django.VERSION >= (1, 5):
+    class ListStreamsIdsCommandTestCase(TestCase):
+        @patch('evostream.commands.protocol', TestProtocol(json.dumps(LIST_STREAMS_IDS_TEST_DATA)))
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_command(self, mock_write):
+            call_command('liststreamsids')
+            self.assertEqual(mock_write.call_count, 1)
+            self.assertEqual(mock_write.call_args,
+                             [(json.dumps(LIST_STREAMS_IDS_TEST_DATA['data'], indent=1, sort_keys=True), )])
