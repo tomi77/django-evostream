@@ -3,7 +3,11 @@ import logging
 
 from .default import protocol
 
-
+__all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
+           'list_streams', 'get_streams_count', 'shutdown_stream',
+           'list_config', 'remove_config', 'get_config_info',
+           'add_stream_alias', 'list_stream_aliases', 'remove_stream_alias',
+           'flush_stream_aliases']
 logger = logging.getLogger(__name__)
 
 
@@ -22,7 +26,9 @@ def expected(*expected_keys):
                           if key in expected_keys)
 
             return func(*args, **kwargs)
+
         return wraps(func)(wrapped_func)
+
     return command_decorator
 
 

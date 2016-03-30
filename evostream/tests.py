@@ -10,7 +10,7 @@ except ImportError:
 
 from django.core.management import call_command
 from django.test import TestCase
-from evostream.commands import list_streams_ids, get_stream_info, list_streams, get_streams_count
+from evostream.commands import *
 from evostream.protocols import HTTPProtocol
 
 
@@ -24,6 +24,7 @@ class TestHTTPProtocol(HTTPProtocol):
 
 def load_test_data(filename):
     return json.load(open(os.path.join('testapp', 'testdata', filename)))
+
 
 LIST_STREAMS_IDS_TEST_DATA = load_test_data('list_streams_ids.json')
 
