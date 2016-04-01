@@ -28,3 +28,4 @@
  * liststreamaliases
  * removestreamalias
  * flushstreamaliases
+ * shutdownstream

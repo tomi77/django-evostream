@@ -41,3 +41,8 @@ Example
 ::
 
     ./manage.py liststreams
+
+TODO
+====
+
+* Implement silent mode in ``shutdownstream`` CLI command

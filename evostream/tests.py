@@ -1,9 +1,6 @@
 import json
 
-import sys
-
 import os
-import re
 
 import django
 
@@ -58,6 +55,11 @@ class ApiTestCase(TestCase):
     def test_get_streams_count(self):
         out = get_streams_count()
         self.assertDictEqual(out, GET_STREAMS_COUNT_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
+    def test_shutdown_stream(self):
+        out = shutdown_stream(id=55)
+        self.assertDictEqual(out, SHUTDOWN_STREAM_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -126,6 +128,17 @@ if django.VERSION >= (1, 5):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_STREAMS_COUNT_TEST_DATA['data'].keys():
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
+        def test_shutdownstream(self, mock_write):
+            call_command('shutdownstream', id_or_local_stream_name=55)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in SHUTDOWN_STREAM_TEST_DATA['data'].keys():
                 try:
                     out.index(key)
                 except ValueError:

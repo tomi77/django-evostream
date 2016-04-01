@@ -111,3 +111,13 @@ Example
 ::
 
     ./manage.py removestreamalias video1
+
+``shutdownstream``
+==================
+
+Terminates a specific stream. When ``permanently=1`` is used, this command is analogous to ``removeConfig``.
+
+Example
+::
+
+    ./manage.py shutdownstream 55
