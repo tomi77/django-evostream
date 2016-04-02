@@ -13,3 +13,5 @@ engines:
 ratings:
   paths:
   - "evostream/**.py"
+exclude_paths:
+- "evostream/tests.py"
