@@ -32,6 +32,7 @@ GET_STREAM_INFO_TEST_DATA = load_test_data('get_stream_info.json')
 LIST_STREAMS_TEST_DATA = load_test_data('list_streams.json')
 GET_STREAMS_COUNT_TEST_DATA = load_test_data('get_streams_count.json')
 SHUTDOWN_STREAM_TEST_DATA = load_test_data('shutdown_stream.json')
+LIST_CONFIG_TEST_DATA = load_test_data('list_config.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -60,6 +61,11 @@ class ApiTestCase(TestCase):
     def test_shutdown_stream(self):
         out = shutdown_stream(id=55)
         self.assertDictEqual(out, SHUTDOWN_STREAM_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
+    def test_shutdown_stream(self):
+        out = shutdown_stream()
+        self.assertDictEqual(out, LIST_CONFIG_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -139,6 +145,17 @@ if django.VERSION >= (1, 5):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in SHUTDOWN_STREAM_TEST_DATA['data'].keys():
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
+        def test_listconfig(self, mock_write):
+            call_command('listconfig')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in LIST_CONFIG_TEST_DATA['data'].keys():
                 try:
                     out.index(key)
                 except ValueError:

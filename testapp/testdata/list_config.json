@@ -1,0 +1,33 @@
+{
+  "data": {
+    "dash": [
+      "details of dash streams"
+    ],
+    "hds": [
+      "details of hds streams"
+    ],
+    "hls": [
+      "details of hls streams"
+    ],
+    "mss": [
+      "details of mss streams"
+    ],
+    "process": [
+      "details of on process streams"
+    ],
+    "pull": [
+      "details of pulled streams"
+    ],
+    "push": [
+      "details of pushed streams"
+    ],
+    "record": [
+      "details of recorded streams"
+    ],
+    "webrtc": [
+      "details of webRTC streams"
+    ]
+  },
+  "description": "Run-time configuration",
+  "status": "SUCCESS"
+}
