@@ -35,6 +35,7 @@ SHUTDOWN_STREAM_TEST_DATA = load_test_data('shutdown_stream.json')
 LIST_CONFIG_TEST_DATA = load_test_data('list_config.json')
 REMOVE_CONFIG_TEST_DATA = load_test_data('remove_config.json')
 GET_CONFIG_INFO_TEST_DATA = load_test_data('get_config_info.json')
+ADD_STREAM_ALIAS_TEST_DATA = load_test_data('add_stream_alias.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -78,6 +79,11 @@ class ApiTestCase(TestCase):
     def test_get_config_info(self):
         out = get_config_info(1)
         self.assertDictEqual(out, GET_CONFIG_INFO_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
+    def test_add_stream_alias(self):
+        out = add_stream_alias('MyStream', 'video1', expirePeriod=-300)
+        self.assertDictEqual(out, ADD_STREAM_ALIAS_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -174,7 +180,7 @@ if django.VERSION >= (1, 5):
                     self.fail('Key %s not found' % key)
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
-        def test_liststreams_verbose(self, mock_write):
+        def test_removeconfig_verbose(self, mock_write):
             call_command('removeconfig', id_or_group_name=555, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -185,7 +191,7 @@ if django.VERSION >= (1, 5):
                     self.fail('Key %s not found' % key)
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
-        def test_liststreams(self, mock_write):
+        def test_removeconfig(self, mock_write):
             call_command('removeconfig', id_or_group_name=555)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -196,7 +202,7 @@ if django.VERSION >= (1, 5):
                     self.fail('Key %s not found' % key)
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
-        def test_liststreams_verbose(self, mock_write):
+        def test_getconfiginfo_verbose(self, mock_write):
             call_command('getconfiginfo', config_id=1, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -207,11 +213,22 @@ if django.VERSION >= (1, 5):
                     self.fail('Key %s not found' % key)
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
-        def test_liststreams(self, mock_write):
+        def test_getconfiginfo(self, mock_write):
             call_command('getconfiginfo', config_id=1)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['configId', 'localStreamName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
+        def test_addstreamalias(self, mock_write):
+            call_command('addstreamalias', local_stream_name='MyStream', alias_name='video1', expirePeriod=-300)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ADD_STREAM_ALIAS_TEST_DATA['data']:
                 try:
                     out.index(key)
                 except ValueError:
