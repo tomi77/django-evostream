@@ -9,5 +9,5 @@ class Command(BaseEvoStreamCommand):
 
     requires_system_checks = False
 
-    def get_results(self, aliasName, *args, **options):
-        return remove_stream_alias(aliasName)
+    def get_results(self, alias_name, *args, **options):
+        return remove_stream_alias(aliasName=alias_name)

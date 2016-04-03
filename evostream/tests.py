@@ -37,6 +37,7 @@ REMOVE_CONFIG_TEST_DATA = load_test_data('remove_config.json')
 GET_CONFIG_INFO_TEST_DATA = load_test_data('get_config_info.json')
 ADD_STREAM_ALIAS_TEST_DATA = load_test_data('add_stream_alias.json')
 LIST_STREAM_ALIASES_TEST_DATA = load_test_data('list_stream_aliases.json')
+REMOVE_STREAM_ALIAS_TEST_DATA = load_test_data('remove_stream_alias.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -87,9 +88,14 @@ class ApiTestCase(TestCase):
         self.assertDictEqual(out, ADD_STREAM_ALIAS_TEST_DATA['data'])
 
     @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAM_ALIASES_TEST_DATA))
-    def test_add_stream_alias(self):
+    def test_list_stream_aliases(self):
         out = list_stream_aliases()
         self.assertListEqual(out, LIST_STREAM_ALIASES_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
+    def test_remove_stream_alias(self):
+        out = remove_stream_alias(aliasName='video1')
+        self.assertDictEqual(out, REMOVE_STREAM_ALIAS_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -258,6 +264,17 @@ if django.VERSION >= (1, 5):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['aliasName', 'localStreamName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
+        def test_removestreamalias(self, mock_write):
+            call_command('removestreamalias', alias_name='video1')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in REMOVE_STREAM_ALIAS_TEST_DATA['data']:
                 try:
                     out.index(key)
                 except ValueError:
