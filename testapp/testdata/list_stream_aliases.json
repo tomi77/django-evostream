@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "aliasName": "video1",
+      "creationTime": 1448267205,
+      "expirePeriod": 300,
+      "localStreamName": "MyStream",
+      "oneShot": true,
+      "permanent": false
+    }
+  ],
+  "description": "Currently available aliases",
+  "status": "SUCCESS"
+}
