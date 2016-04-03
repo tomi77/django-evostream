@@ -39,6 +39,7 @@ ADD_STREAM_ALIAS_TEST_DATA = load_test_data('add_stream_alias.json')
 LIST_STREAM_ALIASES_TEST_DATA = load_test_data('list_stream_aliases.json')
 REMOVE_STREAM_ALIAS_TEST_DATA = load_test_data('remove_stream_alias.json')
 FLUSH_STREAM_ALIASES_TEST_DATA = load_test_data('flush_stream_aliases.json')
+ADD_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('add_group_name_alias.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -102,6 +103,11 @@ class ApiTestCase(TestCase):
     def test_flush_stream_aliases(self):
         out = flush_stream_aliases()
         self.assertIsNone(out)
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
+    def test_add_group_name_alias(self):
+        out = add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
+        self.assertDictEqual(out, ADD_GROUP_NAME_ALIAS_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -295,3 +301,25 @@ if django.VERSION >= (1, 5):
                 out.index('No data')
             except ValueError:
                 self.fail('Key "No data" not found')
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
+        def test_addgroupnamealias_verbose(self, mock_write):
+            call_command('addgroupnamealias', group_name='MyGroup', alias_name='TestGroupAlias', verbosity=2)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ADD_GROUP_NAME_ALIAS_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
+        def test_addgroupnamealias(self, mock_write):
+            call_command('addgroupnamealias', group_name='MyGroup', alias_name='TestGroupAlias')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['aliasName', 'groupName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)

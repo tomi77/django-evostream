@@ -17,6 +17,7 @@
  * list_stream_aliases
  * remove_stream_alias
  * flush_stream_aliases
+ * add_group_name_alias
 
 * Command Line
 
@@ -29,3 +30,4 @@
  * removestreamalias
  * flushstreamaliases
  * shutdownstream
+ * addgroupnamealias

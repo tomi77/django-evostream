@@ -236,3 +236,15 @@ Example:
  flush_stream_aliases()
 
 http://docs.evostream.com/ems_api_definition/flushstreamaliases
+
+``add_group_name_alias``
+========================
+
+Create secondary name for group name.
+
+Example:
+::
+
+ add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
+
+http://docs.evostream.com/ems_api_definition/addgroupnamealias
