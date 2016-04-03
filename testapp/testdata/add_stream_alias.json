@@ -1,0 +1,9 @@
+{
+  "data": {
+    "aliasName": "video1",
+    "expirePeriod": -300,
+    "localStreamName": "MyStream"
+  },
+  "description": "Alias applied",
+  "status": "SUCCESS"
+}
