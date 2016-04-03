@@ -32,7 +32,7 @@ def expected(*expected_keys):
     return command_decorator
 
 
-@expected('keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl',
+@expected('uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl',
           'swfUrl', 'ttl', 'tos', 'rtcpDetectionInterval', 'emulateUserAgent',
           'isAudio', 'audioCodecBytes', 'spsBytes', 'ppsBytes', 'ssmIp')
 def pull_stream(uri, **kwargs):
@@ -257,6 +257,7 @@ def remove_config(**kwargs):
     return protocol.execute('removeConfig', **kwargs)
 
 
+@expected('id',)
 def get_config_info(id):
     """
     Returns the information of the stream by the configId.
@@ -269,7 +270,7 @@ def get_config_info(id):
     return protocol.execute('getConfigInfo', id=id)
 
 
-@expected('expirePeriod')
+@expected('localStreamName', 'aliasName', 'expirePeriod')
 def add_stream_alias(localStreamName, aliasName, **kwargs):
     """
     Allows you to create secondary name(s) for internal streams. Once an alias
