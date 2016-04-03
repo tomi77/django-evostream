@@ -33,6 +33,7 @@ LIST_STREAMS_TEST_DATA = load_test_data('list_streams.json')
 GET_STREAMS_COUNT_TEST_DATA = load_test_data('get_streams_count.json')
 SHUTDOWN_STREAM_TEST_DATA = load_test_data('shutdown_stream.json')
 LIST_CONFIG_TEST_DATA = load_test_data('list_config.json')
+REMOVE_CONFIG_TEST_DATA = load_test_data('remove_config.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -63,9 +64,14 @@ class ApiTestCase(TestCase):
         self.assertDictEqual(out, SHUTDOWN_STREAM_TEST_DATA['data'])
 
     @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
-    def test_shutdown_stream(self):
-        out = shutdown_stream()
+    def test_list_config(self):
+        out = list_config()
         self.assertDictEqual(out, LIST_CONFIG_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
+    def test_remove_config(self):
+        out = remove_config(id=555)
+        self.assertDictEqual(out, REMOVE_CONFIG_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -156,6 +162,28 @@ if django.VERSION >= (1, 5):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in LIST_CONFIG_TEST_DATA['data'].keys():
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
+        def test_liststreams_verbose(self, mock_write):
+            call_command('removeconfig', id_or_group_name=555, verbosity=2)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in REMOVE_CONFIG_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
+        def test_liststreams(self, mock_write):
+            call_command('removeconfig', id_or_group_name=555)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['configId']:
                 try:
                     out.index(key)
                 except ValueError:

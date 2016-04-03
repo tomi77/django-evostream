@@ -102,6 +102,16 @@ Example
 
     ./manage.py liststreamsids
 
+``removeconfig``
+================
+
+Stop the stream and remove the corresponding configuration entry.
+
+Example
+::
+
+    ./manage.py removeconfig 555
+
 ``removestreamalias``
 =====================
 
