@@ -40,7 +40,8 @@ LIST_STREAM_ALIASES_TEST_DATA = load_test_data('list_stream_aliases.json')
 REMOVE_STREAM_ALIAS_TEST_DATA = load_test_data('remove_stream_alias.json')
 FLUSH_STREAM_ALIASES_TEST_DATA = load_test_data('flush_stream_aliases.json')
 ADD_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('add_group_name_alias.json')
-FLUSH_GROUP_NAME_ALIASES = load_test_data('flush_group_name_aliases.json')
+FLUSH_GROUP_NAME_ALIASES_TEST_DATA = load_test_data('flush_group_name_aliases.json')
+GET_GROUP_NAME_BY_ALIAS_TEST_DATA = load_test_data('get_group_name_by_alias.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -110,10 +111,15 @@ class ApiTestCase(TestCase):
         out = add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
         self.assertDictEqual(out, ADD_GROUP_NAME_ALIAS_TEST_DATA['data'])
 
-    @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES))
+    @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES_TEST_DATA))
     def test_flush_group_name_aliases(self):
         out = flush_stream_aliases()
         self.assertIsNone(out)
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
+    def test_get_group_name_by_alias(self):
+        out = get_group_name_by_alias(aliasName='TestGroupAlias')
+        self.assertDictEqual(out, GET_GROUP_NAME_BY_ALIAS_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -330,7 +336,7 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES))
+        @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES_TEST_DATA))
         def test_flushgroupnamealiases(self, mock_write):
             call_command('flushgroupnamealiases')
             self.assertGreaterEqual(mock_write.call_count, 1)
@@ -339,3 +345,25 @@ if django.VERSION >= (1, 5):
                 out.index('No data')
             except ValueError:
                 self.fail('Key "No data" not found')
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
+        def test_getgroupnamebyalias_verbose(self, mock_write):
+            call_command('getgroupnamebyalias', alias_name='TestGroupAlias', verbosity=2)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in GET_GROUP_NAME_BY_ALIAS_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
+        def test_getgroupnamebyalias(self, mock_write):
+            call_command('getgroupnamebyalias', alias_name='TestGroupAlias')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['aliasName', 'groupName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)

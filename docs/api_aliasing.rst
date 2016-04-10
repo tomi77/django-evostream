@@ -260,3 +260,15 @@ Example:
  flush_group_name_aliases()
 
 http://docs.evostream.com/ems_api_definition/flushgroupnamealiases
+
+``get_group_name_by_alias``
+===========================
+
+Returns the group name given the alias name.
+
+Example:
+::
+
+ get_group_name_by_alias(aliasName='TestGroupAlias')
+
+http://docs.evostream.com/ems_api_definition/getgroupnamebyalias

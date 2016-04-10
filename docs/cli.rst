@@ -60,6 +60,16 @@ Example
 
     ./manage.py getconfiginfo 1
 
+``getgroupnamebyalias``
+=======================
+
+Returns the group name given the alias name.
+
+Example
+::
+
+    ./manage.py getgroupnamebyalias TestGroupAlias
+
 ``getstreaminfo``
 =================
 

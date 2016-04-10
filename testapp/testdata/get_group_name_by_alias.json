@@ -1,0 +1,15 @@
+{
+  "data": {
+    "aliasName": "TestGroupAlias",
+    "cliProtocolId": 97,
+    "edges": [],
+    "edgesCount": 0,
+    "groupName": "MyGroup",
+    "lastUpdate": 1442374870,
+    "operation": "getGroupNameByAlias",
+    "result": true,
+    "uniqueRequestId": 4
+  },
+  "description": "Group name",
+  "status": "SUCCESS"
+}
