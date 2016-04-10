@@ -330,11 +330,10 @@ def flush_stream_aliases():
 @expected('groupName', 'aliasName')
 def add_group_name_alias(groupName, aliasName):
     """
-    This command creates secondary name(s) for group names. Once an alias is
-    created the group name cannot be used to request HTTP playback of that
-    stream. Once an alias is used (requested by a client) the alias is
-    removed. Aliases are designed to be used to protect/hide your source
-    streams.
+    Creates secondary name(s) for group names. Once an alias is created the
+    group name cannot be used to request HTTP playback of that stream. Once
+    an alias is used (requested by a client) the alias is removed. Aliases are
+    designed to be used to protect/hide your source streams.
 
     :param groupName: The original group name
     :type groupName: str
@@ -344,4 +343,14 @@ def add_group_name_alias(groupName, aliasName):
 
     :link: http://docs.evostream.com/ems_api_definition/addgroupnamealias
     """
-    return protocol.execute('addGroupNameAlias', groupName=groupName, aliasName=aliasName)
+    return protocol.execute('addGroupNameAlias', groupName=groupName,
+                            aliasName=aliasName)
+
+
+def flush_group_name_aliases():
+    """
+    Invalidates all group name aliases.
+
+    :link: http://docs.evostream.com/ems_api_definition/flushgroupnamealiases
+    """
+    return protocol.execute('flushGroupNameAliases')

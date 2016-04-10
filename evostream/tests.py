@@ -40,6 +40,7 @@ LIST_STREAM_ALIASES_TEST_DATA = load_test_data('list_stream_aliases.json')
 REMOVE_STREAM_ALIAS_TEST_DATA = load_test_data('remove_stream_alias.json')
 FLUSH_STREAM_ALIASES_TEST_DATA = load_test_data('flush_stream_aliases.json')
 ADD_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('add_group_name_alias.json')
+FLUSH_GROUP_NAME_ALIASES = load_test_data('flush_group_name_aliases.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -108,6 +109,11 @@ class ApiTestCase(TestCase):
     def test_add_group_name_alias(self):
         out = add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
         self.assertDictEqual(out, ADD_GROUP_NAME_ALIAS_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES))
+    def test_flush_group_name_aliases(self):
+        out = flush_stream_aliases()
+        self.assertIsNone(out)
 
 
 if django.VERSION >= (1, 5):
@@ -323,3 +329,13 @@ if django.VERSION >= (1, 5):
                     out.index(key)
                 except ValueError:
                     self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES))
+        def test_flushgroupnamealiases(self, mock_write):
+            call_command('flushgroupnamealiases')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            try:
+                out.index('No data')
+            except ValueError:
+                self.fail('Key "No data" not found')

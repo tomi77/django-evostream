@@ -248,3 +248,15 @@ Example:
  add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
 
 http://docs.evostream.com/ems_api_definition/addgroupnamealias
+
+``flush_group_name_aliases``
+============================
+
+Invalidates all group name aliases.
+
+Example:
+::
+
+ flush_group_name_aliases()
+
+http://docs.evostream.com/ems_api_definition/flushgroupnamealiases

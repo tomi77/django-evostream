@@ -30,6 +30,16 @@ Example:
 
     ./manage.py addstreamalias bunny video1 --expire-period=-300
 
+``flushgroupnamealiases``
+=========================
+
+Invalidates all group name aliases.
+
+Example:
+::
+
+    ./manage.py flushgroupnamealiases
+
 ``flushstreamaliases``
 ======================
 
