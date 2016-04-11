@@ -9,7 +9,7 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'add_stream_alias', 'list_stream_aliases', 'remove_stream_alias',
            'flush_stream_aliases', 'add_group_name_alias',
            'flush_group_name_aliases', 'get_group_name_by_alias',
-           'list_group_name_aliases']
+           'list_group_name_aliases', 'remove_group_name_alias']
 logger = logging.getLogger(__name__)
 
 
@@ -378,3 +378,16 @@ def list_group_name_aliases():
     :link: http://docs.evostream.com/ems_api_definition/listgroupnamealiases
     """
     return protocol.execute('listGroupNameAliases')
+
+
+@expected('aliasName')
+def remove_group_name_alias(aliasName):
+    """
+    Removes an alias of a group.
+
+    :param aliasName: The alias alternative to be removed from the group name.
+    :type aliasName: str
+
+    :return: http://docs.evostream.com/ems_api_definition/removegroupnamealiases
+    """
+    return protocol.execute('removeGroupNameAlias', aliasName=aliasName)

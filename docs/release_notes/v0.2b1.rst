@@ -21,6 +21,7 @@
  * flush_group_name_aliases
  * get_group_name_by_alias
  * list_group_name_aliases
+ * remove_group_name_alias
 
 * Command Line
 
@@ -36,3 +37,5 @@
  * addgroupnamealias
  * flushgroupnamealiases
  * getgroupnamebyalias
+ * listgroupnamealiases
+ * removegroupnamealias

@@ -284,3 +284,15 @@ Example:
  list_group_name_aliases()
 
 http://docs.evostream.com/ems_api_definition/listgroupnamealiases
+
+``remove_group_name_alias``
+===========================
+
+Removes an alias of a group.
+
+Example:
+::
+
+ remove_group_name_alias()
+
+http://docs.evostream.com/ems_api_definition/removegroupnamealiases

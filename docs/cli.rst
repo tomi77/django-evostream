@@ -155,6 +155,16 @@ Example
 
     ./manage.py removeconfig 555
 
+``removegroupnamealias``
+========================
+
+Removes an alias of a group.
+
+Example
+::
+
+    ./manage.py removegroupnamealias TestGroupAlias
+
 ``removestreamalias``
 =====================
 

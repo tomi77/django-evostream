@@ -43,6 +43,7 @@ ADD_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('add_group_name_alias.json')
 FLUSH_GROUP_NAME_ALIASES_TEST_DATA = load_test_data('flush_group_name_aliases.json')
 GET_GROUP_NAME_BY_ALIAS_TEST_DATA = load_test_data('get_group_name_by_alias.json')
 LIST_GROUP_NAME_ALIASES_TEST_DATA = load_test_data('list_group_name_aliases.json')
+REMOVE_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('remove_group_name_alias.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -126,6 +127,11 @@ class ApiTestCase(TestCase):
     def test_list_group_name_aliases(self):
         out = list_group_name_aliases()
         self.assertListEqual(out, LIST_GROUP_NAME_ALIASES_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
+    def test_remove_group_name_alias(self):
+        out = remove_group_name_alias(aliasName='TestGroupAlias')
+        self.assertDictEqual(out, REMOVE_GROUP_NAME_ALIAS_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -385,3 +391,14 @@ if django.VERSION >= (1, 5):
                         out.index(key)
                     except ValueError:
                         self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
+        def test_removegroupnamealias(self, mock_write):
+            call_command('removegroupnamealias', alias_name='video1')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in REMOVE_GROUP_NAME_ALIAS_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
