@@ -101,6 +101,16 @@ Example
 
     ./manage.py listconfig
 
+``listgroupnamealiases``
+========================
+
+Returns a complete list of group name aliases.
+
+Example
+::
+
+    ./manage.py listgroupnamealiases
+
 ``liststreamaliases``
 =====================
 

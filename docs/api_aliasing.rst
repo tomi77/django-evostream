@@ -272,3 +272,15 @@ Example:
  get_group_name_by_alias(aliasName='TestGroupAlias')
 
 http://docs.evostream.com/ems_api_definition/getgroupnamebyalias
+
+``list_group_name_aliases``
+===========================
+
+Returns a complete list of group name aliases.
+
+Example:
+::
+
+ list_group_name_aliases()
+
+http://docs.evostream.com/ems_api_definition/listgroupnamealiases

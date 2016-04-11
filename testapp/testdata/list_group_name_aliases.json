@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "aliasName": "TestGroupAlias",
+      "groupName": "MyGroup"
+    }
+  ],
+  "description": "Currently available group name aliases",
+  "status": "SUCCESS"
+}

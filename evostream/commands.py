@@ -8,7 +8,8 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'list_config', 'remove_config', 'get_config_info',
            'add_stream_alias', 'list_stream_aliases', 'remove_stream_alias',
            'flush_stream_aliases', 'add_group_name_alias',
-           'flush_group_name_aliases', 'get_group_name_by_alias']
+           'flush_group_name_aliases', 'get_group_name_by_alias',
+           'list_group_name_aliases']
 logger = logging.getLogger(__name__)
 
 
@@ -368,3 +369,12 @@ def get_group_name_by_alias(aliasName):
     :link: http://docs.evostream.com/ems_api_definition/getgroupnamebyalias
     """
     return protocol.execute('getGroupNameByAlias', aliasName=aliasName)
+
+
+def list_group_name_aliases():
+    """
+    Returns a complete list of group name aliases.
+
+    :link: http://docs.evostream.com/ems_api_definition/listgroupnamealiases
+    """
+    return protocol.execute('listGroupNameAliases')
