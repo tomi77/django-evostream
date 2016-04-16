@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "clientIP": "127.0.0.1",
+      "elapsedTime": 33,
+      "sessionId": 1,
+      "startTime": "2014-12-17T18-31-13",
+      "targetFolder": "C:\\xampp\\htdocs\\mss_group\\mystream"
+    }
+  ],
+  "description": "Currently open HTTP streaming sessions",
+  "status": "SUCCESS"
+}

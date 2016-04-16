@@ -9,7 +9,8 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'add_stream_alias', 'list_stream_aliases', 'remove_stream_alias',
            'flush_stream_aliases', 'add_group_name_alias',
            'flush_group_name_aliases', 'get_group_name_by_alias',
-           'list_group_name_aliases', 'remove_group_name_alias']
+           'list_group_name_aliases', 'remove_group_name_alias',
+           'list_http_streaming_sessions']
 logger = logging.getLogger(__name__)
 
 
@@ -388,6 +389,15 @@ def remove_group_name_alias(aliasName):
     :param aliasName: The alias alternative to be removed from the group name.
     :type aliasName: str
 
-    :return: http://docs.evostream.com/ems_api_definition/removegroupnamealiases
+    :link: http://docs.evostream.com/ems_api_definition/removegroupnamealiases
     """
     return protocol.execute('removeGroupNameAlias', aliasName=aliasName)
+
+
+def list_http_streaming_sessions():
+    """
+    Lists all currently active HTTP streaming sessions.
+
+    :link: http://docs.evostream.com/ems_api_definition/listhttpstreamingsessions
+    """
+    return protocol.execute('listHttpStreamingSessions')

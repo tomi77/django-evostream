@@ -111,6 +111,16 @@ Example
 
     ./manage.py listgroupnamealiases
 
+``listhttpstreamingsessions``
+=============================
+
+Lists all currently active HTTP streaming sessions.
+
+Example
+::
+
+    ./manage.py listhttpstreamingsessions
+
 ``liststreamaliases``
 =====================
 

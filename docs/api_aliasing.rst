@@ -136,3 +136,15 @@ Example:
  remove_group_name_alias()
 
 http://docs.evostream.com/ems_api_definition/removegroupnamealiases
+
+``list_http_streaming_sessions``
+================================
+
+Lists all currently active HTTP streaming sessions.
+
+Example:
+::
+
+ list_http_streaming_sessions()
+
+http://docs.evostream.com/ems_api_definition/listhttpstreamingsessions
