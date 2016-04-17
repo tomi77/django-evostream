@@ -42,3 +42,4 @@
  * listgroupnamealiases
  * removegroupnamealias
  * listhttpstreamingsessions
+ * createingestpoint
