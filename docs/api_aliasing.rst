@@ -61,7 +61,7 @@ Required:
 Example:
 ::
 
- remove_stream_alias('video1')
+ remove_stream_alias(aliasName='video1')
 
 http://docs.evostream.com/ems_api_definition/removestreamalias
 
@@ -81,6 +81,14 @@ http://docs.evostream.com/ems_api_definition/flushstreamaliases
 ========================
 
 Create secondary name for group name.
+
+Required:
+
+:``groupName`` `(str)`:
+    The original group name.
+
+:``aliasName`` `(str)`:
+    The alias alternative to the group name.
 
 Example:
 ::
@@ -106,6 +114,11 @@ http://docs.evostream.com/ems_api_definition/flushgroupnamealiases
 
 Returns the group name given the alias name.
 
+Required:
+
+:``aliasName`` `(str)`:
+    The original group name.
+
 Example:
 ::
 
@@ -130,10 +143,15 @@ http://docs.evostream.com/ems_api_definition/listgroupnamealiases
 
 Removes an alias of a group.
 
+Required:
+
+:``aliasName`` `(str)`:
+    The alias alternative to be removed from the group name.
+
 Example:
 ::
 
- remove_group_name_alias()
+ remove_group_name_alias(aliasName='TestGroupAlias')
 
 http://docs.evostream.com/ems_api_definition/removegroupnamealiases
 
@@ -148,3 +166,27 @@ Example:
  list_http_streaming_sessions()
 
 http://docs.evostream.com/ems_api_definition/listhttpstreamingsessions
+
+``create_ingest_point``
+=======================
+
+Creates an RTMP ingest point, which mandates that streams pushed into the
+EMS have a target stream name which matches one Ingest Point
+privateStreamName.
+
+Required:
+
+:``privateStreamName`` `(str)`:
+    The name that RTMP Target Stream Names must match.
+
+:``publicStreamName`` `(str)`:
+    The name that is used to access the stream pushed to the `privateStreamName`.
+    The `publicStreamName` becomes the streams `localStreamName`.
+
+
+Example:
+::
+
+ create_ingest_point(privateStreamName='theIngestPoint', publicStreamName='useMeToViewStream')
+
+http://docs.evostream.com/ems_api_definition/createingestpoint

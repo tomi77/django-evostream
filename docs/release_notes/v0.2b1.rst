@@ -23,6 +23,7 @@
  * list_group_name_aliases
  * remove_group_name_alias
  * list_http_streaming_sessions
+ * create_ingest_point
 
 * Command Line
 

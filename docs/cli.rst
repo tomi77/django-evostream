@@ -30,6 +30,16 @@ Example:
 
     ./manage.py addstreamalias bunny video1 --expire-period=-300
 
+``createingestpoint``
+=====================
+
+Creates an RTMP ingest point.
+
+Example:
+::
+
+    ./manage.py createingestpoint theIngestPoint useMeToViewStream
+
 ``flushgroupnamealiases``
 =========================
 
