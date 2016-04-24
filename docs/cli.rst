@@ -131,6 +131,16 @@ Example
 
     ./manage.py listhttpstreamingsessions
 
+``listingestpoints``
+====================
+
+Lists the currently available Ingest Points.
+
+Example
+::
+
+    ./manage.py listingestpoints
+
 ``liststreamaliases``
 =====================
 

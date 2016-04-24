@@ -25,6 +25,7 @@
  * list_http_streaming_sessions
  * create_ingest_point
  * remove_ingest_point
+ * list_ingest_points
 
 * Command Line
 
@@ -45,3 +46,4 @@
  * listhttpstreamingsessions
  * createingestpoint
  * removeingestpoint
+ * listingestpoints

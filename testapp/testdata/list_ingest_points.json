@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "privateStreamName": "theIngestPoint",
+      "publicStreamName": "useMeToViewStream"
+    }
+  ],
+  "description": "Available ingest points",
+  "status": "SUCCESS"
+}

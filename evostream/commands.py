@@ -11,7 +11,7 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'flush_group_name_aliases', 'get_group_name_by_alias',
            'list_group_name_aliases', 'remove_group_name_alias',
            'list_http_streaming_sessions', 'create_ingest_point',
-           'remove_ingest_point']
+           'remove_ingest_point', 'list_ingest_points']
 logger = logging.getLogger(__name__)
 
 
@@ -439,3 +439,12 @@ def remove_ingest_point(privateStreamName):
     :link: http://docs.evostream.com/ems_api_definition/removeingestpoint
     """
     return protocol.execute('removeIngestPoint', privateStreamName=privateStreamName)
+
+
+def list_ingest_points():
+    """
+    Lists the currently available Ingest Points.
+
+    :link: http://docs.evostream.com/ems_api_definition/listingestpoints
+    """
+    return protocol.execute('listIngestPoints')

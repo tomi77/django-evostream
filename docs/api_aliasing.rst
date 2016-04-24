@@ -209,3 +209,16 @@ Example:
  remove_ingest_point(privateStreamName='theIngestPoint')
 
 http://docs.evostream.com/ems_api_definition/removeingestpoint
+
+``list_ingest_points``
+======================
+
+Lists the currently available Ingest Points.
+
+
+Example:
+::
+
+ list_ingest_points()
+
+http://docs.evostream.com/ems_api_definition/listingestpoints
