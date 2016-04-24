@@ -185,6 +185,16 @@ Example
 
     ./manage.py removegroupnamealias TestGroupAlias
 
+``removeingestpoint``
+=====================
+
+Removes an RTMP ingest point.
+
+Example
+::
+
+    ./manage.py removeingestpoint theIngestPoint
+
 ``removestreamalias``
 =====================
 

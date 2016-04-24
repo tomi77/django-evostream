@@ -10,7 +10,8 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'flush_stream_aliases', 'add_group_name_alias',
            'flush_group_name_aliases', 'get_group_name_by_alias',
            'list_group_name_aliases', 'remove_group_name_alias',
-           'list_http_streaming_sessions', 'create_ingest_point']
+           'list_http_streaming_sessions', 'create_ingest_point',
+           'remove_ingest_point']
 logger = logging.getLogger(__name__)
 
 
@@ -424,3 +425,17 @@ def create_ingest_point(privateStreamName, publicStreamName):
     return protocol.execute('createIngestPoint',
                             privateStreamName=privateStreamName,
                             publicStreamName=publicStreamName)
+
+
+@expected('privateStreamName')
+def remove_ingest_point(privateStreamName):
+    """
+    Removes an RTMP ingest point.
+
+    :param privateStreamName: The Ingest Point is identified by the
+        privateStreamName, so only that is required to delete it.
+    :type privateStreamName: str
+
+    :link: http://docs.evostream.com/ems_api_definition/removeingestpoint
+    """
+    return protocol.execute('removeIngestPoint', privateStreamName=privateStreamName)

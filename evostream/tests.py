@@ -46,6 +46,7 @@ LIST_GROUP_NAME_ALIASES_TEST_DATA = load_test_data('list_group_name_aliases.json
 REMOVE_GROUP_NAME_ALIAS_TEST_DATA = load_test_data('remove_group_name_alias.json')
 LIST_HTTP_STREAMING_SESSIONS_TEST_DATA = load_test_data('list_http_streaming_sessions.json')
 CREATE_INGEST_POINT_TEST_DATA = load_test_data('create_ingest_point.json')
+REMOVE_INGEST_POINT_TEST_DATA = load_test_data('remove_ingest_point.json')
 
 
 @patch('evostream.commands.logger', Mock())
@@ -144,6 +145,11 @@ class ApiTestCase(TestCase):
     def test_create_ingest_point(self):
         out = create_ingest_point(privateStreamName='theIngestPoint', publicStreamName='useMeToViewStream')
         self.assertDictEqual(out, CREATE_INGEST_POINT_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
+    def test_remove_ingest_point(self):
+        out = remove_ingest_point(privateStreamName='theIngestPoint')
+        self.assertDictEqual(out, REMOVE_INGEST_POINT_TEST_DATA['data'])
 
 
 if django.VERSION >= (1, 5):
@@ -433,6 +439,17 @@ if django.VERSION >= (1, 5):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in CREATE_INGEST_POINT_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
+        def test_removeingestpoint(self, mock_write):
+            call_command('removeingestpoint', private_stream_name='theIngestPoint')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in REMOVE_INGEST_POINT_TEST_DATA['data']:
                 try:
                     out.index(key)
                 except ValueError:

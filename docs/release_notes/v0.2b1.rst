@@ -24,6 +24,7 @@
  * remove_group_name_alias
  * list_http_streaming_sessions
  * create_ingest_point
+ * remove_ingest_point
 
 * Command Line
 
@@ -43,3 +44,4 @@
  * removegroupnamealias
  * listhttpstreamingsessions
  * createingestpoint
+ * removeingestpoint

@@ -190,3 +190,22 @@ Example:
  create_ingest_point(privateStreamName='theIngestPoint', publicStreamName='useMeToViewStream')
 
 http://docs.evostream.com/ems_api_definition/createingestpoint
+
+``remove_ingest_point``
+=======================
+
+Removes an RTMP ingest point.
+
+Required:
+
+:``privateStreamName`` `(str)`:
+    The Ingest Point is identified by the `privateStreamName`, so only that is
+    required to delete it.
+
+
+Example:
+::
+
+ remove_ingest_point(privateStreamName='theIngestPoint')
+
+http://docs.evostream.com/ems_api_definition/removeingestpoint
