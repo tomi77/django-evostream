@@ -8,13 +8,14 @@ env:
   - DJANGO=1.5.12
   - DJANGO=1.6.11
   - DJANGO=1.7.11
-  - DJANGO=1.8.11
-  - DJANGO=1.9.4
+  - DJANGO=1.8.14
+  - DJANGO=1.9.9
+  - DJANGO=1.10
 
 matrix:
   include:
     - python: 3.5
-      env: DJANGO=1.9.4
+      env: DJANGO=1.10
 
 install:
   - pip install coveralls
