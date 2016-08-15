@@ -52,132 +52,17 @@ REMOVE_INGEST_POINT_TEST_DATA = load_test_data('remove_ingest_point.json')
 LIST_INGEST_POINTS_TEST_DATA = load_test_data('list_ingest_points.json')
 
 
+@patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
 @patch('evostream.commands.logger', Mock())
-class ApiTestCase(TestCase):
-    @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
-    def test_pull_stream(self):
+class PullStreamTestCase(TestCase):
+    def test_api(self):
         out = pull_stream(uri='rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
                           localStreamName='testpullstream')
         self.assertDictEqual(out, PULL_STREAM_TEST_DATA['data'])
 
-    @patch('evostream.commands.protocol', TestHTTPProtocol(PUSH_STREAM_TEST_DATA))
-    def test_push_stream(self):
-        out = push_stream(uri='rtmp://DestinationAddress/live',
-                          localStreamName='testpullstream', targetStreamName='testpushStream')
-        self.assertDictEqual(out, PUSH_STREAM_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
-    def test_list_streams_ids(self):
-        out = list_streams_ids()
-        self.assertListEqual(out, LIST_STREAMS_IDS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
-    def test_get_stream_info(self):
-        out = get_stream_info(id=1)
-        self.assertDictEqual(out, GET_STREAM_INFO_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
-    def test_list_streams(self):
-        out = list_streams()
-        self.assertListEqual(out, LIST_STREAMS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAMS_COUNT_TEST_DATA))
-    def test_get_streams_count(self):
-        out = get_streams_count()
-        self.assertDictEqual(out, GET_STREAMS_COUNT_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
-    def test_shutdown_stream(self):
-        out = shutdown_stream(id=55)
-        self.assertDictEqual(out, SHUTDOWN_STREAM_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
-    def test_list_config(self):
-        out = list_config()
-        self.assertDictEqual(out, LIST_CONFIG_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
-    def test_remove_config(self):
-        out = remove_config(id=555)
-        self.assertDictEqual(out, REMOVE_CONFIG_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
-    def test_get_config_info(self):
-        out = get_config_info(1)
-        self.assertDictEqual(out, GET_CONFIG_INFO_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
-    def test_add_stream_alias(self):
-        out = add_stream_alias('MyStream', 'video1', expirePeriod=-300)
-        self.assertDictEqual(out, ADD_STREAM_ALIAS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAM_ALIASES_TEST_DATA))
-    def test_list_stream_aliases(self):
-        out = list_stream_aliases()
-        self.assertListEqual(out, LIST_STREAM_ALIASES_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
-    def test_remove_stream_alias(self):
-        out = remove_stream_alias(aliasName='video1')
-        self.assertDictEqual(out, REMOVE_STREAM_ALIAS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_STREAM_ALIASES_TEST_DATA))
-    def test_flush_stream_aliases(self):
-        out = flush_stream_aliases()
-        self.assertIsNone(out)
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
-    def test_add_group_name_alias(self):
-        out = add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
-        self.assertDictEqual(out, ADD_GROUP_NAME_ALIAS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES_TEST_DATA))
-    def test_flush_group_name_aliases(self):
-        out = flush_stream_aliases()
-        self.assertIsNone(out)
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
-    def test_get_group_name_by_alias(self):
-        out = get_group_name_by_alias(aliasName='TestGroupAlias')
-        self.assertDictEqual(out, GET_GROUP_NAME_BY_ALIAS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_GROUP_NAME_ALIASES_TEST_DATA))
-    def test_list_group_name_aliases(self):
-        out = list_group_name_aliases()
-        self.assertListEqual(out, LIST_GROUP_NAME_ALIASES_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
-    def test_remove_group_name_alias(self):
-        out = remove_group_name_alias(aliasName='TestGroupAlias')
-        self.assertDictEqual(out, REMOVE_GROUP_NAME_ALIAS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_HTTP_STREAMING_SESSIONS_TEST_DATA))
-    def test_list_http_streaming_sessions(self):
-        out = list_http_streaming_sessions()
-        self.assertListEqual(out, LIST_HTTP_STREAMING_SESSIONS_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(CREATE_INGEST_POINT_TEST_DATA))
-    def test_create_ingest_point(self):
-        out = create_ingest_point(privateStreamName='theIngestPoint', publicStreamName='useMeToViewStream')
-        self.assertDictEqual(out, CREATE_INGEST_POINT_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
-    def test_remove_ingest_point(self):
-        out = remove_ingest_point(privateStreamName='theIngestPoint')
-        self.assertDictEqual(out, REMOVE_INGEST_POINT_TEST_DATA['data'])
-
-    @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_INGEST_POINTS_TEST_DATA))
-    def test_list_ingest_points(self):
-        out = list_ingest_points()
-        self.assertListEqual(out, LIST_INGEST_POINTS_TEST_DATA['data'])
-
-
-if django.VERSION >= (1, 5):
-    @patch('evostream.commands.logger', Mock())
-    @patch('django.core.management.base.OutputWrapper.write')
-    class CliTestCase(TestCase):
-        @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
-        def test_pullstream(self, mock_write):
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('pullstream', 'rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
                          localStreamName='testpullstream')
             self.assertGreaterEqual(mock_write.call_count, 1)
@@ -188,8 +73,18 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(PUSH_STREAM_TEST_DATA))
-        def test_pushstream(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(PUSH_STREAM_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class PushStreamTestCase(TestCase):
+    def test_api(self):
+        out = push_stream(uri='rtmp://DestinationAddress/live',
+                          localStreamName='testpullstream', targetStreamName='testpushStream')
+        self.assertDictEqual(out, PUSH_STREAM_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('pushstream', 'rtmp://DestinationAddress/live',
                          localStreamName='testpullstream', targetStreamName='testpushStream')
             self.assertGreaterEqual(mock_write.call_count, 1)
@@ -200,8 +95,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
-        def test_liststreamsids(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListStreamsIdsTestCase(TestCase):
+    def test_api(self):
+        out = list_streams_ids()
+        self.assertListEqual(out, LIST_STREAMS_IDS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('liststreamsids')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -211,8 +115,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('ID %s not found' % _id)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
-        def test_getstreaminfo_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class GetStreamInfoTestCase(TestCase):
+    def test_api(self):
+        out = get_stream_info(id=1)
+        self.assertDictEqual(out, GET_STREAM_INFO_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('getstreaminfo', 1, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -222,8 +135,8 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
-        def test_getstreaminfo(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('getstreaminfo', 1)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -233,8 +146,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
-        def test_liststreams_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListStreamsTestCase(TestCase):
+    def test_api(self):
+        out = list_streams()
+        self.assertListEqual(out, LIST_STREAMS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('liststreams', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -245,8 +167,8 @@ if django.VERSION >= (1, 5):
                     except ValueError:
                         self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_TEST_DATA))
-        def test_liststreams(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('liststreams')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -256,8 +178,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAMS_COUNT_TEST_DATA))
-        def test_getstreamscount(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAMS_COUNT_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class GetStreamsCountTestCase(TestCase):
+    def test_api(self):
+        out = get_streams_count()
+        self.assertDictEqual(out, GET_STREAMS_COUNT_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('getstreamscount')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -267,8 +198,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
-        def test_shutdownstream(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ShutdownStreamTestCase(TestCase):
+    def test_api(self):
+        out = shutdown_stream(id=55)
+        self.assertDictEqual(out, SHUTDOWN_STREAM_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('shutdownstream', 55)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -278,8 +218,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
-        def test_listconfig(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_CONFIG_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListConfigTestCase(TestCase):
+    def test_api(self):
+        out = list_config()
+        self.assertDictEqual(out, LIST_CONFIG_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('listconfig')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -289,8 +238,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
-        def test_removeconfig_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class RemoveConfigTestCase(TestCase):
+    def test_api(self):
+        out = remove_config(id=555)
+        self.assertDictEqual(out, REMOVE_CONFIG_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('removeconfig', 555, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -300,8 +258,8 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
-        def test_removeconfig(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('removeconfig', 555)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -311,8 +269,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
-        def test_getconfiginfo_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class GetConfigInfoTestCase(TestCase):
+    def test_api(self):
+        out = get_config_info(1)
+        self.assertDictEqual(out, GET_CONFIG_INFO_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('getconfiginfo', 1, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -322,8 +289,8 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
-        def test_getconfiginfo(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('getconfiginfo', 1)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -333,8 +300,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
-        def test_addstreamalias(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class AddStreamAliasTestCase(TestCase):
+    def test_api(self):
+        out = add_stream_alias('MyStream', 'video1', expirePeriod=-300)
+        self.assertDictEqual(out, ADD_STREAM_ALIAS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('addstreamalias', 'MyStream', 'video1', expirePeriod=-300)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -344,8 +320,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAM_ALIASES_TEST_DATA))
-        def test_liststreamaliases_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAM_ALIASES_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListStreamAliasesTestCase(TestCase):
+    def test_api(self):
+        out = list_stream_aliases()
+        self.assertListEqual(out, LIST_STREAM_ALIASES_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('liststreamaliases', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -356,8 +341,8 @@ if django.VERSION >= (1, 5):
                     except ValueError:
                         self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAM_ALIASES_TEST_DATA))
-        def test_liststreamaliases(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('liststreamaliases')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -367,8 +352,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
-        def test_removestreamalias(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class RemoveStreamAliasTestCase(TestCase):
+    def test_api(self):
+        out = remove_stream_alias(aliasName='video1')
+        self.assertDictEqual(out, REMOVE_STREAM_ALIAS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('removestreamalias', 'video1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -378,8 +372,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_STREAM_ALIASES_TEST_DATA))
-        def test_flushstreamaliases(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_STREAM_ALIASES_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class FlushStreamAliasesTestCase(TestCase):
+    def test_api(self):
+        out = flush_stream_aliases()
+        self.assertIsNone(out)
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('flushstreamaliases')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -388,8 +391,17 @@ if django.VERSION >= (1, 5):
             except ValueError:
                 self.fail('Key "No data" not found')
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
-        def test_addgroupnamealias_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class AddGroupNameAliasTestCase(TestCase):
+    def test_api(self):
+        out = add_group_name_alias(groupName='MyGroup', aliasName='TestGroupAlias')
+        self.assertDictEqual(out, ADD_GROUP_NAME_ALIAS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('addgroupnamealias', 'MyGroup', 'TestGroupAlias', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -399,8 +411,8 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
-        def test_addgroupnamealias(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('addgroupnamealias', 'MyGroup', 'TestGroupAlias')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -410,8 +422,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES_TEST_DATA))
-        def test_flushgroupnamealiases(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(FLUSH_GROUP_NAME_ALIASES_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class FlushGroupNameAliasesTestCase(TestCase):
+    def test_api(self):
+        out = flush_stream_aliases()
+        self.assertIsNone(out)
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('flushgroupnamealiases')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -420,8 +441,17 @@ if django.VERSION >= (1, 5):
             except ValueError:
                 self.fail('Key "No data" not found')
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
-        def test_getgroupnamebyalias_verbose(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class GetGroupNameByAliasTestCase(TestCase):
+    def test_api(self):
+        out = get_group_name_by_alias(aliasName='TestGroupAlias')
+        self.assertDictEqual(out, GET_GROUP_NAME_BY_ALIAS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
             call_command('getgroupnamebyalias', 'TestGroupAlias', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -431,8 +461,8 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
-        def test_getgroupnamebyalias(self, mock_write):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('getgroupnamebyalias', 'TestGroupAlias')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -442,8 +472,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_GROUP_NAME_ALIASES_TEST_DATA))
-        def test_listgroupnamealiases(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_GROUP_NAME_ALIASES_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListGroupNameAliasesTestCase(TestCase):
+    def test_api(self):
+        out = list_group_name_aliases()
+        self.assertListEqual(out, LIST_GROUP_NAME_ALIASES_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('listgroupnamealiases')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -454,8 +493,17 @@ if django.VERSION >= (1, 5):
                     except ValueError:
                         self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
-        def test_removegroupnamealias(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class RemoveGroupNameAliasTestCase(TestCase):
+    def test_api(self):
+        out = remove_group_name_alias(aliasName='TestGroupAlias')
+        self.assertDictEqual(out, REMOVE_GROUP_NAME_ALIAS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('removegroupnamealias', 'video1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -465,8 +513,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_HTTP_STREAMING_SESSIONS_TEST_DATA))
-        def test_listhttpstreamingsessions(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_HTTP_STREAMING_SESSIONS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListHttpStreamingSessionsTestCase(TestCase):
+    def test_api(self):
+        out = list_http_streaming_sessions()
+        self.assertListEqual(out, LIST_HTTP_STREAMING_SESSIONS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('listhttpstreamingsessions')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -477,8 +534,17 @@ if django.VERSION >= (1, 5):
                     except ValueError:
                         self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(CREATE_INGEST_POINT_TEST_DATA))
-        def test_createingestpoint(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(CREATE_INGEST_POINT_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class CreateIngestPointTestCase(TestCase):
+    def test_api(self):
+        out = create_ingest_point(privateStreamName='theIngestPoint', publicStreamName='useMeToViewStream')
+        self.assertDictEqual(out, CREATE_INGEST_POINT_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('createingestpoint', 'theIngestPoint', 'useMeToViewStream')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -488,8 +554,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
-        def test_removeingestpoint(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class RemoveIngestPointTestCase(TestCase):
+    def test_api(self):
+        out = remove_ingest_point(privateStreamName='theIngestPoint')
+        self.assertDictEqual(out, REMOVE_INGEST_POINT_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('removeingestpoint', 'theIngestPoint')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -499,8 +574,17 @@ if django.VERSION >= (1, 5):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-        @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_INGEST_POINTS_TEST_DATA))
-        def test_listingestpoints(self, mock_write):
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(LIST_INGEST_POINTS_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class ListIngestPointsTestCase(TestCase):
+    def test_api(self):
+        out = list_ingest_points()
+        self.assertListEqual(out, LIST_INGEST_POINTS_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
             call_command('listingestpoints')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
