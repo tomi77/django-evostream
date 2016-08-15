@@ -28,6 +28,7 @@ def load_test_data(filename):
 
 
 PULL_STREAM_TEST_DATA = load_test_data('pull_stream.json')
+PUSH_STREAM_TEST_DATA = load_test_data('push_stream.json')
 LIST_STREAMS_IDS_TEST_DATA = load_test_data('list_streams_ids.json')
 GET_STREAM_INFO_TEST_DATA = load_test_data('get_stream_info.json')
 LIST_STREAMS_TEST_DATA = load_test_data('list_streams.json')
@@ -58,6 +59,12 @@ class ApiTestCase(TestCase):
         out = pull_stream(uri='rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
                           localStreamName='testpullstream')
         self.assertDictEqual(out, PULL_STREAM_TEST_DATA['data'])
+
+    @patch('evostream.commands.protocol', TestHTTPProtocol(PUSH_STREAM_TEST_DATA))
+    def test_push_stream(self):
+        out = push_stream(uri='rtmp://DestinationAddress/live',
+                          localStreamName='testpullstream', targetStreamName='testpushStream')
+        self.assertDictEqual(out, PUSH_STREAM_TEST_DATA['data'])
 
     @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
     def test_list_streams_ids(self):
@@ -173,6 +180,18 @@ if django.VERSION >= (1, 5):
         def test_pullstream(self, mock_write):
             call_command('pullstream', 'rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
                          localStreamName='testpullstream')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['localStreamName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+        @patch('evostream.commands.protocol', TestHTTPProtocol(PUSH_STREAM_TEST_DATA))
+        def test_pushstream(self, mock_write):
+            call_command('pushstream', 'rtmp://DestinationAddress/live',
+                         localStreamName='testpullstream', targetStreamName='testpushStream')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['localStreamName']:

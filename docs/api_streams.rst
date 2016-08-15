@@ -107,6 +107,81 @@ Example::
 
 http://docs.evostream.com/ems_api_definition/pullstream
 
+``push_stream``
+===============
+
+Try to push a local stream to an external destination. The pushed stream
+can only use the RTMP, RTSP or MPEG-TS unicast/multicast protocol.
+
+Required
+
+:``uri`` `(str)`:
+    The URI of the external stream. Can be RTMP, RTSP or unicast/multicast
+    (d) mpegts.
+
+Optional
+
+:``keepAlive`` `(int)`:
+    If ``keepAlive`` is set to 1, the server will attempt to reestablish
+    connection with a stream source after a connection has been lost. The
+    reconnect will be attempted once every second.
+
+:``localStreamName`` `(str)`:
+    If provided, the stream will be given this name. Otherwise, a fallback
+    techniques used to determine the stream name (based on the URI).
+
+:``targetStreamName`` `(str)`:
+    The name of the stream at destination. If not provided, the target
+    stream name will be the same as the local stream name.
+
+:``targetStreamType`` `(str)`:
+    It can be one of following: **live**, **record**, **append**. It is
+    meaningful only for RTMP.
+
+:``tcUrl`` `(str)`:
+    When specified, this value will be used to set the TC URL in the initial
+    RTMP connect invoke.
+
+:``pageUrl`` `(str)`:
+    When specified, this value will be used to set the originating web page
+    address in the initial RTMP connect invoke.
+
+:``swfUrl`` `(str)`:
+    When specified, this value will be used to set the originating swf URL
+    in the initial RTMP connect invoke.
+
+:``ttl`` `(int)`:
+    Sets the IP_TTL (time to live) option on the socket.
+
+:``tos`` `(int)`:
+    Sets the IP_TOS (Type of Service) option on the socket.
+
+:``emulateUserAgent`` `(str)`:
+    When specified, this value will be used as the user agent string.
+    It is meaningful only for RTMP.
+
+:``rtmpAbsoluteTimestamps`` `(int)`:
+    Forces the timestamps to be absolute when using RTMP.
+
+:``sendChunkSizeRequest`` `(int)`:
+    Sets whether the RTMP stream will or will not send a "Set Chunk Length"
+    message. This is significant when pushing to Akamai’s new RTMP HD
+    ingest point where this parameter should be set to 0 so that Akamai will
+    not drop the connection.
+
+:``useSourcePts`` `(int)`:
+    When value is true, timestamps on source inbound RTMP stream are passed
+    directly to the outbound (pushed) RTMP streams. This affects only pushed
+    Outbound Net RTMP with net RTMP source. This parameter overrides the
+    value of the config.lua option of the same name.
+
+Example
+::
+
+ push_stream('rtmp://DestinationAddress/live' localStreamName='testpullstream' targetStreamName='testpushStream')
+
+http://docs.evostream.com/ems_api_definition/pushstream
+
 ``list_streams_ids``
 ====================
 

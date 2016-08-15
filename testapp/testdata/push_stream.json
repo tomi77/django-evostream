@@ -1,0 +1,43 @@
+{
+  "data": {
+    "configId": 6,
+    "emulateUserAgent": "EvoStream Media Server (www.evostream.com)",
+    "forceTcp": false,
+    "httpProxy": "",
+    "keepAlive": true,
+    "localStreamName": "testpullStream",
+    "operationType": 2,
+    "pageUrl": "",
+    "rtmpAbsoluteTimestamps": false,
+    "sendChunkSizeRequest": true,
+    "swfUrl": "",
+    "targetStreamName": "testpushStream",
+    "targetStreamType": "live",
+    "targetUri": {
+      "document": "",
+      "documentPath": "\/",
+      "documentWithFullParameters": "",
+      "fullDocumentPath": "\/",
+      "fullDocumentPathWithParameters": "\/",
+      "fullParameters": "",
+      "fullUri": "rtmp:\/\/127.0.0.1",
+      "fullUriWithAuth": "rtmp:\/\/127.0.0.1",
+      "host": "localhost",
+      "ip": "127.0.0.1",
+      "originalUri": "rtmp:\/\/localhost",
+      "parameters": {
+      },
+      "password": "",
+      "port": 1935,
+      "portSpecified": false,
+      "scheme": "rtmp",
+      "userName": ""
+    },
+    "tcUrl": "",
+    "tos": 256,
+    "ttl": 256,
+    "useSourcePts": false
+  },
+  "description": "Local stream testpullStream enqueued for pushing to rtmp:\/\/localhost as testpushStream",
+  "status": "SUCCESS"
+}

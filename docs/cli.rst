@@ -268,6 +268,57 @@ Example
 
     ./manage.py pullstream "rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4" --local-stream-name=testpullstream
 
+``pushstream``
+==============
+
+Try to push a local stream to an external destination. The pushed stream
+can only use the RTMP, RTSP or MPEG-TS unicast/multicast protocol.
+
+Arguments:
+
+* ``uri`` The URI of the external stream. Can be RTMP, RTSP or unicast/multicast (d) mpegts.
+
+Parameters:
+
+* ``--keep-alive`` If keepAlive is set to 1, the server will attempt to reestablish
+  connection with a stream source after a connection has been lost. The reconnect
+  will be attempted once every second.
+
+* ``--local-stream-name`` Name of the stream. Otherwise, a fallback techniques used
+  to determine the stream name (based on the URI).
+
+* ``--ratget-stream-name`` It can be one of following: **live**, **record**, **append**.
+  It is meaningful only for RTMP.
+
+* ``--tc-url`` TC URL to use in the initial RTMP connect invoke.
+
+* ``--page-url`` Originating web page address to use in the initial RTMP connect invoke.
+
+* ``--swf-url`` Originating swf URL to use in the initial RTMP connect invoke.
+
+* ``--ttl`` Sets the IP_TTL (time to live) option on the socket.
+
+* ``--tos`` Sets the IP_TOS (Type of Service) option on the socket.
+
+* ``--emulate-user-agent`` User agent string (only for RTMP).
+
+* ``--rtmp-absolute-timestamps`` Forces the timestamps to be absolute when using RTMP.
+
+* ``--send-chunk-size-request`` Sets whether the RTMP stream will or will not send a
+    “Set Chunk Length” message. This is significant when pushing to Akamai’s new RTMP HD
+    ingest point where this parameter should be set to 0 so that Akamai will not drop the
+    connection.
+
+* ``--use-source-pts`` When value is true, timestamps on source inbound RTMP stream are
+    passed directly to the outbound (pushed) RTMP streams. This affects only pushed
+    Outbound Net RTMP with net RTMP source. This parameter overrides the value of the
+    ``config.lua`` option of the same name.
+
+Example
+::
+
+    ./manage.py pushstream "rtmp://DestinationAddress/live" --local-stream-name=testpullstream --target-stream-name=testpushStream
+
 ``removeconfig``
 ================
 
