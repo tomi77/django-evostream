@@ -194,7 +194,7 @@ def push_stream(uri, **kwargs):
 
     :param sendChunkSizeRequest: Sets whether the RTMP stream will or will not
         send a "Set Chunk Length" message. This is significant when pushing to
-        Akamai’s new RTMP HD ingest point where this parameter should be set
+        Akamai's new RTMP HD ingest point where this parameter should be set
         to 0 so that Akamai will not drop the connection.
     :type sendChunkSizeRequest: int
 
