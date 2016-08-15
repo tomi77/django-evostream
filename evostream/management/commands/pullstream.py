@@ -195,4 +195,4 @@ class Command(BaseEvoStreamCommand):
         )
 
     def get_results(self, uri, *args, **options):
-        return pull_stream(uri=uri)
+        return pull_stream(uri=uri, **options)
