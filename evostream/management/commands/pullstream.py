@@ -7,8 +7,6 @@ from evostream.management.base import BaseEvoStreamCommand
 
 
 class Command(BaseEvoStreamCommand):
-    args = '<uri>'
-
     help = 'Pull in a stream from an external source.'
 
     requires_system_checks = False
@@ -17,6 +15,10 @@ class Command(BaseEvoStreamCommand):
 
     if django.VERSION[:2] > (1, 7):
         def add_arguments(self, parser):
+            parser.add_argument('uri', type=str,
+                                help='The URI of the external stream. Can be '
+                                     'RTMP, RTSP or unicast/multicast (d) '
+                                     'mpegts.')
             parser.add_argument('--keep-alive', action='store',
                                 type=int, choices=[0, 1], default=1,
                                 dest='keepAlive',
@@ -108,6 +110,8 @@ class Command(BaseEvoStreamCommand):
                                      'pulled; "self" - pulling RTSP over '
                                      'HTTP.')
     else:
+        args = '<uri>'
+
         option_list = BaseEvoStreamCommand.option_list + (
             make_option('--keep-alive', action='store',
                         type='choice', choices=['0', '1'], default='1',

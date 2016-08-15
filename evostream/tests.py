@@ -171,7 +171,7 @@ if django.VERSION >= (1, 5):
     class CliTestCase(TestCase):
         @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
         def test_pullstream(self, mock_write):
-            call_command('pullstream', uri='rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
+            call_command('pullstream', 'rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
                          localStreamName='testpullstream')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
@@ -194,7 +194,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
         def test_getstreaminfo_verbose(self, mock_write):
-            call_command('getstreaminfo', id_or_local_stream_name=1, verbosity=2)
+            call_command('getstreaminfo', 1, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_STREAM_INFO_TEST_DATA['data'].keys():
@@ -205,7 +205,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_STREAM_INFO_TEST_DATA))
         def test_getstreaminfo(self, mock_write):
-            call_command('getstreaminfo', id_or_local_stream_name=1)
+            call_command('getstreaminfo', 1)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['uniqueId', 'name']:
@@ -250,7 +250,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(SHUTDOWN_STREAM_TEST_DATA))
         def test_shutdownstream(self, mock_write):
-            call_command('shutdownstream', id_or_local_stream_name=55)
+            call_command('shutdownstream', 55)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in SHUTDOWN_STREAM_TEST_DATA['data'].keys():
@@ -272,7 +272,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
         def test_removeconfig_verbose(self, mock_write):
-            call_command('removeconfig', id_or_group_name=555, verbosity=2)
+            call_command('removeconfig', 555, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in REMOVE_CONFIG_TEST_DATA['data']:
@@ -283,7 +283,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_CONFIG_TEST_DATA))
         def test_removeconfig(self, mock_write):
-            call_command('removeconfig', id_or_group_name=555)
+            call_command('removeconfig', 555)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['configId']:
@@ -294,7 +294,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
         def test_getconfiginfo_verbose(self, mock_write):
-            call_command('getconfiginfo', config_id=1, verbosity=2)
+            call_command('getconfiginfo', 1, verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_CONFIG_INFO_TEST_DATA['data']:
@@ -305,7 +305,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_CONFIG_INFO_TEST_DATA))
         def test_getconfiginfo(self, mock_write):
-            call_command('getconfiginfo', config_id=1)
+            call_command('getconfiginfo', 1)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['configId', 'localStreamName']:
@@ -316,7 +316,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_STREAM_ALIAS_TEST_DATA))
         def test_addstreamalias(self, mock_write):
-            call_command('addstreamalias', local_stream_name='MyStream', alias_name='video1', expirePeriod=-300)
+            call_command('addstreamalias', 'MyStream', 'video1', expirePeriod=-300)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ADD_STREAM_ALIAS_TEST_DATA['data']:
@@ -350,7 +350,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_STREAM_ALIAS_TEST_DATA))
         def test_removestreamalias(self, mock_write):
-            call_command('removestreamalias', alias_name='video1')
+            call_command('removestreamalias', 'video1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in REMOVE_STREAM_ALIAS_TEST_DATA['data']:
@@ -371,7 +371,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
         def test_addgroupnamealias_verbose(self, mock_write):
-            call_command('addgroupnamealias', group_name='MyGroup', alias_name='TestGroupAlias', verbosity=2)
+            call_command('addgroupnamealias', 'MyGroup', 'TestGroupAlias', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ADD_GROUP_NAME_ALIAS_TEST_DATA['data']:
@@ -382,7 +382,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(ADD_GROUP_NAME_ALIAS_TEST_DATA))
         def test_addgroupnamealias(self, mock_write):
-            call_command('addgroupnamealias', group_name='MyGroup', alias_name='TestGroupAlias')
+            call_command('addgroupnamealias', 'MyGroup', 'TestGroupAlias')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['aliasName', 'groupName']:
@@ -403,7 +403,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
         def test_getgroupnamebyalias_verbose(self, mock_write):
-            call_command('getgroupnamebyalias', alias_name='TestGroupAlias', verbosity=2)
+            call_command('getgroupnamebyalias', 'TestGroupAlias', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_GROUP_NAME_BY_ALIAS_TEST_DATA['data']:
@@ -414,7 +414,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(GET_GROUP_NAME_BY_ALIAS_TEST_DATA))
         def test_getgroupnamebyalias(self, mock_write):
-            call_command('getgroupnamebyalias', alias_name='TestGroupAlias')
+            call_command('getgroupnamebyalias', 'TestGroupAlias')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['aliasName', 'groupName']:
@@ -437,7 +437,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_GROUP_NAME_ALIAS_TEST_DATA))
         def test_removegroupnamealias(self, mock_write):
-            call_command('removegroupnamealias', alias_name='video1')
+            call_command('removegroupnamealias', 'video1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in REMOVE_GROUP_NAME_ALIAS_TEST_DATA['data']:
@@ -460,7 +460,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(CREATE_INGEST_POINT_TEST_DATA))
         def test_createingestpoint(self, mock_write):
-            call_command('createingestpoint', private_stream_name='theIngestPoint', public_stream_name='useMeToViewStream')
+            call_command('createingestpoint', 'theIngestPoint', 'useMeToViewStream')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in CREATE_INGEST_POINT_TEST_DATA['data']:
@@ -471,7 +471,7 @@ if django.VERSION >= (1, 5):
 
         @patch('evostream.commands.protocol', TestHTTPProtocol(REMOVE_INGEST_POINT_TEST_DATA))
         def test_removeingestpoint(self, mock_write):
-            call_command('removeingestpoint', private_stream_name='theIngestPoint')
+            call_command('removeingestpoint', 'theIngestPoint')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in REMOVE_INGEST_POINT_TEST_DATA['data']:

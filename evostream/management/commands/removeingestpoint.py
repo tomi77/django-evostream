@@ -1,13 +1,22 @@
+import django
+
 from evostream.commands import remove_ingest_point
 from evostream.management.base import BaseEvoStreamCommand
 
 
 class Command(BaseEvoStreamCommand):
-    args = '<privateStreamName>'
-
     help = 'Removes an RTMP ingest point.'
 
     requires_system_checks = False
 
-    def get_results(self, private_stream_name, *args, **options):
-        return remove_ingest_point(privateStreamName=private_stream_name)
+    if django.VERSION[:2] > (1, 7):
+        def add_arguments(self, parser):
+            parser.add_argument('privateStreamName', type=str,
+                                help='The Ingest Point is identified by the '
+                                     'privateStreamName, so only that is '
+                                     'required to delete it.')
+    else:
+        args = '<privateStreamName>'
+
+    def get_results(self, privateStreamName, *args, **options):
+        return remove_ingest_point(privateStreamName=privateStreamName)

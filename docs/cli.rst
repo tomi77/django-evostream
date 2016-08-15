@@ -12,6 +12,12 @@ created the group name cannot be used to request HTTP playback of that stream.
 Once an alias is used (requested by a client) the alias is removed. Aliases
 are designed to be used to protect/hide your source streams.
 
+Arguments:
+
+* ``groupName`` The original group name.
+
+* ``aliasName`` The alias alternative to the group name.
+
 Example:
 ::
 
@@ -25,6 +31,12 @@ created the localstreamname cannot be used to request playback of that stream.
 Once an alias is used (requested by a client) the alias is removed. Aliases
 are designed to be used to protect/hide your source streams.
 
+Arguments:
+
+* ``localStreamName`` The original stream name.
+
+* ``aliasName`` The alias alternative to the ``localStreamName``.
+
 Example:
 ::
 
@@ -34,6 +46,14 @@ Example:
 =====================
 
 Creates an RTMP ingest point.
+
+Arguments:
+
+* ``privateStreamName`` The name that RTMP Target Stream Names must match.
+
+* ``publicStreamName`` The name that is used to access the stream pushed to the
+  ``privateStreamName``. The ``publicStreamName`` becomes the streams
+  ``localStreamName``.
 
 Example:
 ::
@@ -65,6 +85,10 @@ Example:
 
 Returns the information of the stream by the configId.
 
+Arguments:
+
+* ``configId`` The ``configId`` of the configuration to get some information.
+
 Example
 ::
 
@@ -75,6 +99,10 @@ Example
 
 Returns the group name given the alias name.
 
+Arguments:
+
+* ``aliasName`` The group alias name.
+
 Example
 ::
 
@@ -84,6 +112,10 @@ Example
 =================
 
 Returns a detailed set of information about a stream.
+
+Arguments:
+
+* ``idOrLocalStreamName`` The uniqueId of the stream or the name of the stream.
 
 Example
 ::
@@ -180,6 +212,10 @@ Example
 
 Pull in a stream from an external source.
 
+Arguments:
+
+* ``uri`` The URI of the external stream. Can be RTMP, RTSP or unicast/multicast (d) mpegts
+
 Parameters:
 
 * ``--keep-alive`` If keepAlive is set to 1, the server will attempt to reestablish
@@ -237,6 +273,11 @@ Example
 
 Stop the stream and remove the corresponding configuration entry.
 
+Arguments:
+
+* ``idOrGroupName`` The ``configId`` of the configuration that needs to be removed
+  or the name of the group that needs to be removed.
+
 Example
 ::
 
@@ -246,6 +287,10 @@ Example
 ========================
 
 Removes an alias of a group.
+
+Arguments:
+
+* ``aliasName`` The alias alternative to be removed from the group name.
 
 Example
 ::
@@ -257,6 +302,11 @@ Example
 
 Removes an RTMP ingest point.
 
+Arguments:
+
+* ``privateStreamName`` The Ingest Point is identified by the ``privateStreamName``,
+  so only that is required to delete it.
+
 Example
 ::
 
@@ -267,6 +317,10 @@ Example
 
 Removes an alias of a stream.
 
+Arguments:
+
+* ``aliasName`` The alias to delete.
+
 Example
 ::
 
@@ -276,6 +330,11 @@ Example
 ==================
 
 Terminates a specific stream. When ``permanently=1`` is used, this command is analogous to ``removeConfig``.
+
+Arguments:
+
+* ``idOrLocalStreamName`` The uniqueId of the stream or the name of the inbound
+  stream that needs to be terminated.
 
 Example
 ::
