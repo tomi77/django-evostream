@@ -25,7 +25,8 @@ class BaseEvoStreamCommand(BaseCommand):
                     if key in result:
                         self.stdout.write(key + ': ' + json.dumps(result[key]) + '\n')
 
-    def handle(self, verbosity, *args, **options):
+    def handle(self, *args, **options):
+        verbosity = options.get('verbosity')
         if not isinstance(verbosity, int):
             verbosity = int(verbosity)
 
