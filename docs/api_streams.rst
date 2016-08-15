@@ -103,8 +103,7 @@ Optional:
 
 Example::
 
- push_stream('rtmp://192.168.1.2', localStreamName='testpullStream',
-             targetStreamName='testpushStream')
+ pull_stream('rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4', localStreamName='testpullStream')
 
 http://docs.evostream.com/ems_api_definition/pullstream
 
