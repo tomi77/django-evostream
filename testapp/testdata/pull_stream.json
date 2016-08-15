@@ -1,0 +1,47 @@
+{
+  "data": {
+    "audioCodecBytes": "",
+    "configId": 1,
+    "emulateUserAgent": "EvoStream Media Server (www.evostream.com) player",
+    "forceTcp": false,
+    "httpProxy": "",
+    "isAudio": true,
+    "keepAlive": true,
+    "localStreamName": "testpullstream",
+    "operationType": 1,
+    "pageUrl": "",
+    "ppsBytes": "",
+    "rangeEnd": -1,
+    "rangeStart": -2,
+    "rtcpDetectionInterval": 10,
+    "sendRenewStream": false,
+    "spsBytes ": "",
+    "ssmIp": "",
+    "swfUrl": "",
+    "tcUrl": "",
+    "tos": 256,
+    "ttl": 256,
+    "uri": {
+      "document": "mp4:sintel.mp4",
+      "documentPath": "\/cfx\/st\/",
+      "documentWithFullParameters": "mp4:sintel.mp4",
+      "fullDocumentPath": "\/cfx\/st\/mp4:sintel.mp4",
+      "fullDocumentPathWithParameters": "\/cfx\/st\/mp4:sintel.mp4",
+      "fullParameters": "",
+      "fullUri": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4",
+      "fullUriWithAuth": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4",
+      "host": "s2pchzxmtymn2k.cloudfront.net",
+      "ip": "54.239.131.57",
+      "originalUri": "rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4",
+      "parameters": {
+      },
+      "password": "",
+      "port": 1935,
+      "portSpecified": false,
+      "scheme": "rtmp",
+      "userName": ""
+    }
+  },
+  "description": "Stream rtmp:\/\/s2pchzxmtymn2k.cloudfront.net\/cfx\/st\/mp4:sintel.mp4 enqueued for pulling",
+  "status": "SUCCESS"
+}

@@ -175,6 +175,63 @@ Example
 
     ./manage.py liststreamsids
 
+``pullstream``
+==============
+
+Pull in a stream from an external source.
+
+Parameters:
+
+* ``--keep-alive`` If keepAlive is set to 1, the server will attempt to reestablish
+  connection with a stream source after a connection has been lost. The reconnect
+  will be attempted once every second.
+
+* ``--local-stream-name`` Name of the stream. Otherwise, a fallback techniques used
+  to determine the stream name (based on the URI).
+
+* ``--force-tcp`` If 1 and if the stream is RTSP, a TCP connection will be forced.
+  Otherwise the transport mechanism will be negotiated (UDP or TCP).
+
+* ``--tc-url`` TC URL to use in the initial RTMP connect invoke.
+
+* ``--page-url`` Originating web page address to use in the initial RTMP connect invoke.
+
+* ``--swf-url`` Originating swf URL to use in the initial RTMP connect invoke.
+
+* ``--range-start`` A value from which the playback should start expressed in seconds
+  (RTSP and RTMP connections only).
+
+* ``--range-end`` The length in seconds for the playback (RTSP and RTMP connections only).
+
+* ``--ttl`` Sets the IP_TTL (time to live) option on the socket.
+
+* ``--tos`` Sets the IP_TOS (Type of Service) option on the socket.
+
+* ``--rtcp-detection-interval`` How much time (in seconds) should the server wait for RTCP
+  packets before declaring the RTSP stream as a RTCP-less stream.
+
+* ``--emulate-user-agent`` User agent string (only for RTMP).
+
+* ``--is-audio`` If 1 and if the stream is RTP, it indicates that the currently pulled
+  stream is an audio source. Otherwise the pulled source is assumed as a video source.
+
+* ``--audio-codec-bytes`` The audio codec setup of RTP stream if it is audio. Represented
+  as hex format without "0x" or "h".
+
+* ``--sps-bytes`` The video SPS bytes of RTP stream if it is video. It should be base 64 encoded.
+
+* ``--pps-bytes`` The video PPS bytes of RTP stream if it is video. It should be base 64 encoded.
+
+* ``--ssm-ip`` The source IP from source-specific-multicast (only UDP based pull).
+
+* ``--http-proxy`` IP:Port - specifies an RTSP HTTP Proxy from which the RTSP stream should be
+  pulled; "self" - pulling RTSP over HTTP.
+
+Example
+::
+
+    ./manage.py pullstream "rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4" --local-stream-name=testpullstream
+
 ``removeconfig``
 ================
 

@@ -27,6 +27,7 @@ def load_test_data(filename):
     return json.load(open(os.path.join('testapp', 'testdata', filename)))
 
 
+PULL_STREAM_TEST_DATA = load_test_data('pull_stream.json')
 LIST_STREAMS_IDS_TEST_DATA = load_test_data('list_streams_ids.json')
 GET_STREAM_INFO_TEST_DATA = load_test_data('get_stream_info.json')
 LIST_STREAMS_TEST_DATA = load_test_data('list_streams.json')
@@ -52,6 +53,12 @@ LIST_INGEST_POINTS_TEST_DATA = load_test_data('list_ingest_points.json')
 
 @patch('evostream.commands.logger', Mock())
 class ApiTestCase(TestCase):
+    @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
+    def test_pull_stream(self):
+        out = pull_stream(uri='rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
+                          localStreamName='testpullstream')
+        self.assertDictEqual(out, PULL_STREAM_TEST_DATA['data'])
+
     @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
     def test_list_streams_ids(self):
         out = list_streams_ids()
@@ -162,6 +169,18 @@ if django.VERSION >= (1, 5):
     @patch('evostream.commands.logger', Mock())
     @patch('django.core.management.base.OutputWrapper.write')
     class CliTestCase(TestCase):
+        @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
+        def test_pullstream(self, mock_write):
+            call_command('pullstream', uri='rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4',
+                         localStreamName='testpullstream')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['localStreamName']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
         @patch('evostream.commands.protocol', TestHTTPProtocol(LIST_STREAMS_IDS_TEST_DATA))
         def test_liststreamsids(self, mock_write):
             call_command('liststreamsids')

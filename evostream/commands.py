@@ -37,8 +37,9 @@ def expected(*expected_keys):
 
 
 @expected('uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl',
-          'swfUrl', 'ttl', 'tos', 'rtcpDetectionInterval', 'emulateUserAgent',
-          'isAudio', 'audioCodecBytes', 'spsBytes', 'ppsBytes', 'ssmIp')
+          'swfUrl', 'rangeStart', 'rangeEnd', 'ttl', 'tos',
+          'rtcpDetectionInterval', 'emulateUserAgent', 'isAudio',
+          'audioCodecBytes', 'spsBytes', 'ppsBytes', 'ssmIp', 'httpProxy')
 def pull_stream(uri, **kwargs):
     """
     This will try to pull in a stream from an external source. Once a stream
@@ -50,13 +51,13 @@ def pull_stream(uri, **kwargs):
     :type uri: str
 
     :param keepAlive: If keepAlive is set to 1, the server will attempt to
-        reestablish connection with astream source after a connection has been
+        reestablish connection with a stream source after a connection has been
         lost. The reconnect will be attempted once every second
         (default: 1 true)
     :type keepAlive: int
 
     :param localStreamName: If provided, the stream will be given this
-        name. Otherwise, a fallback techniqueis used to determine the stream
+        name. Otherwise, a fallback techniques used to determine the stream
         name (based on the URI)
     :type localStreamName: str
 
@@ -66,19 +67,19 @@ def pull_stream(uri, **kwargs):
     :type forceTcp: int
 
     :param tcUrl: When specified, this value will be used to set the TC URL in
-        the initial RTMPconnect invoke
+        the initial RTMP connect invoke
     :type tcUrl: str
 
     :param pageUrl: When specified, this value will be used to set the
-        originating web page address inthe initial RTMP connect invoke
+        originating web page address in the initial RTMP connect invoke
     :type pageUrl: str
 
     :param swfUrl: When specified, this value will be used to set the
-        originating swf URL in theinitial RTMP connect invoke
+        originating swf URL in the initial RTMP connect invoke
     :type swfUrl: str
 
-    :param rangeStart: For RTSP and RTMP connections.  A value fromwhich the
-        playback should start expressed in seconds. There are 2 specialvalues:
+    :param rangeStart: For RTSP and RTMP connections. A value from which the
+        playback should start expressed in seconds. There are 2 special values:
         -2 and -1. For more information, please read about start/len
         parameters here:
         http://livedocs.adobe.com/flashmediaserver/3.0/hpdocs/help.html?content=00000185.html
@@ -135,7 +136,7 @@ def pull_stream(uri, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/pullstream
     """
-    return protocol.protocol.execute('pullStream', uri=uri, **kwargs)
+    return protocol.execute('pullStream', uri=uri, **kwargs)
 
 
 def list_streams_ids():

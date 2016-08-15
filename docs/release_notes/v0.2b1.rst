@@ -47,3 +47,4 @@
  * createingestpoint
  * removeingestpoint
  * listingestpoints
+ * pullstream
