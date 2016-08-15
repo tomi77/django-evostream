@@ -126,7 +126,7 @@ class GetStreamInfoTestCase(TestCase):
     if django.VERSION >= (1, 5):
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli_verbose(self, mock_write):
-            call_command('getstreaminfo', 1, verbosity=2)
+            call_command('getstreaminfo', '1', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_STREAM_INFO_TEST_DATA['data'].keys():
@@ -137,7 +137,7 @@ class GetStreamInfoTestCase(TestCase):
 
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli(self, mock_write):
-            call_command('getstreaminfo', 1)
+            call_command('getstreaminfo', '1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['uniqueId', 'name']:
@@ -209,7 +209,7 @@ class ShutdownStreamTestCase(TestCase):
     if django.VERSION >= (1, 5):
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli(self, mock_write):
-            call_command('shutdownstream', 55)
+            call_command('shutdownstream', '55')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in SHUTDOWN_STREAM_TEST_DATA['data'].keys():
@@ -249,7 +249,7 @@ class RemoveConfigTestCase(TestCase):
     if django.VERSION >= (1, 5):
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli_verbose(self, mock_write):
-            call_command('removeconfig', 555, verbosity=2)
+            call_command('removeconfig', '555', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in REMOVE_CONFIG_TEST_DATA['data']:
@@ -260,7 +260,7 @@ class RemoveConfigTestCase(TestCase):
 
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli(self, mock_write):
-            call_command('removeconfig', 555)
+            call_command('removeconfig', '555')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['configId']:
@@ -280,7 +280,7 @@ class GetConfigInfoTestCase(TestCase):
     if django.VERSION >= (1, 5):
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli_verbose(self, mock_write):
-            call_command('getconfiginfo', 1, verbosity=2)
+            call_command('getconfiginfo', '1', verbosity=2)
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in GET_CONFIG_INFO_TEST_DATA['data']:
@@ -291,7 +291,7 @@ class GetConfigInfoTestCase(TestCase):
 
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli(self, mock_write):
-            call_command('getconfiginfo', 1)
+            call_command('getconfiginfo', '1')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['configId', 'localStreamName']:
