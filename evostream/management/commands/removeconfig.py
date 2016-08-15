@@ -22,7 +22,8 @@ class Command(BaseEvoStreamCommand):
             parser.add_argument('--remove_hls_hds_files', action='store',
                                 type=int, choices=[0, 1], default=0,
                                 dest='removeHlsHdsFiles',
-                                help='Remove folder associated with HLS/HDS stream')
+                                help='Remove folder associated with HLS/HDS '
+                                     'stream')
     else:
         args = '<idOrGroupName>'
 

@@ -18,7 +18,8 @@ class Command(BaseEvoStreamCommand):
             parser.add_argument('--disable-internal-streams', action='store',
                                 type=int, choices=[0, 1], default=0,
                                 dest='disableInternalStreams',
-                                help='Filtering out internal streams from the list')
+                                help='Filtering out internal streams from '
+                                     'the list')
     else:
         option_list = BaseEvoStreamCommand.option_list + (
             make_option('--disable-internal-streams', action='store',

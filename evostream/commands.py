@@ -24,7 +24,8 @@ def expected(*expected_keys):
 
             if bool(unexpected):
                 unexpected = ', '.join([key for key in list(unexpected)])
-                logger.warning('Function %s: Unexpected argument(s): %s', func.__name__, unexpected)
+                logger.warning('Function %s: Unexpected argument(s): %s',
+                               func.__name__, unexpected)
 
             kwargs = dict((key, val) for key, val in kwargs.items()
                           if key in expected_keys)
@@ -36,8 +37,8 @@ def expected(*expected_keys):
     return command_decorator
 
 
-@expected('uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl', 'pageUrl',
-          'swfUrl', 'rangeStart', 'rangeEnd', 'ttl', 'tos',
+@expected('uri', 'keepAlive', 'localStreamName', 'forceTcp', 'tcUrl',
+          'pageUrl', 'swfUrl', 'rangeStart', 'rangeEnd', 'ttl', 'tos',
           'rtcpDetectionInterval', 'emulateUserAgent', 'isAudio',
           'audioCodecBytes', 'spsBytes', 'ppsBytes', 'ssmIp', 'httpProxy')
 def pull_stream(uri, **kwargs):
@@ -369,7 +370,8 @@ def add_stream_alias(localStreamName, aliasName, **kwargs):
 
     :link: http://docs.evostream.com/ems_api_definition/addstreamalias
     """
-    return protocol.execute('addStreamAlias', localStreamName=localStreamName, aliasName=aliasName, **kwargs)
+    return protocol.execute('addStreamAlias', localStreamName=localStreamName,
+                            aliasName=aliasName, **kwargs)
 
 
 def list_stream_aliases():
@@ -510,7 +512,8 @@ def remove_ingest_point(privateStreamName):
 
     :link: http://docs.evostream.com/ems_api_definition/removeingestpoint
     """
-    return protocol.execute('removeIngestPoint', privateStreamName=privateStreamName)
+    return protocol.execute('removeIngestPoint',
+                            privateStreamName=privateStreamName)
 
 
 def list_ingest_points():

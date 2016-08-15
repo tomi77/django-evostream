@@ -23,7 +23,8 @@ class BaseEvoStreamCommand(BaseCommand):
             for result in results:
                 for key in self.silent_keys:
                     if key in result:
-                        self.stdout.write(key + ': ' + json.dumps(result[key]) + '\n')
+                        val = json.dumps(result[key])
+                        self.stdout.write('%s: %s\n' % (key, val))
 
     def handle(self, *args, **options):
         verbosity = options.get('verbosity')

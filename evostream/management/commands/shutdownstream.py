@@ -35,4 +35,5 @@ class Command(BaseEvoStreamCommand):
         try:
             return shutdown_stream(id=int(idOrLocalStreamName), **options)
         except ValueError:
-            return shutdown_stream(localStreamName=idOrLocalStreamName, **options)
+            return shutdown_stream(localStreamName=idOrLocalStreamName,
+                                   **options)

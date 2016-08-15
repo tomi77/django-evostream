@@ -13,6 +13,7 @@ def get_module_class(class_path):
     try:
         mod = import_module(mod_name)
     except ImportError as ex:
-        raise ImproperlyConfigured('Error importing module %s: "%s"' % (mod_name, ex))
+        raise ImproperlyConfigured('Error importing module %s: '
+                                   '"%s"' % (mod_name, ex))
 
     return getattr(mod, cls_name)
