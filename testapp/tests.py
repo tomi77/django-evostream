@@ -656,7 +656,6 @@ class CreateHDSStreamTestCase(TestCase):
                 except ValueError:
                     self.fail('Key %s not found' % key)
 
-
         @patch('django.core.management.base.OutputWrapper.write')
         def test_cli(self, mock_write):
             call_command('createhdsstream', 'testpullStream', '../evo-webroot', groupName='hds',
