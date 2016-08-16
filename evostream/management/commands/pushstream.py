@@ -7,7 +7,7 @@ from evostream.management.base import BaseEvoStreamCommand
 
 
 class Command(BaseEvoStreamCommand):
-    help = 'Pull in a stream from an external source.'
+    help = 'Push a local stream to an external destination.'
 
     requires_system_checks = False
 
