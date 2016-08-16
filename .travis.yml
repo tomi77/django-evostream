@@ -23,7 +23,7 @@ install:
   - pip install --upgrade mock
 
 script:
-  - coverage run ./manage.py test
+  - coverage run setup.py test
 
 after_success:
   - coveralls

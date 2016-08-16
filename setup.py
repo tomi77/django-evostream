@@ -40,5 +40,6 @@ setup(
     packages=find_packages(exclude=['testapp']),
     install_requires=[
         'django>=1.4'
-    ]
+    ],
+    test_suite='testapp.tests'
 )

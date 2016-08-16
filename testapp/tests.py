@@ -4,6 +4,10 @@ import os
 
 import django
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'testapp.settings'
+if hasattr(django, 'setup'):
+    django.setup()
+
 try:
     from unittest.mock import patch, Mock
 except ImportError:
@@ -24,7 +28,7 @@ class TestHTTPProtocol(HTTPProtocol):
 
 
 def load_test_data(filename):
-    return json.load(open(os.path.join('testapp', 'testdata', filename)))
+    return json.load(open(os.path.join(os.path.dirname(__file__), 'testdata', filename)))
 
 
 PULL_STREAM_TEST_DATA = load_test_data('pull_stream.json')
