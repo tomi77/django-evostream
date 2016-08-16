@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-evostream",
-    version='0.2beta1',
+    version='0.2b1',
     author='Tomasz Jakub Rup',
     author_email='tomasz.rup@gmail.com',
     url='https://github.com/tomi77/django-evostream',
