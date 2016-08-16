@@ -26,6 +26,9 @@
  * create_ingest_point
  * remove_ingest_point
  * list_ingest_points
+ * push_stream
+ * create_hls_stream
+ * create_hds_stream
 
 * Command Line
 
@@ -50,3 +53,4 @@
  * pullstream
  * pushstream
  * createhlsstream
+ * createhdsstream

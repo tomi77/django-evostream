@@ -282,6 +282,71 @@ Example
 
 http://docs.evostream.com/ems_api_definition/createhlsstream
 
+``create_hds_stream``
+=====================
+
+Create an HDS (HTTP Dynamic Streaming) stream out of an existing H.264/AAC
+stream. HDS is used to stream standard MP4 media over regular HTTP
+connections.
+
+Required:
+
+:``localStreamNames`` `(str)`: The stream(s) that will be used as the input.
+    This is a comma-delimited list of active stream names (local stream
+    names).
+
+:``targetFolder`` `(str)`: The folder where all the manifest (*.f4m) and
+    fragment (f4v*) files will be stored. This folder must be accessible by
+    the HDS clients. It is usually in the web-root of the server.
+
+Optional:
+
+:``bandwidths`` `(int)`: The corresponding bandwidths for each stream listed in
+    localStreamNames. Again, this can be a comma-delimited list.
+
+:``chunkBaseName`` `(str)`: The base name used to generate the fragments.
+
+:``chunkLength`` `(int)`: The length (in seconds) of fragments to be made.
+    Minimum value is 1 (second)
+
+:``chunkOnIDR`` `(int)`: If true, chunking is performed ONLY on IDR. Otherwise,
+    chunking is performed whenever chunk length is achieved.
+
+:``groupName`` `(str)`: The name assigned to the HDS stream or group. If the
+    ``localStreamNames`` parameter contains only one entry and ``groupName`` is
+    not specified, ``groupName`` will have the value of the input stream name.
+
+:``keepAlive`` `(int)`: If true, the EMS will attempt to reconnect to the
+    stream source if the connection is severed.
+
+:``manifestName`` `(str)`: The manifest file name.
+
+:``overwriteDestination`` `(int)`: If true, it will allow overwrite of
+    destination files.
+
+:``playlistType`` `(str)`: Either `appending` or `rolling`.
+
+:``playlistLength`` `(int)`: The number of fragments before the server starts to
+    overwrite the older fragments. Used only when ``playlistType`` is
+    `rolling`. Ignored otherwise.
+:type playlistLength: int
+
+:``staleRetentionCount`` `(int)`: The number of old files kept besides the ones
+    listed in the current version of the playlist. Only applicable for
+    `rolling` playlists.
+
+:``createMasterPlaylist`` `(int)`: If true, a master playlist will be created.
+
+:``cleanupDestination`` `(int)`: If true, all manifest and fragment files in the
+    target folder will be removed before HDS creation is started.
+
+Example
+::
+
+ create_hds_stream('testpullStream', '../evo-webroot', groupName='hds', playlistType='rolling')
+
+http://docs.evostream.com/ems_api_definition/createhdsstream
+
 ``list_streams_ids``
 ====================
 

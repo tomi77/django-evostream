@@ -1,0 +1,28 @@
+{
+  "data": {
+    "bandwidths": [
+      0
+    ],
+    "chunkBaseName": "f4v",
+    "chunkLength": 10,
+    "chunkOnIDR": true,
+    "cleanupDestination": false,
+    "configIds": [
+      9
+    ],
+    "createMasterPlaylist": true,
+    "groupName": "hds",
+    "keepAlive": true,
+    "localStreamNames": [
+      "testpullStream"
+    ],
+    "manifestName": "",
+    "overwriteDestination": true,
+    "playlistLength": 10,
+    "playlistType": "rolling",
+    "staleRetentionCount": 10,
+    "targetFolder": "..\/evo-webroot"
+  },
+  "description": "HDS stream created",
+  "status": "SUCCESS"
+}

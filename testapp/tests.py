@@ -55,6 +55,7 @@ CREATE_INGEST_POINT_TEST_DATA = load_test_data('create_ingest_point.json')
 REMOVE_INGEST_POINT_TEST_DATA = load_test_data('remove_ingest_point.json')
 LIST_INGEST_POINTS_TEST_DATA = load_test_data('list_ingest_points.json')
 CREATE_HLS_STREAM_TEST_DATA = load_test_data('create_hls_stream.json')
+CREATE_HDS_STREAM_TEST_DATA = load_test_data('create_hds_stream.json')
 
 
 @patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
@@ -626,6 +627,40 @@ class CreateHLSStreamTestCase(TestCase):
         def test_cli(self, mock_write):
             call_command('createhlsstream', 'hlstest', '/MyWebRoot/', bandwidths=128, groupName='hls',
                          playlistType='rolling', playlistLength=10, chunkLength=5)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in ['localStreamNames', 'targetFolder']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+
+@patch('evostream.commands.protocol', TestHTTPProtocol(CREATE_HDS_STREAM_TEST_DATA))
+@patch('evostream.commands.logger', Mock())
+class CreateHDSStreamTestCase(TestCase):
+    def test_api(self):
+        out = create_hds_stream('testpullStream', '../evo-webroot', groupName='hds', playlistType='rolling')
+        self.assertDictEqual(out, CREATE_HDS_STREAM_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
+            call_command('createhdsstream', 'testpullStream', '../evo-webroot', groupName='hds',
+                         playlistType='rolling', verbosity=2)
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in CREATE_HDS_STREAM_TEST_DATA['data']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+
+        @patch('django.core.management.base.OutputWrapper.write')
+        def test_cli(self, mock_write):
+            call_command('createhdsstream', 'testpullStream', '../evo-webroot', groupName='hds',
+                         playlistType='rolling')
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['localStreamNames', 'targetFolder']:
