@@ -50,28 +50,28 @@ Create an HTTP Live Stream (HLS) out of an existing H.264/AAC stream.
 Arguments:
 
 * ``localStreamNames`` The stream(s) that will be used as the input. This is a comma-delimited
-    list of active stream names (local stream names).
+  list of active stream names (local stream names).
 
 * ``targetFolder`` The folder where all the .ts/.m3u8 files will be stored. This folder must
-    be accessible by the HLS clients. It is usually in the web-root of the server.
+  be accessible by the HLS clients. It is usually in the web-root of the server.
 
 Optional:
 
 * ``--keep-alive`` If true, the EMS will attempt to reconnect to the stream source if the
-    connection is severed.
+  connection is severed.
 
 * ``--overwrite-destination`` If true, it will force overwrite of destination files.
 
 * ``--stale-retention-count`` The number of old files kept besides the ones listed in the
-    current version of the playlist (only rolling playlist).
+  current version of the playlist (only rolling playlist).
 
 * ``--create-master-playlist`` If true, a master playlist will be created.
 
 * ``--cleanup-destination`` If true, all \*.ts and \*.m3u8 files in the target folder will
-    be removed before HLS creation is started.
+  be removed before HLS creation is started.
 
 * ``--bandwidths`` The corresponding bandwidths for each stream listed in localStreamNames.
-    Again, this can be a comma-delimited list.
+  Again, this can be a comma-delimited list.
 
 * ``--groupName`` The name assigned to the HLS stream or group.
 
@@ -82,39 +82,39 @@ Optional:
 * ``--playlist-name`` The file name of the playlist (\*.m3u8).
 
 * ``--chunk-length`` The length (in seconds) of each playlist element (\*.ts file). Minimum
-    value is 1 (second).
+  value is 1 (second).
 
 * ``--max-chunk-length`` Maximum length (in seconds) the EMS will allow any single chunk to be.
 
 * ``--chunk-base-name`` The base name used to generate the \*.ts chunks.
 
 * ``--chunk-on-idr`` If true, chunking is performed ONLY on IDR. Otherwise, chunking is
-    performed whenever chunk length is achieved.
+  performed whenever chunk length is achieved.
 
 * ``--drm-type`` Type of DRM encryption to use.
 
 * ``--aes-key-count`` Number of keys that will be automatically generated and rotated over
-    while encrypting this HLS stream.
+  while encrypting this HLS stream.
 
 * ``--audio-only`` If true, stream will be audio only.
 
 * ``--hls-resume`` If true, HLS will resume in appending segments to previously created child
-    playlist even in cases of EMS shutdown or cut off stream source.
+  playlist even in cases of EMS shutdown or cut off stream source.
 
 * ``--cleanup-on-close`` If true, corresponding hls files to a stream will be deleted if the
-    said stream is removed or shut down or disconnected.
+  said stream is removed or shut down or disconnected.
 
 * ``--use-byte-range`` If true, will use the EXT-X-BYTERANGE feature of HLS (version 4 and up).
 
 * ``--file-length`` When using useByteRange=1, this parameter needs to be set too. This
-    will be the size of file before chunking it to another file, this replace the chunkLength
-    in case of EXT-X-BYTERANGE, since chunkLength will be the byte range chunk.
+  will be the size of file before chunking it to another file, this replace the chunkLength
+  in case of EXT-X-BYTERANGE, since chunkLength will be the byte range chunk.
 
 * ``--use-system-time`` If true, uses UTC in playlist time stamp otherwise will use the local
-    server time.
+  server time.
 
 * ``--offset-time`` A parameter valid only for HLS v.6 onwards. This will indicate the start
-    offset time (in seconds) for the playback of the playlist.
+  offset time (in seconds) for the playback of the playlist.
 
 Example
 ::
@@ -452,14 +452,14 @@ Parameters:
 * ``--rtmp-absolute-timestamps`` Forces the timestamps to be absolute when using RTMP.
 
 * ``--send-chunk-size-request`` Sets whether the RTMP stream will or will not send a
-    “Set Chunk Length” message. This is significant when pushing to Akamai’s new RTMP HD
-    ingest point where this parameter should be set to 0 so that Akamai will not drop the
-    connection.
+  "Set Chunk Length" message. This is significant when pushing to Akamai’s new RTMP HD
+  ingest point where this parameter should be set to 0 so that Akamai will not drop the
+  connection.
 
 * ``--use-source-pts`` When value is true, timestamps on source inbound RTMP stream are
-    passed directly to the outbound (pushed) RTMP streams. This affects only pushed
-    Outbound Net RTMP with net RTMP source. This parameter overrides the value of the
-    ``config.lua`` option of the same name.
+  passed directly to the outbound (pushed) RTMP streams. This affects only pushed
+  Outbound Net RTMP with net RTMP source. This parameter overrides the value of the
+  ``config.lua`` option of the same name.
 
 Example
 ::
