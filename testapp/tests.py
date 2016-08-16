@@ -55,6 +55,7 @@ REMOVE_INGEST_POINT_TEST_DATA = load_test_data('remove_ingest_point.json')
 LIST_INGEST_POINTS_TEST_DATA = load_test_data('list_ingest_points.json')
 CREATE_HLS_STREAM_TEST_DATA = load_test_data('create_hls_stream.json')
 CREATE_HDS_STREAM_TEST_DATA = load_test_data('create_hds_stream.json')
+IS_STREAM_RUNNING_TEST_DATA = load_test_data('is_stream_running.json')
 
 
 @mock.patch('evostream.commands.protocol', TestHTTPProtocol(PULL_STREAM_TEST_DATA))
@@ -662,6 +663,26 @@ class CreateHDSStreamTestCase(TestCase):
             self.assertGreaterEqual(mock_write.call_count, 1)
             out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
             for key in ['localStreamNames', 'targetFolder']:
+                try:
+                    out.index(key)
+                except ValueError:
+                    self.fail('Key %s not found' % key)
+
+
+@mock.patch('evostream.commands.protocol', TestHTTPProtocol(IS_STREAM_RUNNING_TEST_DATA))
+@mock.patch('evostream.commands.logger', mock.Mock())
+class IsStreamRunningTestCase(TestCase):
+    def test_api(self):
+        out = is_stream_running(id=1)
+        self.assertDictEqual(out, IS_STREAM_RUNNING_TEST_DATA['data'])
+
+    if django.VERSION >= (1, 5):
+        @mock.patch('django.core.management.base.OutputWrapper.write')
+        def test_cli_verbose(self, mock_write):
+            call_command('isstreamrunning', '1')
+            self.assertGreaterEqual(mock_write.call_count, 1)
+            out = ''.join([z for x in mock_write.call_args_list for y in x for z in y])
+            for key in IS_STREAM_RUNNING_TEST_DATA['data'].keys():
                 try:
                     out.index(key)
                 except ValueError:

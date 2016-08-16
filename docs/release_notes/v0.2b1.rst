@@ -29,6 +29,7 @@
  * push_stream
  * create_hls_stream
  * create_hds_stream
+ * is_stream_running
 
 * Command Line
 
@@ -54,3 +55,4 @@
  * pushstream
  * createhlsstream
  * createhdsstream
+ * isstreamrunning

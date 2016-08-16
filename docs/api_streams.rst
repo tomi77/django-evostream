@@ -506,3 +506,24 @@ Example:
  get_config_info(id=1)
 
 http://docs.evostream.com/ems_api_definition/getconfiginfo
+
+``is_stream_running``
+=====================
+
+Checks a specific stream if it is running or not.
+
+Required:
+
+One of these parameters is required.
+
+:``id`` `(int)`: The unique id of the stream to check.
+
+:``localStreamName`` `(str)`: The name of the stream to check.
+
+Example:
+::
+
+ is_stream_running(id=1)
+ is_stream_running(localStreamName='testStream')
+
+http://docs.evostream.com/ems_api_definition/isstreamrunning

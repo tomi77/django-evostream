@@ -12,7 +12,7 @@ __all__ = ['pull_stream', 'list_streams_ids', 'get_stream_info',
            'list_group_name_aliases', 'remove_group_name_alias',
            'list_http_streaming_sessions', 'create_ingest_point',
            'remove_ingest_point', 'list_ingest_points', 'push_stream',
-           'create_hls_stream', 'create_hds_stream']
+           'create_hls_stream', 'create_hds_stream',  'is_stream_running']
 logger = logging.getLogger(__name__)
 
 
@@ -551,6 +551,21 @@ def get_config_info(id):
     """
     return protocol.execute('getConfigInfo', id=id)
 
+
+@expected('id', 'localStreamName')
+def is_stream_running(**kwargs):
+    """
+    Checks a specific stream if it is running or not.
+
+    :param id: The unique id of the stream to check.
+    :type id: int
+
+    :param localStreamName: The name of the stream to check.
+    :type localStreamName: str
+
+    :link: http://docs.evostream.com/ems_api_definition/isstreamrunning
+    """
+    return protocol.execute('isStreamRunning', **kwargs)
 
 @expected('localStreamName', 'aliasName', 'expirePeriod')
 def add_stream_alias(localStreamName, aliasName, **kwargs):
