@@ -49,3 +49,4 @@
  * listingestpoints
  * pullstream
  * pushstream
+ * createhlsstream

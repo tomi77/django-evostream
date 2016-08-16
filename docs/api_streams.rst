@@ -182,6 +182,106 @@ Example
 
 http://docs.evostream.com/ems_api_definition/pushstream
 
+``create_hls_stream``
+=====================
+
+Create an HTTP Live Stream (HLS) out of an existing H.264/AAC stream. HLS
+is used to stream live feeds to iOS devices such as iPhones and iPads.
+
+Required:
+
+:``localStreamNames`` `(str)`: The stream(s) that will be used as the input.
+    This is a comma-delimited list of active stream names (local stream names).
+
+:``targetFolder`` `(str)`: The folder where all the .ts/.m3u8 files will be
+    stored. This folder must be accessible by the HLS clients. It is
+    usually in the web-root of the server.
+
+Optional:
+
+:``keepAlive`` `(int)`: If true, the EMS will attempt to reconnect to the
+    stream source if the connection is severed.
+
+:``overwriteDestination`` `(int)`: If true, it will force overwrite of
+    destination files.
+
+:``staleRetentionCount`` `(int)`: The number of old files kept besides the ones
+    listed in the current version of the playlist. Only applicable for
+    rolling playlists.
+
+:``createMasterPlaylist`` `(int)`: If true, a master playlist will be created.
+
+:``cleanupDestination`` `(int)`: If true, all *.ts and *.m3u8 files in the
+    target folder will be removed before HLS creation is started.
+
+:``bandwidths`` `(int)`: The corresponding bandwidths for each stream listed in
+    localStreamNames. Again, this can be a comma-delimited list.
+
+:``groupName`` `(str)`: The name assigned to the HLS stream or group. If the
+    localStreamNames parameter contains only one entry and groupName is
+    not specified, groupName will have the value of the input stream name.
+
+:``playlistType`` `(str)`: Either appending or rolling.
+
+:``playlistLength`` `(int)`: The length (number of elements) of the playlist.
+    Used only when playlistType is rolling. Ignored otherwise.
+
+:``playlistName`` `(str)`: The file name of the playlist (*.m3u8).
+
+:``chunkLength`` `(int)`: The length (in seconds) of each playlist element (*.ts
+    file). Minimum value is 1 (second).
+
+:``maxChunkLength`` `(int)`: Maximum length (in seconds) the EMS will allow any
+    single chunk to be. This is primarily in the case of chunkOnIDR=true where
+    the EMS will wait for the next key-frame. If the maxChunkLength is less than
+    chunkLength, the parameter shall be ignored.
+
+:``chunkBaseName`` `(str)`: The base name used to generate the *.ts chunks.
+
+:``chunkOnIDR`` `(int)`: If true, chunking is performed ONLY on IDR. Otherwise,
+    chunking is performed whenever chunk length is achieved.
+
+:``drmType`` `(str)`: Type of DRM encryption to use. Options are: none
+    (no encryption), evo (AES Encryption), SAMPLE-AES (Sample-AES),
+    verimatrix (Verimatrix DRM). For Verimatrix DRM, the "drm" section of
+    the config.lua file must be active and properly configured.
+
+:``AESKeyCount`` `(int)`: Number of keys that will be automatically generated
+    and rotated over while encrypting this HLS stream.
+
+:``audioOnly`` `(int)`: If true, stream will be audio only.
+
+:``hlsResume`` `(int)`: If true, HLS will resume in appending segments to
+    previously created child playlist even in cases of EMS shutdown or cut
+    off stream source.
+
+:``cleanupOnClose`` `(int)`: If true, corresponding hls files to a stream will
+    be deleted if the said stream is removed or shut down or disconnected.
+
+:``useByteRange`` `(int)`: If true, will use the EXT-X-BYTERANGE feature of HLS
+    (version 4 and up).
+
+:``fileLength`` `(int)`: When using useByteRange=1, this parameter needs to be
+    set too. This will be the size of file before chunking it to another
+    file, this replace the chunkLength in case of EXT-X-BYTERANGE, since
+    chunkLength will be the byte range chunk.
+
+:``useSystemTime`` `(int)`: If true, uses UTC in playlist time stamp otherwise
+    will use the local server time.
+
+:``offsetTime`` `(int)`:
+
+:``startOffset`` `(int)`: A parameter valid only for HLS v.6 onwards. This will
+    indicate the start offset time (in seconds) for the playback of the
+    playlist.
+
+Example
+::
+
+ create_hls_stream('hlstest', '/MyWebRoot/', bandwidths=128, groupName='hls', playlistType='rolling', playlistLength=10, chunkLength=5)
+
+http://docs.evostream.com/ems_api_definition/createhlsstream
+
 ``list_streams_ids``
 ====================
 

@@ -1,0 +1,40 @@
+{
+  "data": {
+    "AESKeyCount": 5,
+    "audioOnly": false,
+    "bandwidths": [
+      128
+    ],
+    "chunkBaseName": "segment",
+    "chunkLength": 10,
+    "chunkOnIDR": true,
+    "cleanupDestination": false,
+    "cleanupOnClose": false,
+    "configIds": [
+      7
+    ],
+    "createMasterPlaylist": true,
+    "drmType": "none",
+    "fileLength": 0,
+    "groupName": "hls",
+    "hlsResume": false,
+    "hlsVersion": 3,
+    "keepAlive": true,
+    "localStreamNames": [
+      "testpullStream"
+    ],
+    "maxChunkLength": 0,
+    "offsetTime": 0,
+    "overwriteDestination": true,
+    "playlistLength": 10,
+    "playlistName": "playlist.m3u8",
+    "playlistType": "rolling",
+    "staleRetentionCount": 10,
+    "startOffset": 0,
+    "targetFolder": "..\/evo-webroot",
+    "useByteRange": false,
+    "useSystemTime": false
+  },
+  "description": "HLS stream created",
+  "status": "SUCCESS"
+}
