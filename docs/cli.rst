@@ -344,7 +344,7 @@ Optional:
 
 * ``--create-master-playlist`` If true, a master playlist will be created.
 
-* ``--cleanup-destination`` If true, all *.ts and *.m3u8 files in the target folder will
+* ``--cleanup-destination`` If true, all \*.ts and \*.m3u8 files in the target folder will
     be removed before HLS creation is started.
 
 * ``--bandwidths`` The corresponding bandwidths for each stream listed in localStreamNames.
@@ -356,14 +356,14 @@ Optional:
 
 * ``--playlist-length`` The length (number of elements) of the playlist (only rolling playlist).
 
-* ``--playlist-name`` The file name of the playlist (*.m3u8).
+* ``--playlist-name`` The file name of the playlist (\*.m3u8).
 
-* ``--chunk-length`` The length (in seconds) of each playlist element (*.ts file). Minimum
+* ``--chunk-length`` The length (in seconds) of each playlist element (\*.ts file). Minimum
     value is 1 (second).
 
 * ``--max-chunk-length`` Maximum length (in seconds) the EMS will allow any single chunk to be.
 
-* ``--chunk-base-name`` The base name used to generate the *.ts chunks.
+* ``--chunk-base-name`` The base name used to generate the \*.ts chunks.
 
 * ``--chunk-on-idr`` If true, chunking is performed ONLY on IDR. Otherwise, chunking is
     performed whenever chunk length is achieved.
@@ -397,6 +397,59 @@ Example
 ::
 
  ./manage.py createhlsstream hlstest /MyWebRoot/ --bandwidths=128 --group-name=hls --playlist-type=rolling --playlist-length=10 --chunk-length=5
+
+``create_hds_stream``
+=====================
+
+Create an HDS (HTTP Dynamic Streaming) stream out of an existing H.264/AAC stream.
+
+Arguments:
+
+* ``localStreamNames`` The stream(s) that will be used as the input.
+  This is a comma-delimited list of active stream names (local stream
+  names).
+
+* ``targetFolder`` The folder where all the manifest (*.f4m) and
+  fragment (f4v*) files will be stored. This folder must be accessible
+  by the HDS clients. It is usually in the web-root of the server.
+
+Optional:
+
+* ``--bandwidths`` The corresponding bandwidths for each stream listed in
+  ``localStreamNames``. Again, this can be a comma-delimited list.
+
+* ``--chunk-base-name`` The base name used to generate the fragments.
+
+* ``--chunk-length`` The length (in seconds) of fragments to be made.
+  Minimum value is 1 (second).
+
+* ``--chunk-on-idr`` If true, chunking is performed ONLY on IDR. Otherwise,
+  chunking is performed whenever chunk length is achieved.
+
+* ``--group-name`` The name assigned to the HDS stream or group.
+
+* ``--keep-alive`` If true, the EMS will attempt to reconnect to the
+  stream source if the connection is severed.
+
+* ``--manifest-name`` The manifest file name.
+
+* ``--overwrite-destination`` If true, it will allow overwrite of
+  destination files.
+
+* ``--playlist-type`` Either `appending` or `rolling`.
+
+* ``--playlist-length`` The number of fragments before the server starts to
+  overwrite the older fragments. Used only when ``--playlist-type`` is
+  `rolling`. Ignored otherwise.
+
+* ``--stale-retention-count`` The number of old files kept besides the ones
+  listed in the current version of the playlist. Only applicable for
+  rolling playlists.
+
+* ``--create-master-playlist`` If true, a master playlist will be created.
+
+* ``--cleanup-destination`` If true, all manifest and fragment files in the
+  target folder will be removed before HDS creation is started.
 
 ``removeconfig``
 ================

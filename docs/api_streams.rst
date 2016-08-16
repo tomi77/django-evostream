@@ -211,7 +211,7 @@ Optional:
 
 :``createMasterPlaylist`` `(int)`: If true, a master playlist will be created.
 
-:``cleanupDestination`` `(int)`: If true, all *.ts and *.m3u8 files in the
+:``cleanupDestination`` `(int)`: If true, all \*.ts and \*.m3u8 files in the
     target folder will be removed before HLS creation is started.
 
 :``bandwidths`` `(int)`: The corresponding bandwidths for each stream listed in
@@ -226,9 +226,9 @@ Optional:
 :``playlistLength`` `(int)`: The length (number of elements) of the playlist.
     Used only when playlistType is rolling. Ignored otherwise.
 
-:``playlistName`` `(str)`: The file name of the playlist (*.m3u8).
+:``playlistName`` `(str)`: The file name of the playlist (\*.m3u8).
 
-:``chunkLength`` `(int)`: The length (in seconds) of each playlist element (*.ts
+:``chunkLength`` `(int)`: The length (in seconds) of each playlist element (\*.ts
     file). Minimum value is 1 (second).
 
 :``maxChunkLength`` `(int)`: Maximum length (in seconds) the EMS will allow any
@@ -236,7 +236,7 @@ Optional:
     the EMS will wait for the next key-frame. If the maxChunkLength is less than
     chunkLength, the parameter shall be ignored.
 
-:``chunkBaseName`` `(str)`: The base name used to generate the *.ts chunks.
+:``chunkBaseName`` `(str)`: The base name used to generate the \*.ts chunks.
 
 :``chunkOnIDR`` `(int)`: If true, chunking is performed ONLY on IDR. Otherwise,
     chunking is performed whenever chunk length is achieved.
