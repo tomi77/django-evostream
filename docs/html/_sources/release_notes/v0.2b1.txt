@@ -1,0 +1,58 @@
+==========
+0.2 beta 1
+==========
+
+**Breaking changes**
+
+* Simplify configuration
+
+**New features:**
+
+* API
+
+ * list_streams_ids
+ * get_streams_count
+ * get_config_info
+ * add_stream_alias
+ * list_stream_aliases
+ * remove_stream_alias
+ * flush_stream_aliases
+ * add_group_name_alias
+ * flush_group_name_aliases
+ * get_group_name_by_alias
+ * list_group_name_aliases
+ * remove_group_name_alias
+ * list_http_streaming_sessions
+ * create_ingest_point
+ * remove_ingest_point
+ * list_ingest_points
+ * push_stream
+ * create_hls_stream
+ * create_hds_stream
+ * is_stream_running
+
+* Command Line
+
+ * getstreamscount
+ * liststreamsids
+ * getstreaminfo
+ * getconfiginfo
+ * addstreamalias
+ * liststreamaliases
+ * removestreamalias
+ * flushstreamaliases
+ * shutdownstream
+ * addgroupnamealias
+ * flushgroupnamealiases
+ * getgroupnamebyalias
+ * listgroupnamealiases
+ * removegroupnamealias
+ * listhttpstreamingsessions
+ * createingestpoint
+ * removeingestpoint
+ * listingestpoints
+ * pullstream
+ * pushstream
+ * createhlsstream
+ * createhdsstream
+ * isstreamrunning

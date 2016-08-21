@@ -23,6 +23,11 @@ Setup ``EvoStream Media Server`` HTTP API address
 
     EVOSTREAM_URI = 'http://127.0.0.1:7777'
 
+Documentation
+=============
+
+https://tomi77.github.io/django-evostream/html/
+
 API Usage
 =========
 

@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command Line &mdash; django-evostream latest documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="django-evostream latest documentation" href="index.html"/>
+        <link rel="next" title="Release Notes" href="release_notes/index.html"/>
+        <link rel="prev" title="Aliasing" href="api_aliasing.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> django-evostream
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">EvoStream Media Server API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Command Line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#addgroupnamealias"><code class="docutils literal"><span class="pre">addgroupnamealias</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#addstreamalias"><code class="docutils literal"><span class="pre">addstreamalias</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#createhlsstream"><code class="docutils literal"><span class="pre">createhlsstream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-hds-stream"><code class="docutils literal"><span class="pre">create_hds_stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#createingestpoint"><code class="docutils literal"><span class="pre">createingestpoint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flushgroupnamealiases"><code class="docutils literal"><span class="pre">flushgroupnamealiases</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flushstreamaliases"><code class="docutils literal"><span class="pre">flushstreamaliases</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getconfiginfo"><code class="docutils literal"><span class="pre">getconfiginfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getgroupnamebyalias"><code class="docutils literal"><span class="pre">getgroupnamebyalias</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getstreaminfo"><code class="docutils literal"><span class="pre">getstreaminfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getstreamscount"><code class="docutils literal"><span class="pre">getstreamscount</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isstreamrunning"><code class="docutils literal"><span class="pre">isstreamrunning</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listconfig"><code class="docutils literal"><span class="pre">listconfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listgroupnamealiases"><code class="docutils literal"><span class="pre">listgroupnamealiases</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listhttpstreamingsessions"><code class="docutils literal"><span class="pre">listhttpstreamingsessions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listingestpoints"><code class="docutils literal"><span class="pre">listingestpoints</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#liststreamaliases"><code class="docutils literal"><span class="pre">liststreamaliases</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#liststreams"><code class="docutils literal"><span class="pre">liststreams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#liststreamsids"><code class="docutils literal"><span class="pre">liststreamsids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pullstream"><code class="docutils literal"><span class="pre">pullstream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pushstream"><code class="docutils literal"><span class="pre">pushstream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removeconfig"><code class="docutils literal"><span class="pre">removeconfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removegroupnamealias"><code class="docutils literal"><span class="pre">removegroupnamealias</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removeingestpoint"><code class="docutils literal"><span class="pre">removeingestpoint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removestreamalias"><code class="docutils literal"><span class="pre">removestreamalias</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shutdownstream"><code class="docutils literal"><span class="pre">shutdownstream</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">django-evostream</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Command Line</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/cli.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line">
+<span id="ref-cli"></span><h1>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="addgroupnamealias">
+<h2><code class="docutils literal"><span class="pre">addgroupnamealias</span></code><a class="headerlink" href="#addgroupnamealias" title="Permalink to this headline">¶</a></h2>
+<p>This command creates secondary name(s) for group names. Once an alias is
+created the group name cannot be used to request HTTP playback of that stream.
+Once an alias is used (requested by a client) the alias is removed. Aliases
+are designed to be used to protect/hide your source streams.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">groupName</span></code> The original group name.</li>
+<li><code class="docutils literal"><span class="pre">aliasName</span></code> The alias alternative to the group name.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py addgroupnamealias MyGroup TestGroupAlias
+</pre></div>
+</div>
+</div>
+<div class="section" id="addstreamalias">
+<h2><code class="docutils literal"><span class="pre">addstreamalias</span></code><a class="headerlink" href="#addstreamalias" title="Permalink to this headline">¶</a></h2>
+<p>Allows you to create secondary name(s) for internal streams. Once an alias is
+created the localstreamname cannot be used to request playback of that stream.
+Once an alias is used (requested by a client) the alias is removed. Aliases
+are designed to be used to protect/hide your source streams.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">localStreamName</span></code> The original stream name.</li>
+<li><code class="docutils literal"><span class="pre">aliasName</span></code> The alias alternative to the <code class="docutils literal"><span class="pre">localStreamName</span></code>.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py addstreamalias bunny video1 --expire-period=-300
+</pre></div>
+</div>
+</div>
+<div class="section" id="createhlsstream">
+<h2><code class="docutils literal"><span class="pre">createhlsstream</span></code><a class="headerlink" href="#createhlsstream" title="Permalink to this headline">¶</a></h2>
+<p>Create an HTTP Live Stream (HLS) out of an existing H.264/AAC stream.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">localStreamNames</span></code> The stream(s) that will be used as the input. This is a comma-delimited
+list of active stream names (local stream names).</li>
+<li><code class="docutils literal"><span class="pre">targetFolder</span></code> The folder where all the .ts/.m3u8 files will be stored. This folder must
+be accessible by the HLS clients. It is usually in the web-root of the server.</li>
+</ul>
+<p>Optional:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--keep-alive</span></code> If true, the EMS will attempt to reconnect to the stream source if the
+connection is severed.</li>
+<li><code class="docutils literal"><span class="pre">--overwrite-destination</span></code> If true, it will force overwrite of destination files.</li>
+<li><code class="docutils literal"><span class="pre">--stale-retention-count</span></code> The number of old files kept besides the ones listed in the
+current version of the playlist (only rolling playlist).</li>
+<li><code class="docutils literal"><span class="pre">--create-master-playlist</span></code> If true, a master playlist will be created.</li>
+<li><code class="docutils literal"><span class="pre">--cleanup-destination</span></code> If true, all *.ts and *.m3u8 files in the target folder will
+be removed before HLS creation is started.</li>
+<li><code class="docutils literal"><span class="pre">--bandwidths</span></code> The corresponding bandwidths for each stream listed in localStreamNames.
+Again, this can be a comma-delimited list.</li>
+<li><code class="docutils literal"><span class="pre">--groupName</span></code> The name assigned to the HLS stream or group.</li>
+<li><code class="docutils literal"><span class="pre">--playlist-type</span></code></li>
+<li><code class="docutils literal"><span class="pre">--playlist-length</span></code> The length (number of elements) of the playlist (only rolling playlist).</li>
+<li><code class="docutils literal"><span class="pre">--playlist-name</span></code> The file name of the playlist (*.m3u8).</li>
+<li><code class="docutils literal"><span class="pre">--chunk-length</span></code> The length (in seconds) of each playlist element (*.ts file). Minimum
+value is 1 (second).</li>
+<li><code class="docutils literal"><span class="pre">--max-chunk-length</span></code> Maximum length (in seconds) the EMS will allow any single chunk to be.</li>
+<li><code class="docutils literal"><span class="pre">--chunk-base-name</span></code> The base name used to generate the *.ts chunks.</li>
+<li><code class="docutils literal"><span class="pre">--chunk-on-idr</span></code> If true, chunking is performed ONLY on IDR. Otherwise, chunking is
+performed whenever chunk length is achieved.</li>
+<li><code class="docutils literal"><span class="pre">--drm-type</span></code> Type of DRM encryption to use.</li>
+<li><code class="docutils literal"><span class="pre">--aes-key-count</span></code> Number of keys that will be automatically generated and rotated over
+while encrypting this HLS stream.</li>
+<li><code class="docutils literal"><span class="pre">--audio-only</span></code> If true, stream will be audio only.</li>
+<li><code class="docutils literal"><span class="pre">--hls-resume</span></code> If true, HLS will resume in appending segments to previously created child
+playlist even in cases of EMS shutdown or cut off stream source.</li>
+<li><code class="docutils literal"><span class="pre">--cleanup-on-close</span></code> If true, corresponding hls files to a stream will be deleted if the
+said stream is removed or shut down or disconnected.</li>
+<li><code class="docutils literal"><span class="pre">--use-byte-range</span></code> If true, will use the EXT-X-BYTERANGE feature of HLS (version 4 and up).</li>
+<li><code class="docutils literal"><span class="pre">--file-length</span></code> When using useByteRange=1, this parameter needs to be set too. This
+will be the size of file before chunking it to another file, this replace the chunkLength
+in case of EXT-X-BYTERANGE, since chunkLength will be the byte range chunk.</li>
+<li><code class="docutils literal"><span class="pre">--use-system-time</span></code> If true, uses UTC in playlist time stamp otherwise will use the local
+server time.</li>
+<li><code class="docutils literal"><span class="pre">--offset-time</span></code> A parameter valid only for HLS v.6 onwards. This will indicate the start
+offset time (in seconds) for the playback of the playlist.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py createhlsstream hlstest /MyWebRoot/ --bandwidths=128 --group-name=hls --playlist-type=rolling --playlist-length=10 --chunk-length=5
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-hds-stream">
+<h2><code class="docutils literal"><span class="pre">create_hds_stream</span></code><a class="headerlink" href="#create-hds-stream" title="Permalink to this headline">¶</a></h2>
+<p>Create an HDS (HTTP Dynamic Streaming) stream out of an existing H.264/AAC stream.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">localStreamNames</span></code> The stream(s) that will be used as the input.
+This is a comma-delimited list of active stream names (local stream
+names).</li>
+<li><code class="docutils literal"><span class="pre">targetFolder</span></code> The folder where all the manifest (<em>.f4m) and
+fragment (f4v</em>) files will be stored. This folder must be accessible
+by the HDS clients. It is usually in the web-root of the server.</li>
+</ul>
+<p>Optional:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--bandwidths</span></code> The corresponding bandwidths for each stream listed in
+<code class="docutils literal"><span class="pre">localStreamNames</span></code>. Again, this can be a comma-delimited list.</li>
+<li><code class="docutils literal"><span class="pre">--chunk-base-name</span></code> The base name used to generate the fragments.</li>
+<li><code class="docutils literal"><span class="pre">--chunk-length</span></code> The length (in seconds) of fragments to be made.
+Minimum value is 1 (second).</li>
+<li><code class="docutils literal"><span class="pre">--chunk-on-idr</span></code> If true, chunking is performed ONLY on IDR. Otherwise,
+chunking is performed whenever chunk length is achieved.</li>
+<li><code class="docutils literal"><span class="pre">--group-name</span></code> The name assigned to the HDS stream or group.</li>
+<li><code class="docutils literal"><span class="pre">--keep-alive</span></code> If true, the EMS will attempt to reconnect to the
+stream source if the connection is severed.</li>
+<li><code class="docutils literal"><span class="pre">--manifest-name</span></code> The manifest file name.</li>
+<li><code class="docutils literal"><span class="pre">--overwrite-destination</span></code> If true, it will allow overwrite of
+destination files.</li>
+<li><code class="docutils literal"><span class="pre">--playlist-type</span></code> Either <cite>appending</cite> or <cite>rolling</cite>.</li>
+<li><code class="docutils literal"><span class="pre">--playlist-length</span></code> The number of fragments before the server starts to
+overwrite the older fragments. Used only when <code class="docutils literal"><span class="pre">--playlist-type</span></code> is
+<cite>rolling</cite>. Ignored otherwise.</li>
+<li><code class="docutils literal"><span class="pre">--stale-retention-count</span></code> The number of old files kept besides the ones
+listed in the current version of the playlist. Only applicable for
+rolling playlists.</li>
+<li><code class="docutils literal"><span class="pre">--create-master-playlist</span></code> If true, a master playlist will be created.</li>
+<li><code class="docutils literal"><span class="pre">--cleanup-destination</span></code> If true, all manifest and fragment files in the
+target folder will be removed before HDS creation is started.</li>
+</ul>
+</div>
+<div class="section" id="createingestpoint">
+<h2><code class="docutils literal"><span class="pre">createingestpoint</span></code><a class="headerlink" href="#createingestpoint" title="Permalink to this headline">¶</a></h2>
+<p>Creates an RTMP ingest point.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">privateStreamName</span></code> The name that RTMP Target Stream Names must match.</li>
+<li><code class="docutils literal"><span class="pre">publicStreamName</span></code> The name that is used to access the stream pushed to the
+<code class="docutils literal"><span class="pre">privateStreamName</span></code>. The <code class="docutils literal"><span class="pre">publicStreamName</span></code> becomes the streams
+<code class="docutils literal"><span class="pre">localStreamName</span></code>.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py createingestpoint theIngestPoint useMeToViewStream
+</pre></div>
+</div>
+</div>
+<div class="section" id="flushgroupnamealiases">
+<h2><code class="docutils literal"><span class="pre">flushgroupnamealiases</span></code><a class="headerlink" href="#flushgroupnamealiases" title="Permalink to this headline">¶</a></h2>
+<p>Invalidates all group name aliases.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py flushgroupnamealiases
+</pre></div>
+</div>
+</div>
+<div class="section" id="flushstreamaliases">
+<h2><code class="docutils literal"><span class="pre">flushstreamaliases</span></code><a class="headerlink" href="#flushstreamaliases" title="Permalink to this headline">¶</a></h2>
+<p>Invalidates all streams aliases.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py flushstreamaliases
+</pre></div>
+</div>
+</div>
+<div class="section" id="getconfiginfo">
+<h2><code class="docutils literal"><span class="pre">getconfiginfo</span></code><a class="headerlink" href="#getconfiginfo" title="Permalink to this headline">¶</a></h2>
+<p>Returns the information of the stream by the configId.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">configId</span></code> The <code class="docutils literal"><span class="pre">configId</span></code> of the configuration to get some information.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py getconfiginfo 1
+</pre></div>
+</div>
+</div>
+<div class="section" id="getgroupnamebyalias">
+<h2><code class="docutils literal"><span class="pre">getgroupnamebyalias</span></code><a class="headerlink" href="#getgroupnamebyalias" title="Permalink to this headline">¶</a></h2>
+<p>Returns the group name given the alias name.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">aliasName</span></code> The group alias name.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py getgroupnamebyalias TestGroupAlias
+</pre></div>
+</div>
+</div>
+<div class="section" id="getstreaminfo">
+<h2><code class="docutils literal"><span class="pre">getstreaminfo</span></code><a class="headerlink" href="#getstreaminfo" title="Permalink to this headline">¶</a></h2>
+<p>Returns a detailed set of information about a stream.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">idOrLocalStreamName</span></code> The uniqueId of the stream or the name of the stream.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py getstreaminfo 1
+./manage.py getstreaminfo streamname
+</pre></div>
+</div>
+</div>
+<div class="section" id="getstreamscount">
+<h2><code class="docutils literal"><span class="pre">getstreamscount</span></code><a class="headerlink" href="#getstreamscount" title="Permalink to this headline">¶</a></h2>
+<p>Returns the number of active streams.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py getstreamscount
+</pre></div>
+</div>
+</div>
+<div class="section" id="isstreamrunning">
+<h2><code class="docutils literal"><span class="pre">isstreamrunning</span></code><a class="headerlink" href="#isstreamrunning" title="Permalink to this headline">¶</a></h2>
+<p>Checks a specific stream if it is running or not.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">idOrLocalStreamName</span></code> The uniqueId of the stream or the name of the stream.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py isstreamrunning 1
+./manage.py isstreamrunning testStream
+</pre></div>
+</div>
+</div>
+<div class="section" id="listconfig">
+<h2><code class="docutils literal"><span class="pre">listconfig</span></code><a class="headerlink" href="#listconfig" title="Permalink to this headline">¶</a></h2>
+<p>Returns a list with all push/pull configurations.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py listconfig
+</pre></div>
+</div>
+</div>
+<div class="section" id="listgroupnamealiases">
+<h2><code class="docutils literal"><span class="pre">listgroupnamealiases</span></code><a class="headerlink" href="#listgroupnamealiases" title="Permalink to this headline">¶</a></h2>
+<p>Returns a complete list of group name aliases.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py listgroupnamealiases
+</pre></div>
+</div>
+</div>
+<div class="section" id="listhttpstreamingsessions">
+<h2><code class="docutils literal"><span class="pre">listhttpstreamingsessions</span></code><a class="headerlink" href="#listhttpstreamingsessions" title="Permalink to this headline">¶</a></h2>
+<p>Lists all currently active HTTP streaming sessions.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py listhttpstreamingsessions
+</pre></div>
+</div>
+</div>
+<div class="section" id="listingestpoints">
+<h2><code class="docutils literal"><span class="pre">listingestpoints</span></code><a class="headerlink" href="#listingestpoints" title="Permalink to this headline">¶</a></h2>
+<p>Lists the currently available Ingest Points.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py listingestpoints
+</pre></div>
+</div>
+</div>
+<div class="section" id="liststreamaliases">
+<h2><code class="docutils literal"><span class="pre">liststreamaliases</span></code><a class="headerlink" href="#liststreamaliases" title="Permalink to this headline">¶</a></h2>
+<p>Returns a complete list of aliases.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py liststreamaliases
+</pre></div>
+</div>
+</div>
+<div class="section" id="liststreams">
+<h2><code class="docutils literal"><span class="pre">liststreams</span></code><a class="headerlink" href="#liststreams" title="Permalink to this headline">¶</a></h2>
+<p>Provides a detailed description of all active streams.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--disable-internal-streams</span></code> Filtering out internal streams from the list.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py liststreams --disable-internal-streams=1
+</pre></div>
+</div>
+</div>
+<div class="section" id="liststreamsids">
+<h2><code class="docutils literal"><span class="pre">liststreamsids</span></code><a class="headerlink" href="#liststreamsids" title="Permalink to this headline">¶</a></h2>
+<p>Get a list of IDs for every active stream.</p>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py liststreamsids
+</pre></div>
+</div>
+</div>
+<div class="section" id="pullstream">
+<h2><code class="docutils literal"><span class="pre">pullstream</span></code><a class="headerlink" href="#pullstream" title="Permalink to this headline">¶</a></h2>
+<p>Pull in a stream from an external source.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">uri</span></code> The URI of the external stream. Can be RTMP, RTSP or unicast/multicast (d) mpegts</li>
+</ul>
+<p>Parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--keep-alive</span></code> If keepAlive is set to 1, the server will attempt to reestablish
+connection with a stream source after a connection has been lost. The reconnect
+will be attempted once every second.</li>
+<li><code class="docutils literal"><span class="pre">--local-stream-name</span></code> Name of the stream. Otherwise, a fallback techniques used
+to determine the stream name (based on the URI).</li>
+<li><code class="docutils literal"><span class="pre">--force-tcp</span></code> If 1 and if the stream is RTSP, a TCP connection will be forced.
+Otherwise the transport mechanism will be negotiated (UDP or TCP).</li>
+<li><code class="docutils literal"><span class="pre">--tc-url</span></code> TC URL to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--page-url</span></code> Originating web page address to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--swf-url</span></code> Originating swf URL to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--range-start</span></code> A value from which the playback should start expressed in seconds
+(RTSP and RTMP connections only).</li>
+<li><code class="docutils literal"><span class="pre">--range-end</span></code> The length in seconds for the playback (RTSP and RTMP connections only).</li>
+<li><code class="docutils literal"><span class="pre">--ttl</span></code> Sets the IP_TTL (time to live) option on the socket.</li>
+<li><code class="docutils literal"><span class="pre">--tos</span></code> Sets the IP_TOS (Type of Service) option on the socket.</li>
+<li><code class="docutils literal"><span class="pre">--rtcp-detection-interval</span></code> How much time (in seconds) should the server wait for RTCP
+packets before declaring the RTSP stream as a RTCP-less stream.</li>
+<li><code class="docutils literal"><span class="pre">--emulate-user-agent</span></code> User agent string (only for RTMP).</li>
+<li><code class="docutils literal"><span class="pre">--is-audio</span></code> If 1 and if the stream is RTP, it indicates that the currently pulled
+stream is an audio source. Otherwise the pulled source is assumed as a video source.</li>
+<li><code class="docutils literal"><span class="pre">--audio-codec-bytes</span></code> The audio codec setup of RTP stream if it is audio. Represented
+as hex format without &#8220;0x&#8221; or &#8220;h&#8221;.</li>
+<li><code class="docutils literal"><span class="pre">--sps-bytes</span></code> The video SPS bytes of RTP stream if it is video. It should be base 64 encoded.</li>
+<li><code class="docutils literal"><span class="pre">--pps-bytes</span></code> The video PPS bytes of RTP stream if it is video. It should be base 64 encoded.</li>
+<li><code class="docutils literal"><span class="pre">--ssm-ip</span></code> The source IP from source-specific-multicast (only UDP based pull).</li>
+<li><code class="docutils literal"><span class="pre">--http-proxy</span></code> IP:Port - specifies an RTSP HTTP Proxy from which the RTSP stream should be
+pulled; &#8220;self&#8221; - pulling RTSP over HTTP.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py pullstream &quot;rtmp://s2pchzxmtymn2k.cloudfront.net/cfx/st/mp4:sintel.mp4&quot; --local-stream-name=testpullstream
+</pre></div>
+</div>
+</div>
+<div class="section" id="pushstream">
+<h2><code class="docutils literal"><span class="pre">pushstream</span></code><a class="headerlink" href="#pushstream" title="Permalink to this headline">¶</a></h2>
+<p>Try to push a local stream to an external destination. The pushed stream
+can only use the RTMP, RTSP or MPEG-TS unicast/multicast protocol.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">uri</span></code> The URI of the external stream. Can be RTMP, RTSP or unicast/multicast (d) mpegts.</li>
+</ul>
+<p>Parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--keep-alive</span></code> If keepAlive is set to 1, the server will attempt to reestablish
+connection with a stream source after a connection has been lost. The reconnect
+will be attempted once every second.</li>
+<li><code class="docutils literal"><span class="pre">--local-stream-name</span></code> Name of the stream. Otherwise, a fallback techniques used
+to determine the stream name (based on the URI).</li>
+<li><code class="docutils literal"><span class="pre">--ratget-stream-name</span></code> It can be one of following: <strong>live</strong>, <strong>record</strong>, <strong>append</strong>.
+It is meaningful only for RTMP.</li>
+<li><code class="docutils literal"><span class="pre">--tc-url</span></code> TC URL to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--page-url</span></code> Originating web page address to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--swf-url</span></code> Originating swf URL to use in the initial RTMP connect invoke.</li>
+<li><code class="docutils literal"><span class="pre">--ttl</span></code> Sets the IP_TTL (time to live) option on the socket.</li>
+<li><code class="docutils literal"><span class="pre">--tos</span></code> Sets the IP_TOS (Type of Service) option on the socket.</li>
+<li><code class="docutils literal"><span class="pre">--emulate-user-agent</span></code> User agent string (only for RTMP).</li>
+<li><code class="docutils literal"><span class="pre">--rtmp-absolute-timestamps</span></code> Forces the timestamps to be absolute when using RTMP.</li>
+<li><code class="docutils literal"><span class="pre">--send-chunk-size-request</span></code> Sets whether the RTMP stream will or will not send a
+&#8220;Set Chunk Length&#8221; message. This is significant when pushing to Akamai’s new RTMP HD
+ingest point where this parameter should be set to 0 so that Akamai will not drop the
+connection.</li>
+<li><code class="docutils literal"><span class="pre">--use-source-pts</span></code> When value is true, timestamps on source inbound RTMP stream are
+passed directly to the outbound (pushed) RTMP streams. This affects only pushed
+Outbound Net RTMP with net RTMP source. This parameter overrides the value of the
+<code class="docutils literal"><span class="pre">config.lua</span></code> option of the same name.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py pushstream &quot;rtmp://DestinationAddress/live&quot; --local-stream-name=testpullstream --target-stream-name=testpushStream
+</pre></div>
+</div>
+</div>
+<div class="section" id="removeconfig">
+<h2><code class="docutils literal"><span class="pre">removeconfig</span></code><a class="headerlink" href="#removeconfig" title="Permalink to this headline">¶</a></h2>
+<p>Stop the stream and remove the corresponding configuration entry.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">idOrGroupName</span></code> The <code class="docutils literal"><span class="pre">configId</span></code> of the configuration that needs to be removed
+or the name of the group that needs to be removed.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py removeconfig 555
+</pre></div>
+</div>
+</div>
+<div class="section" id="removegroupnamealias">
+<h2><code class="docutils literal"><span class="pre">removegroupnamealias</span></code><a class="headerlink" href="#removegroupnamealias" title="Permalink to this headline">¶</a></h2>
+<p>Removes an alias of a group.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">aliasName</span></code> The alias alternative to be removed from the group name.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py removegroupnamealias TestGroupAlias
+</pre></div>
+</div>
+</div>
+<div class="section" id="removeingestpoint">
+<h2><code class="docutils literal"><span class="pre">removeingestpoint</span></code><a class="headerlink" href="#removeingestpoint" title="Permalink to this headline">¶</a></h2>
+<p>Removes an RTMP ingest point.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">privateStreamName</span></code> The Ingest Point is identified by the <code class="docutils literal"><span class="pre">privateStreamName</span></code>,
+so only that is required to delete it.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py removeingestpoint theIngestPoint
+</pre></div>
+</div>
+</div>
+<div class="section" id="removestreamalias">
+<h2><code class="docutils literal"><span class="pre">removestreamalias</span></code><a class="headerlink" href="#removestreamalias" title="Permalink to this headline">¶</a></h2>
+<p>Removes an alias of a stream.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">aliasName</span></code> The alias to delete.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py removestreamalias video1
+</pre></div>
+</div>
+</div>
+<div class="section" id="shutdownstream">
+<h2><code class="docutils literal"><span class="pre">shutdownstream</span></code><a class="headerlink" href="#shutdownstream" title="Permalink to this headline">¶</a></h2>
+<p>Terminates a specific stream. When <code class="docutils literal"><span class="pre">permanently=1</span></code> is used, this command is analogous to <code class="docutils literal"><span class="pre">removeConfig</span></code>.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">idOrLocalStreamName</span></code> The uniqueId of the stream or the name of the inbound
+stream that needs to be terminated.</li>
+</ul>
+<p>Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>./manage.py shutdownstream 55
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release_notes/index.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api_aliasing.html" class="btn btn-neutral" title="Aliasing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Tomasz Jakub Rup.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'latest',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
