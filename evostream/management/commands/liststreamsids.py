@@ -1,4 +1,4 @@
-from evostream.commands import list_streams_ids
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -8,4 +8,4 @@ class Command(BaseEvoStreamCommand):
     requires_system_checks = False
 
     def get_results(self, *args, **options):
-        return list_streams_ids()
+        return api.list_streams_ids()

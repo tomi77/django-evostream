@@ -1,4 +1,4 @@
-from evostream.commands import flush_stream_aliases
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -8,4 +8,4 @@ class Command(BaseEvoStreamCommand):
     requires_system_checks = False
 
     def get_results(self, *args, **options):
-        return flush_stream_aliases()
+        return api.flush_stream_aliases()

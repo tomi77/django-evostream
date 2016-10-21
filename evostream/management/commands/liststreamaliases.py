@@ -1,4 +1,4 @@
-from evostream.commands import list_stream_aliases
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -10,4 +10,4 @@ class Command(BaseEvoStreamCommand):
     silent_keys = ('aliasName', 'localStreamName')
 
     def get_results(self, *args, **options):
-        return list_stream_aliases()
+        return api.list_stream_aliases()

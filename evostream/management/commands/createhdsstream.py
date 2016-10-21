@@ -2,7 +2,7 @@ from optparse import make_option
 
 import django
 
-from evostream.commands import create_hls_stream
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -156,5 +156,5 @@ class Command(BaseEvoStreamCommand):
         )
 
     def get_results(self, localStreamNames, targetFolder, *args, **options):
-        return create_hls_stream(localStreamNames=localStreamNames,
-                                 targetFolder=targetFolder, **options)
+        return api.create_hls_stream(localStreamNames=localStreamNames,
+                                     targetFolder=targetFolder, **options)

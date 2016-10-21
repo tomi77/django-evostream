@@ -2,7 +2,7 @@ from optparse import make_option
 
 import django
 
-from evostream.commands import list_streams
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -29,4 +29,4 @@ class Command(BaseEvoStreamCommand):
         )
 
     def get_results(self, *args, **options):
-        return list_streams(**options)
+        return api.list_streams(**options)

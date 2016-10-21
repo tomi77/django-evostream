@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import remove_stream_alias
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -17,4 +17,4 @@ class Command(BaseEvoStreamCommand):
         args = '<aliasName>'
 
     def get_results(self, aliasName, *args, **options):
-        return remove_stream_alias(aliasName=aliasName)
+        return api.remove_stream_alias(aliasName=aliasName)

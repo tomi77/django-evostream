@@ -2,7 +2,7 @@ from optparse import make_option
 
 import django
 
-from evostream.commands import shutdown_stream
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -33,7 +33,7 @@ class Command(BaseEvoStreamCommand):
 
     def get_results(self, idOrLocalStreamName, *args, **options):
         try:
-            return shutdown_stream(id=int(idOrLocalStreamName), **options)
+            return api.shutdown_stream(id=int(idOrLocalStreamName), **options)
         except ValueError:
-            return shutdown_stream(localStreamName=idOrLocalStreamName,
-                                   **options)
+            return api.shutdown_stream(localStreamName=idOrLocalStreamName,
+                                       **options)

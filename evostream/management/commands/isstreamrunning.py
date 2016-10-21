@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import is_stream_running
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -19,6 +19,6 @@ class Command(BaseEvoStreamCommand):
 
     def get_results(self, idOrLocalStreamName, *args, **options):
         try:
-            return is_stream_running(id=int(idOrLocalStreamName))
+            return api.is_stream_running(id=int(idOrLocalStreamName))
         except ValueError:
-            return is_stream_running(localStreamName=idOrLocalStreamName)
+            return api.is_stream_running(localStreamName=idOrLocalStreamName)

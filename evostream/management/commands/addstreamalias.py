@@ -2,7 +2,7 @@ from optparse import make_option
 
 import django
 
-from evostream.commands import add_stream_alias
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -47,5 +47,5 @@ class Command(BaseEvoStreamCommand):
         )
 
     def get_results(self, localStreamName, aliasName, *args, **options):
-        return add_stream_alias(localStreamName=localStreamName,
-                                aliasName=aliasName, **options)
+        return api.add_stream_alias(localStreamName=localStreamName,
+                                    aliasName=aliasName, **options)

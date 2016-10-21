@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import remove_ingest_point
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -19,4 +19,4 @@ class Command(BaseEvoStreamCommand):
         args = '<privateStreamName>'
 
     def get_results(self, privateStreamName, *args, **options):
-        return remove_ingest_point(privateStreamName=privateStreamName)
+        return api.remove_ingest_point(privateStreamName=privateStreamName)

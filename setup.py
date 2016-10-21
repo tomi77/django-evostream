@@ -39,7 +39,8 @@ setup(
     license='MIT',
     packages=find_packages(exclude=['testapp']),
     install_requires=[
-        'django>=1.4'
+        'django>=1.4',
+        'pyems',
     ],
     test_suite='testapp.tests'
 )

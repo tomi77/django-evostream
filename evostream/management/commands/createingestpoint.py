@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import create_ingest_point
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -24,6 +24,6 @@ class Command(BaseEvoStreamCommand):
 
     def get_results(self, privateStreamName, publicStreamName,
                     *args, **options):
-        return create_ingest_point(privateStreamName=privateStreamName,
-                                   publicStreamName=publicStreamName,
-                                   **options)
+        return api.create_ingest_point(privateStreamName=privateStreamName,
+                                       publicStreamName=publicStreamName,
+                                       **options)

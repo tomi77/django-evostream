@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import get_stream_info
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -21,6 +21,6 @@ class Command(BaseEvoStreamCommand):
 
     def get_results(self, idOrLocalStreamName, *args, **options):
         try:
-            return get_stream_info(id=int(idOrLocalStreamName))
+            return api.get_stream_info(id=int(idOrLocalStreamName))
         except ValueError:
-            return get_stream_info(localStreamName=idOrLocalStreamName)
+            return api.get_stream_info(localStreamName=idOrLocalStreamName)

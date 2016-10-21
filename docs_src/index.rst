@@ -6,6 +6,5 @@ Table Of Contents
 
    quick_start
    settings
-   api
    cli
    release_notes/index

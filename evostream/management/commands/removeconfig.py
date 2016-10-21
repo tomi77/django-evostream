@@ -2,7 +2,7 @@ from optparse import make_option
 
 import django
 
-from evostream.commands import remove_config
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -36,6 +36,6 @@ class Command(BaseEvoStreamCommand):
 
     def get_results(self, idOrGroupName, *args, **options):
         try:
-            return remove_config(id=int(idOrGroupName), **options)
+            return api.remove_config(id=int(idOrGroupName), **options)
         except ValueError:
-            return remove_config(groupName=idOrGroupName, **options)
+            return api.remove_config(groupName=idOrGroupName, **options)

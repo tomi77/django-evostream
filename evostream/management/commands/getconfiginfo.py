@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import get_config_info
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -20,4 +20,4 @@ class Command(BaseEvoStreamCommand):
         args = '<configId>'
 
     def get_results(self, configId, *args, **options):
-        return get_config_info(id=int(configId))
+        return api.get_config_info(id=int(configId))

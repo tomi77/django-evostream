@@ -1,6 +1,6 @@
 import django
 
-from evostream.commands import get_group_name_by_alias
+from evostream.default import api
 from evostream.management.base import BaseEvoStreamCommand
 
 
@@ -19,4 +19,4 @@ class Command(BaseEvoStreamCommand):
         args = '<aliasName>'
 
     def get_results(self, aliasName, *args, **options):
-        return get_group_name_by_alias(aliasName=aliasName)
+        return api.get_group_name_by_alias(aliasName=aliasName)
